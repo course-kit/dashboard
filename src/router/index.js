@@ -1,10 +1,8 @@
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/views/Home.vue'
 
 const routes = [
   {
-    // Document title tag
-    // We combine it with defaultDocumentTitle set in `src/main.js` on router.afterEach hook
     meta: {
       title: 'Dashboard'
     },
@@ -14,22 +12,27 @@ const routes = [
   },
   {
     meta: {
-      title: 'Tables'
+      title: 'Courses'
     },
-    path: '/tables',
-    name: 'tables',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "tables" */ '@/views/Tables.vue')
+    path: '/courses',
+    name: 'courses',
+    component: () => import(/* webpackChunkName: "courses" */ '@/views/Courses.vue')
   },
   {
     meta: {
-      title: 'Forms'
+      title: 'Students'
     },
-    path: '/forms',
-    name: 'forms',
-    component: () => import(/* webpackChunkName: "forms" */ '@/views/Forms.vue')
+    path: '/students',
+    name: 'students',
+    component: () => import(/* webpackChunkName: "students" */ '@/views/Students.vue')
+  },
+  {
+    meta: {
+      title: 'Analytics'
+    },
+    path: '/analytics',
+    name: 'analytics',
+    component: () => import(/* webpackChunkName: "analytics" */ '@/views/Analytics.vue')
   },
   {
     meta: {
@@ -38,31 +41,6 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: () => import(/* webpackChunkName: "profile" */ '@/views/Profile.vue')
-  },
-  {
-    meta: {
-      title: 'Ui'
-    },
-    path: '/ui',
-    name: 'ui',
-    component: () => import(/* webpackChunkName: "ui" */ '@/views/Ui.vue')
-  },
-  {
-    meta: {
-      title: 'Responsive layout'
-    },
-    path: '/responsive',
-    name: 'responsive',
-    component: () => import(/* webpackChunkName: "responsive" */ '@/views/Responsive.vue')
-  },
-  {
-    meta: {
-      title: 'Login',
-      fullScreen: true
-    },
-    path: '/login',
-    name: 'login',
-    component: () => import(/* webpackChunkName: "login" */ '@/views/Login.vue')
   },
   {
     meta: {
@@ -76,7 +54,7 @@ const routes = [
 ]
 
 const router = createRouter({
-  history: createWebHashHistory(),
+  history: createWebHistory(),
   routes,
   scrollBehavior (to, from, savedPosition) {
     return savedPosition || { top: 0 }

@@ -51,10 +51,10 @@ const menuClick = (event, item) => {
         />
       </nav-bar-item>
       <div class="flex-1 px-3">
-        <span>Admin</span> <b class="font-black">One</b>
+        <img src="/logo-dark.png" alt="CourseKit" class="h-5">
       </div>
     </div>
-    <div>
+    <div class="mt-4">
       <template v-for="(menuGroup, index) in menu">
         <p
           v-if="typeof menuGroup === 'string'"

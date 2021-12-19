@@ -15,5 +15,4 @@ const titleStack = ref(['Admin', 'Profile'])
   <main-section>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
   </main-section>
-  <bottom-other-pages-section />
 </template>

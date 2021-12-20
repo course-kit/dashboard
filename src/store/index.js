@@ -23,8 +23,13 @@ export default createStore({
     isFieldFocusRegistered: false,
 
     /* Sample data (commonly used) */
-    clients: [],
+    courses: [],
     history: []
+  },
+  getters: {
+    getCourseById: (state) => (id) => {
+      return state.courses.find(course => course.id === id)
+    }
   },
   mutations: {
     /* A fit-them-all commit */
@@ -69,22 +74,9 @@ export default createStore({
       document.documentElement.classList[value ? 'add' : 'remove']('full-screen')
     },
 
-    darkMode ({ commit, state }) {
-      const value = !state.darkMode
-
-      document.documentElement.classList[value ? 'add' : 'remove']('dark')
-
-      localStorage.setItem(darkModeKey, value ? '1' : '0')
-
-      commit('basic', {
-        key: 'darkMode',
-        value
-      })
-    },
-
     fetch ({ commit }, payload) {
       axios
-        .get(`data-sources/${payload}.json`)
+        .get(`/data-sources/${payload}.json`)
         .then((r) => {
           if (r.data && r.data.data) {
             commit('basic', {

@@ -18,6 +18,22 @@ const routes = [
     name: 'courses',
     component: () => import(/* webpackChunkName: "courses" */ '@/views/Courses.vue')
   },
+  // {
+  //   meta: {
+  //     title: 'Add course'
+  //   },
+  //   path: '/courses/add',
+  //   name: 'courses-add',
+  //   component: () => import(/* webpackChunkName: "courses-add" */ '@/views/CoursesAdd.vue')
+  // },
+  {
+    meta: {
+      title: 'Course'
+    },
+    path: '/courses/:courseId',
+    name: 'course',
+    component: () => import(/* webpackChunkName: "course" */ '@/views/Course.vue')
+  },
   {
     meta: {
       title: 'Students'
@@ -33,6 +49,14 @@ const routes = [
     path: '/analytics',
     name: 'analytics',
     component: () => import(/* webpackChunkName: "analytics" */ '@/views/Analytics.vue')
+  },
+  {
+    meta: {
+      title: 'Billing'
+    },
+    path: '/billing',
+    name: 'billing',
+    component: () => import(/* webpackChunkName: "billing" */ '@/views/Billing.vue')
   },
   {
     meta: {

@@ -1,14 +1,22 @@
 <script setup>
 import { ref } from 'vue'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
+
+import { mdiPlusBox } from '@mdi/js'
 import MainSection from '@/components/MainSection.vue'
 import TitleBar from '@/components/TitleBar.vue'
 import CoursesTable from '@/components/CoursesTable.vue'
 import CardComponent from '@/components/CardComponent.vue'
 
 const store = useStore()
+const router = useRouter()
 
 const titleStack = ref(['Courses'])
+
+async function addCourse () {
+  console.log('add course')
+}
 
 </script>
 
@@ -17,12 +25,12 @@ const titleStack = ref(['Courses'])
   <main-section>
     <card-component
       class="mb-6"
-      title="Clients"
-      :icon="mdiAccountMultiple"
+      title="Courses"
+      :header-icon="mdiPlusBox"
+      @header-icon-click="router.push('/courses/add')"
       has-table
     >
-      <courses-table checkable />
+      <courses-table />
     </card-component>
   </main-section>
-  <bottom-other-pages-section />
 </template>

@@ -3,23 +3,15 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import { darkModeKey } from '@/config.js'
 
 import './css/main.css'
 
 /* Fetch sample data */
-store.dispatch('fetch', 'clients')
+store.dispatch('fetch', 'courses')
 store.dispatch('fetch', 'history')
 
-/* Dark mode */
-const localStorageDarkModeValue = localStorage.getItem(darkModeKey)
-
-if ((localStorageDarkModeValue === null && window.matchMedia('(prefers-color-scheme: dark)').matches) || localStorageDarkModeValue === '1') {
-  store.dispatch('darkMode')
-}
-
 /* Default title tag */
-const defaultDocumentTitle = 'Admin One Vue 3 Tailwind'
+const defaultDocumentTitle = 'CourseKit'
 
 /* Collapse mobile aside menu on route change */
 router.beforeEach(to => {

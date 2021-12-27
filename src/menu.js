@@ -19,14 +19,14 @@ export default [
       icon: mdiAccountGroup
     },
     {
-      to: '/profile',
-      label: 'Profile',
-      icon: mdiAccountCircle
-    },
-    {
       to: '/analytics',
       label: 'Analytics',
       icon: mdiChartLine
+    },
+    {
+      to: '/profile',
+      label: 'Profile',
+      icon: mdiAccountCircle
     },
     {
       to: '/billing',

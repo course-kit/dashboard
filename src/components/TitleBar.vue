@@ -16,10 +16,10 @@ defineProps({
         <li
           v-for="(title, index) in titleStack"
           :key="index"
-          class="title-stack-item inline-block pr-3 text-2xl text-gray-500 dark:text-gray-400 last:pr-0 last:font-black
-            last:text-black dark:text-gray-100"
+          class="title-stack-item inline-block pr-3 text-xl text-gray-500 last:pr-0 last:text-black last:font-bold"
         >
-          {{ title }}
+          <router-link v-if="title.to" :to="title.to" class="underline">{{ title.name }}</router-link>
+          <span v-else>{{ title.name }}</span>
         </li>
       </ul>
     </level>

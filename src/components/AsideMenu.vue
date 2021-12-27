@@ -51,7 +51,11 @@ const menuClick = (event, item) => {
         />
       </nav-bar-item>
       <div class="flex-1 px-3">
-        <img src="/logo-dark.png" alt="CourseKit" class="h-5">
+        <img
+          src="/logo-dark.png"
+          alt="CourseKit"
+          class="h-5"
+        >
       </div>
     </div>
     <div class="mt-4">

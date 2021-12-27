@@ -1,9 +1,10 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
-import Level from "@/components/Level.vue"
+import Level from '@/components/Level.vue'
 import JbButtons from '@/components/JbButtons.vue'
 import JbButton from '@/components/JbButton.vue'
+import { mdiArrowUpBold, mdiArrowDownBold } from '@mdi/js'
 
 const props = defineProps({
   courseId: {
@@ -26,7 +27,7 @@ const lessonsPaginated = computed(
   () => props.lessons.slice(perPage.value * currentPage.value, perPage.value * (currentPage.value + 1))
 )
 
-const numPages = computed(() => Math.ceil(props.lessons.length / perPage.value))
+const numPages = computed(() => Math.ceil(props.lessons.length / perPage.value) || 1)
 
 const currentPageHuman = computed(() => currentPage.value + 1)
 
@@ -46,8 +47,11 @@ const pagesList = computed(() => {
   <table>
     <thead>
       <tr>
-        <th class="pl-6">Position</th>
+        <th class="pl-6">
+          Pos
+        </th>
         <th>Name</th>
+        <th>ID</th>
         <th />
       </tr>
     </thead>
@@ -55,14 +59,46 @@ const pagesList = computed(() => {
       <tr
         v-for="lesson in lessonsPaginated"
         :key="lesson.id"
-        @click="router.push(`/courses/${courseId}/lessons/${lesson.id}`)"
-        class="cursor-pointer"
       >
-        <td data-label="Position" class="pl-6">
+        <td
+          data-label="Position"
+          class="pl-6 w-12 cursor-pointer"
+          @click="router.push(`/courses/${courseId}/lessons/${lesson.id}`)"
+        >
           {{ lesson.position + 1 }}
         </td>
-        <td data-label="Name">
+        <td
+          data-label="Name"
+          class="cursor-pointer"
+          @click="router.push(`/courses/${courseId}/lessons/${lesson.id}`)"
+        >
           {{ lesson.name }}
+        </td>
+        <td
+          data-label="ID"
+          class="cursor-pointer"
+          @click="router.push(`/courses/${courseId}/lessons/${lesson.id}`)"
+        >
+          {{ lesson.id }}
+        </td>
+        <td class="actions-cell">
+          <jb-buttons
+            type="justify-start lg:justify-end"
+            no-wrap
+          >
+            <jb-button
+              v-if="lessons[0].id !== lesson.id"
+              :icon="mdiArrowUpBold"
+              small
+              @click="store.dispatch('lessonPosChange', { courseId, lessonId: lesson.id, isInc: false })"
+            />
+            <jb-button
+              v-if="lessons[lessons.length - 1].id !== lesson.id"
+              :icon="mdiArrowDownBold"
+              small
+              @click="store.dispatch('lessonPosChange', { courseId, lessonId: lesson.id, isInc: true })"
+            />
+          </jb-buttons>
         </td>
       </tr>
     </tbody>

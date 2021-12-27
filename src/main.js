@@ -8,7 +8,7 @@ import './css/main.css'
 
 /* Fetch sample data */
 store.dispatch('fetch', 'courses')
-store.dispatch('fetch', 'history')
+store.dispatch('fetch', 'students')
 
 /* Default title tag */
 const defaultDocumentTitle = 'CourseKit'

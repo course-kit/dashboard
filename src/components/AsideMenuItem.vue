@@ -1,8 +1,11 @@
 <script setup>
 import { ref, computed } from 'vue'
+import { useRoute } from 'vue-router'
 import { mdiMinus, mdiPlus } from '@mdi/js'
 import Icon from '@/components/Icon.vue'
 import AsideMenuList from '@/components/AsideMenuList.vue'
+
+const route = useRoute()
 
 const props = defineProps({
   item: {
@@ -36,6 +39,10 @@ const menuClick = event => {
   }
 }
 
+const isActive = computed(() => {
+  return route.path.indexOf(props.item.to) === 0
+})
+
 const styleActive = 'font-bold text-white'
 
 const styleInactive = 'text-gray-300'
@@ -57,18 +64,18 @@ const styleInactive = 'text-gray-300'
         v-if="item.icon"
         :path="item.icon"
         class="flex-none"
-        :class="[vSlot && vSlot.isExactActive ? styleActive : styleInactive]"
+        :class="[vSlot && isActive ? styleActive : styleInactive]"
         w="w-12"
       />
       <span
         class="grow"
-        :class="[vSlot && vSlot.isExactActive ? styleActive : styleInactive]"
+        :class="[vSlot && isActive ? styleActive : styleInactive]"
       >{{ item.label }}</span>
       <icon
         v-if="hasDropdown"
         :path="dropdownIcon"
         class="flex-none"
-        :class="[vSlot && vSlot.isExactActive ? styleActive : styleInactive]"
+        :class="[vSlot && isActive ? styleActive : styleInactive]"
         w="w-12"
       />
     </component>

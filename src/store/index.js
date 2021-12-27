@@ -29,6 +29,10 @@ export default createStore({
   getters: {
     getCourseById: (state) => (id) => {
       return state.courses.find(course => course.id === id)
+    },
+    getLessonById: (state) => (courseId, lessonId) => {
+      const course = state.courses.find(course => course.id === courseId)
+      return course.lessons.find(lesson => lesson.id === lessonId)
     }
   },
   mutations: {
@@ -88,6 +92,9 @@ export default createStore({
         .catch(error => {
           alert(error.message)
         })
+    },
+    lessonPosChange ({ state }, { courseId, lessonId, isInc }) {
+
     }
   },
   modules: {

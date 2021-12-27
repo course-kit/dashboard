@@ -1,0 +1,78 @@
+<script setup>
+import { computed, ref, watchEffect, onMounted } from 'vue'
+import { useStore } from 'vuex'
+import { useRouter, useRoute } from 'vue-router'
+import { PlayerSdk } from '@api.video/player-sdk'
+
+import { mdiPlusBox } from '@mdi/js'
+import MainSection from '@/components/MainSection.vue'
+import TitleBar from '@/components/TitleBar.vue'
+import CardComponent from '@/components/CardComponent.vue'
+
+const store = useStore()
+const router = useRouter()
+const route = useRoute()
+
+const course = computed(() => store.getters.getCourseById(route.params.courseId))
+const lesson = computed(() => store.getters.getLessonById(route.params.courseId, route.params.lessonId))
+
+const titleStack = computed(() => [
+  { name: 'Courses', to: '/courses' },
+  { name: course.value ? course.value.name : null, to: course.value ? `/courses/${course.value.id}` : null },
+  { name: 'Lessons', to: course.value ? `/courses/${course.value.id}/#lessons` : null },
+  { name: lesson.value ? lesson.value.name : null }
+])
+
+const pageReady = ref(false)
+
+watchEffect(() => {
+  if (lesson.value && pageReady.value) {
+    // const sdk = new PlayerSdk('#video', {
+    //   id: lesson.value.videoId,
+    //   token: lesson.value.videoToken
+    // })
+  }
+})
+
+onMounted(() => { pageReady.value = true })
+
+</script>
+
+<template>
+  <title-bar :title-stack="titleStack" />
+  <main-section v-if="lesson">
+    <card-component
+      class="mb-6"
+      title="Lesson info"
+      has-table
+      @header-icon-click="console.log('edit course')"
+    >
+      <table>
+        <tbody>
+          <tr>
+            <td class="pl-6">
+              Name
+            </td>
+            <td>{{ lesson.name }}</td>
+          </tr>
+          <tr>
+            <td class="pl-6">
+              ID
+            </td>
+            <td>{{ lesson.id }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </card-component>
+
+    <card-component
+      class="mb-6"
+      title="Video"
+    >
+      <div id="video" class="flex justify-center">
+        <img class="h-96" src="/video_preview.png" />
+      </div>
+    </card-component>
+
+  </main-section>
+</template>

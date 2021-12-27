@@ -1,5 +1,5 @@
 body {
-  @apply pt-14 xl:pl-60;
+  @apply xl:pl-60;
 }
 
 #app {

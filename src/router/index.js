@@ -16,7 +16,10 @@ const routes = [
     },
     path: '/courses',
     name: 'courses',
-    component: () => import(/* webpackChunkName: "courses" */ '@/views/Courses.vue')
+    component: () => import(/* webpackChunkName: "courses" */ '@/views/Courses.vue'),
+    children: [
+
+    ]
   },
   // {
   //   meta: {
@@ -33,6 +36,14 @@ const routes = [
     path: '/courses/:courseId',
     name: 'course',
     component: () => import(/* webpackChunkName: "course" */ '@/views/Course.vue')
+  },
+  {
+    meta: {
+      title: 'Lesson'
+    },
+    path: '/courses/:courseId/lessons/:lessonId',
+    name: 'lesson',
+    component: () => import(/* webpackChunkName: "lesson" */ '@/views/Lesson.vue')
   },
   {
     meta: {

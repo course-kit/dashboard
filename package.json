@@ -11,6 +11,8 @@
     "lint:fix": "vue-cli-service lint --fix"
   },
   "dependencies": {
+    "@api.video/player-sdk": "^1.2.12",
+    "@api.video/video-uploader": "^1.0.2",
     "@mdi/js": "^6.4.95",
     "axios": "^0.24.0",
     "chart.js": "^3.6.0",

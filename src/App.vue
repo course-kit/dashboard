@@ -23,10 +23,13 @@ const overlayClick = () => {
 </script>
 
 <template>
-  <nav-bar />
   <aside-menu :menu="menu" />
-  <router-view />
-  <footer-bar />
+  <div class="flex flex-col h-screen justify-between">
+    <div>
+      <router-view />
+    </div>
+    <footer-bar />
+  </div>
   <overlay
     v-show="isAsideLgActive"
     z-index="z-30"

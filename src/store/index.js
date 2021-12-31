@@ -1,6 +1,5 @@
 import { createStore } from 'vuex'
-import axios from 'axios'
-import { darkModeKey } from '@/config.js'
+import { getCourses, getStudents, courseAdd } from '@/apiService'
 
 export default createStore({
   state: {
@@ -78,23 +77,42 @@ export default createStore({
       document.documentElement.classList[value ? 'add' : 'remove']('full-screen')
     },
 
-    fetch ({ commit }, payload) {
-      axios
-        .get(`/data-sources/${payload}.json`)
-        .then((r) => {
-          if (r.data && r.data.data) {
-            commit('basic', {
-              key: payload,
-              value: r.data.data
-            })
-          }
+    async getCourses ({ commit }) {
+      try {
+        const { data } = await getCourses()
+        commit('basic', {
+          key: 'courses',
+          value: data
         })
-        .catch(error => {
-          alert(error.message)
-        })
+      } catch (err) {
+        alert(err.message)
+      }
     },
+
+    async getStudents ({ commit }) {
+      try {
+        const { data } = await getStudents()
+        commit('basic', {
+          key: 'students',
+          value: data
+        })
+      } catch (err) {
+        alert(err.message)
+      }
+    },
+
     lessonPosChange ({ state }, { courseId, lessonId, isInc }) {
 
+    },
+
+    async courseAdd ({ commit, dispatch }, payload) {
+      try {
+        const { data } = await courseAdd(payload)
+        await dispatch('getCourses')
+        return data.id
+      } catch (err) {
+        alert(err.message)
+      }
     }
   },
   modules: {

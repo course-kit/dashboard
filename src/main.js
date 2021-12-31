@@ -7,8 +7,8 @@ import store from './store'
 import './css/main.css'
 
 /* Fetch sample data */
-store.dispatch('fetch', 'courses')
-store.dispatch('fetch', 'students')
+store.dispatch('getCourses')
+store.dispatch('getStudents')
 
 /* Default title tag */
 const defaultDocumentTitle = 'CourseKit'

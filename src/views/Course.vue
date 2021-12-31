@@ -65,9 +65,9 @@ const courseEditActive = ref(false)
           </tr>
           <tr>
             <td class="pl-6">
-              Enrolment URL
+              Enrollment URL
             </td>
-            <td>{{ course.enrolmentUrl }}</td>
+            <td>{{ course.enrollmentUrl }}</td>
           </tr>
         </tbody>
       </table>

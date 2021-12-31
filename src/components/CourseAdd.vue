@@ -4,6 +4,7 @@ import Field from '@/components/Field.vue'
 import Control from '@/components/Control.vue'
 import ModalBox from '@/components/ModalBox.vue'
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router'
 const props = defineProps({
   modelValue: {
     type: [String, Number, Boolean],
@@ -15,6 +16,7 @@ const props = defineProps({
   }
 })
 const store = useStore()
+const router = useRouter()
 const name = ref('')
 const homeUrl = ref('')
 if (props.id) {
@@ -26,6 +28,17 @@ const value = computed({
   get: () => props.modelValue,
   set: value => emit('update:modelValue', value)
 })
+const confirm = async () => {
+  const payload = { name: name.value, homeUrl: homeUrl.value }
+  const id = await store.dispatch('courseAdd', payload)
+  if (id) {
+    router.push(`/courses/${id}`)
+  }
+}
+const cancel = () => {
+  name.value = ''
+  homeUrl.value = ''
+}
 </script>
 
 <template>
@@ -34,6 +47,8 @@ const value = computed({
     :title="`${props.id ? 'Edit' : 'Add' } course`"
     button-label="Save"
     has-cancel
+    @confirm="confirm"
+    @cancel="cancel"
   >
     <field label="Name">
       <control
@@ -42,7 +57,7 @@ const value = computed({
         placeholder="Name"
       />
     </field>
-    <field label="Home page URL" help="Redirect students here after enrolment">
+    <field label="Home page URL" help="Redirect students here after enrollment">
       <control
         v-model="homeUrl"
         type="text"

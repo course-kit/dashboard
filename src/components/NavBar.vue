@@ -7,15 +7,10 @@ import {
   mdiClose,
   mdiDotsVertical,
   mdiMenu,
-  mdiClockOutline,
-  mdiCloud,
-  mdiCrop,
   mdiAccount,
   mdiCogOutline,
   mdiEmail,
-  mdiLogout,
-  mdiGithub,
-  mdiThemeLightDark
+  mdiLogout
 } from '@mdi/js'
 import NavBarItem from '@/components/NavBarItem.vue'
 import NavBarItemLabel from '@/components/NavBarItemLabel.vue'
@@ -25,10 +20,6 @@ import UserAvatar from '@/components/UserAvatar.vue'
 import Icon from '@/components/Icon.vue'
 
 const store = useStore()
-
-const toggleLightDark = () => {
-  store.dispatch('darkMode')
-}
 
 const isNavBarVisible = computed(() => !store.state.isFullScreen)
 

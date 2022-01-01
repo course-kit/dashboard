@@ -1,10 +1,7 @@
 <script setup>
 import { ref } from 'vue'
-import { useStore } from 'vuex'
 import MainSection from '@/components/MainSection.vue'
 import TitleBar from '@/components/TitleBar.vue'
-
-const store = useStore()
 
 const titleStack = ref([{ name: 'Analytics' }])
 

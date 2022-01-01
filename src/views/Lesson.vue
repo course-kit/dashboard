@@ -1,16 +1,12 @@
 <script setup>
 import { computed, ref, watchEffect, onMounted } from 'vue'
 import { useStore } from 'vuex'
-import { useRouter, useRoute } from 'vue-router'
-import { PlayerSdk } from '@api.video/player-sdk'
-
-import { mdiPlusBox } from '@mdi/js'
+import { useRoute } from 'vue-router'
 import MainSection from '@/components/MainSection.vue'
 import TitleBar from '@/components/TitleBar.vue'
 import CardComponent from '@/components/CardComponent.vue'
 
 const store = useStore()
-const router = useRouter()
 const route = useRoute()
 
 const course = computed(() => store.getters.getCourseById(route.params.courseId))

@@ -1,19 +1,17 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { useStore } from 'vuex'
-import { useRouter, useRoute } from 'vue-router'
+import { useRoute } from 'vue-router'
 
 import { mdiPlusBox } from '@mdi/js'
 import MainSection from '@/components/MainSection.vue'
 import TitleBar from '@/components/TitleBar.vue'
 import LessonsTable from '@/components/LessonsTable.vue'
 import CardComponent from '@/components/CardComponent.vue'
-import ModalBox from '@/components/ModalBox.vue'
 import LessonAdd from '@/components/LessonAdd.vue'
 import CourseAdd from '@/components/CourseAdd.vue'
 
 const store = useStore()
-const router = useRouter()
 const route = useRoute()
 
 const course = computed(() => store.getters.getCourseById(route.params.courseId))

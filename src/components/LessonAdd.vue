@@ -1,5 +1,5 @@
 <script setup>
-import { VideoUploader } from '@api.video/video-uploader'
+// import { VideoUploader } from '@api.video/video-uploader'
 import { computed, ref } from 'vue'
 import Field from '@/components/Field.vue'
 import Control from '@/components/Control.vue'

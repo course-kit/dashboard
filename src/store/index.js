@@ -23,7 +23,8 @@ export default createStore({
 
     /* Sample data (commonly used) */
     courses: [],
-    history: []
+    history: [],
+    loginUrl: null
   },
   getters: {
     getCourseById: (state) => (id) => {
@@ -51,6 +52,9 @@ export default createStore({
       if (payload.avatar) {
         state.userAvatar = payload.avatar
       }
+    },
+    setLoginUrl (state, loginUrl) {
+      state.loginUrl = loginUrl.concat('&redirect=', encodeURIComponent(window.location.href))
     }
   },
   actions: {
@@ -79,28 +83,41 @@ export default createStore({
 
     async getCourses ({ commit }) {
       try {
-        const { data } = await getCourses()
-        commit('basic', {
-          key: 'courses',
-          value: data
-        })
+        const response = await getCourses()
+        if (response.status === 200) {
+          const { data } = await response.json()
+          commit('basic', {
+            key: 'courses',
+            value: data
+          })
+        }
+        if (response.status === 401) {
+          const { loginUrl } = await response.json()
+          commit('setLoginUrl', loginUrl)
+        }
       } catch (err) {
-        alert(err.message)
+        console.log(err)
       }
     },
 
     async getStudents ({ commit }) {
       try {
-        const { data } = await getStudents()
-        commit('basic', {
-          key: 'students',
-          value: data
-        })
+        const response = await getStudents()
+        const { data } = await response.json()
+        if (response.status === 200) {
+          commit('basic', {
+            key: 'students',
+            value: data
+          })
+        }
+        if (response.status === 401) {
+          const { loginUrl } = await response.json()
+          commit('setLoginUrl', loginUrl)
+        }
       } catch (err) {
-        alert(err.message)
+        console.log(err)
       }
     },
-
     lessonPosChange ({ state }, { courseId, lessonId, isInc }) {
 
     },

@@ -1,19 +1,23 @@
-import axios from 'axios'
-axios.defaults.baseURL = 'http://app.coursekit.test:8080'
+const baseURL = 'http://app.coursekit.test:8080'
 
 const getCourses = async () => {
-  const { data } = await axios.get('/courses')
-  return data
+  return await fetch(`${baseURL}/courses`, {
+    credentials: 'include'
+  })
 }
 
 const getStudents = async () => {
-  const { data } = await axios.get('/students')
-  return data
+  return await fetch(`${baseURL}/students`, {
+    credentials: 'include'
+  })
 }
 
 const courseAdd = async (payload) => {
-  const { data } = await axios.post('/courses', payload)
-  return data
+  return await fetch(`${baseURL}/courses`, {
+    method: 'POST',
+    credentials: 'include',
+    body: JSON.stringify(payload)
+  })
 }
 
 export { getCourses, getStudents, courseAdd }

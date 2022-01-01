@@ -1,25 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import Home from '@/views/Home.vue'
 
 const routes = [
-  {
-    meta: {
-      title: 'Dashboard'
-    },
-    path: '/',
-    name: 'home',
-    component: Home
-  },
   {
     meta: {
       title: 'Courses'
     },
     path: '/courses',
     name: 'courses',
-    component: () => import(/* webpackChunkName: "courses" */ '@/views/Courses.vue'),
-    children: [
-
-    ]
+    component: () => import(/* webpackChunkName: "courses" */ '@/views/Courses.vue')
   },
   // {
   //   meta: {

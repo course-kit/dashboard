@@ -13,7 +13,10 @@ const titleStack = ref([{ name: 'Profile' }])
 <template>
   <title-bar :title-stack="titleStack" />
   <main-section>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" />
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <a v-if="$store.state.loginUrl" :href="$store.state.loginUrl">Log in</a>
+      <a v-else href="http://app.coursekit.test:8080/logout">Log out</a>
+    </div>
   </main-section>
   <bottom-other-pages-section />
 </template>

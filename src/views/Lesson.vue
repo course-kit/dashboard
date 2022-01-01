@@ -65,10 +65,15 @@ onMounted(() => { pageReady.value = true })
       class="mb-6"
       title="Video"
     >
-      <div id="video" class="flex justify-center">
-        <img class="h-96" src="/video_preview.png" />
+      <div
+        id="video"
+        class="flex justify-center"
+      >
+        <img
+          class="h-96"
+          src="/video_preview.png"
+        >
       </div>
     </card-component>
-
   </main-section>
 </template>

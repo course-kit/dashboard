@@ -5,14 +5,22 @@ import TitleBar from '@/components/TitleBar.vue'
 
 const titleStack = ref([{ name: 'Profile' }])
 
+const logoutUrl = process.env.API_URL + '/logout'
+
 </script>
 
 <template>
   <title-bar :title-stack="titleStack" />
   <main-section>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <a v-if="$store.state.loginUrl" :href="$store.state.loginUrl">Log in</a>
-      <a v-else href="http://app.coursekit.test:8080/logout">Log out</a>
+      <a
+        v-if="$store.state.loginUrl"
+        :href="$store.state.loginUrl"
+      >Log in</a>
+      <a
+        v-else
+        :href="logoutUrl"
+      >Log out</a>
     </div>
   </main-section>
   <bottom-other-pages-section />

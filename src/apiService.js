@@ -1,4 +1,4 @@
-const baseURL = 'http://app.coursekit.test:8080'
+const baseURL = process.env.API_URL
 
 const getCourses = async () => {
   return await fetch(`${baseURL}/courses`, {

@@ -31,8 +31,11 @@ const courseEditActive = ref(false)
 </script>
 
 <template>
-  <CourseAdd v-model="courseEditActive" :id="course.id"></CourseAdd>
-  <LessonAdd v-model="addActive"></LessonAdd>
+  <CourseAdd
+    :id="course.id"
+    v-model="courseEditActive"
+  />
+  <LessonAdd v-model="addActive" />
   <title-bar :title-stack="titleStack" />
   <main-section v-if="course">
     <card-component

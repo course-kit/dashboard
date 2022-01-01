@@ -57,7 +57,10 @@ const cancel = () => {
         placeholder="Name"
       />
     </field>
-    <field label="Home page URL" help="Redirect students here after enrollment">
+    <field
+      label="Home page URL"
+      help="Redirect students here after enrollment"
+    >
       <control
         v-model="homeUrl"
         type="text"

@@ -5,7 +5,7 @@ import TitleBar from '@/components/TitleBar.vue'
 
 const titleStack = ref([{ name: 'Profile' }])
 
-const logoutUrl = process.env.API_URL + '/logout'
+const logoutUrl = process.env.VUE_APP_API_URL + '/logout'
 
 </script>
 

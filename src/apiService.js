@@ -1,4 +1,4 @@
-const baseURL = process.env.API_URL
+const baseURL = process.env.VUE_APP_API_URL
 
 const getCourses = async () => {
   return await fetch(`${baseURL}/courses`, {

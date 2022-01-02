@@ -5,7 +5,14 @@ import TitleBar from '@/components/TitleBar.vue'
 
 const titleStack = ref([{ name: 'Profile' }])
 
-const logoutUrl = process.env.VUE_APP_API_URL + '/logout'
+let baseURL
+if (process.env.NODE_ENV === 'production') {
+  baseURL = process.env.VUE_APP_API_URL
+} else {
+  baseURL = import.meta.env.VITE_API_URL
+}
+
+const logoutUrl = `${baseURL}/logout`
 
 </script>
 

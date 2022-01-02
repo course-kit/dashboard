@@ -13,7 +13,6 @@ const route = useRoute()
 
 store.dispatch('getUser')
   .then(user => {
-    console.log(user)
     if (!user) {
       router.push('login')
     } else {

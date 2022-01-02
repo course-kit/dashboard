@@ -6,13 +6,6 @@ import store from './store'
 
 import './css/main.css'
 
-async function getData () {
-  await store.dispatch('getCourses')
-  await store.dispatch('getStudents')
-}
-
-getData()
-
 /* Default title tag */
 const defaultDocumentTitle = 'CourseKit'
 

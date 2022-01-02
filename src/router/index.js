@@ -67,6 +67,15 @@ const routes = [
   },
   {
     meta: {
+      title: 'Login',
+      fullScreen: true
+    },
+    path: '/login',
+    name: 'login',
+    component: () => import(/* webpackChunkName: "login" */ '@/views/Login.vue')
+  },
+  {
+    meta: {
       title: 'Error',
       fullScreen: true
     },

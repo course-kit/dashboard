@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { getCourses, getStudents, courseAdd } from '@/apiService'
+import { getCourses, getStudents, courseAdd, getUser } from '@/apiService'
 
 export default createStore({
   state: {
@@ -24,7 +24,9 @@ export default createStore({
     /* Sample data (commonly used) */
     courses: [],
     history: [],
-    loginUrl: null
+    loginUrl: null,
+    regUrl: null,
+    dataLoaded: false
   },
   getters: {
     getCourseById: (state) => (id) => {
@@ -53,8 +55,13 @@ export default createStore({
         state.userAvatar = payload.avatar
       }
     },
-    setLoginUrl (state, loginUrl) {
-      state.loginUrl = loginUrl.concat('&redirect=', encodeURIComponent(window.location.href))
+    setAuthUrls (state, { loginUrl, regUrl }) {
+      const redirect = encodeURIComponent(window.location.href)
+      state.loginUrl = loginUrl.concat('&redirect=', redirect)
+      state.regUrl = regUrl.concat('&redirect=', redirect)
+    },
+    setDataLoaded (state, payload) {
+      state.dataLoaded = payload
     }
   },
   actions: {
@@ -92,8 +99,7 @@ export default createStore({
           })
         }
         if (response.status === 401) {
-          const { loginUrl } = await response.json()
-          commit('setLoginUrl', loginUrl)
+          alert('Network error.')
         }
       } catch (err) {
         console.log(err)
@@ -111,8 +117,7 @@ export default createStore({
           })
         }
         if (response.status === 401) {
-          const { loginUrl } = await response.json()
-          commit('setLoginUrl', loginUrl)
+          alert('Network error.')
         }
       } catch (err) {
         console.log(err)
@@ -129,6 +134,23 @@ export default createStore({
         return data.id
       } catch (err) {
         alert(err.message)
+      }
+    },
+    async getUser ({ commit }) {
+      try {
+        const response = await getUser()
+        if (response.status === 200) {
+          const user = await response.json()
+          commit('user', user)
+          return user
+        }
+        if (response.status === 401) {
+          const { loginUrl, regUrl } = await response.json()
+          commit('setAuthUrls', { loginUrl, regUrl })
+          return null
+        }
+      } catch (err) {
+        console.log(err)
       }
     }
   },

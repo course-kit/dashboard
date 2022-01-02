@@ -1,4 +1,9 @@
-const baseURL = process.env.VUE_APP_API_URL
+let baseURL
+if (typeof process !== 'undefined') {
+  baseURL = process.env.VUE_APP_API_URL
+} else {
+  baseURL = import.meta.env.VITE_API_URL
+}
 
 const getCourses = async () => {
   return await fetch(`${baseURL}/courses`, {
@@ -20,4 +25,10 @@ const courseAdd = async (payload) => {
   })
 }
 
-export { getCourses, getStudents, courseAdd }
+const getUser = async () => {
+  return await fetch(`${baseURL}/user`, {
+    credentials: 'include'
+  })
+}
+
+export { getCourses, getStudents, courseAdd, getUser }

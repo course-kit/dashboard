@@ -5,14 +5,30 @@ import menu from '@/menu.js'
 import AsideMenu from '@/components/AsideMenu.vue'
 import FooterBar from '@/components/FooterBar.vue'
 import Overlay from '@/components/Overlay.vue'
+import { useRouter, useRoute } from 'vue-router'
 
 const store = useStore()
+const router = useRouter()
+const route = useRoute()
 
-store.commit('user', {
-  name: 'John Doe',
-  email: 'john@example.com',
-  avatar: 'https://avatars.dicebear.com/api/avataaars/example.svg?options[top][]=shortHair&options[accessoriesChance]=93'
-})
+store.dispatch('getUser')
+  .then(user => {
+    console.log(user)
+    if (!user) {
+      router.push('login')
+    } else {
+      if (route.name === 'login' || !route.name) {
+        router.push('courses')
+      }
+      if (!store.state.dataLoaded) {
+        Promise.all([
+          store.dispatch('getCourses'),
+          store.dispatch('getStudents')
+        ])
+          .then(() => store.commit('setDataLoaded', true))
+      }
+    }
+  })
 
 const isAsideLgActive = computed(() => store.state.isAsideLgActive)
 

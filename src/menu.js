@@ -27,7 +27,7 @@ export default [
       to: '/profile',
       label: 'Profile',
       icon: mdiAccountCircle
-    },
+    }
     // {
     //   to: '/billing',
     //   label: 'Billing',

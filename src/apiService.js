@@ -1,5 +1,5 @@
 let baseURL
-if (typeof process !== 'undefined') {
+if (process.env.NODE_ENV === 'production') {
   baseURL = process.env.VUE_APP_API_URL
 } else {
   baseURL = import.meta.env.VITE_API_URL

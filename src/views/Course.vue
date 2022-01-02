@@ -22,7 +22,7 @@ const titleStack = computed(() => [
     to: '/courses'
   },
   {
-    name: course.value ? course.value.name : null
+    name: course.value ? course.value.title : null
   }
 ])
 
@@ -48,9 +48,9 @@ const courseEditActive = ref(false)
         <tbody>
           <tr>
             <td class="pl-6">
-              Name
+              Title
             </td>
-            <td>{{ course.name }}</td>
+            <td>{{ course.title }}</td>
           </tr>
           <tr>
             <td class="pl-6">

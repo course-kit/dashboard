@@ -14,7 +14,7 @@ const lesson = computed(() => store.getters.getLessonById(route.params.courseId,
 
 const titleStack = computed(() => [
   { name: 'Courses', to: '/courses' },
-  { name: course.value ? course.value.name : null, to: course.value ? `/courses/${course.value.id}` : null },
+  { name: course.value ? course.value.title : null, to: course.value ? `/courses/${course.value.id}` : null },
   { name: 'Lessons', to: course.value ? `/courses/${course.value.id}/#lessons` : null },
   { name: lesson.value ? lesson.value.name : null }
 ])

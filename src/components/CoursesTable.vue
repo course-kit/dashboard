@@ -40,7 +40,7 @@ const pagesList = computed(() => {
     <thead>
       <tr>
         <th class="pl-6">
-          Name
+          Title
         </th>
         <th>ID</th>
       </tr>
@@ -53,10 +53,10 @@ const pagesList = computed(() => {
         @click="router.push(`/courses/${course.id}`)"
       >
         <td
-          data-label="Name"
+          data-label="Title"
           class="pl-6"
         >
-          {{ course.name }}
+          {{ course.title }}
         </td>
         <td
           data-label="ID"

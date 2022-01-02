@@ -92,7 +92,7 @@ export default createStore({
       try {
         const response = await getCourses()
         if (response.status === 200) {
-          const { data } = await response.json()
+          const data = await response.json()
           commit('basic', {
             key: 'courses',
             value: data
@@ -129,9 +129,10 @@ export default createStore({
 
     async courseAdd ({ commit, dispatch }, payload) {
       try {
-        const { data } = await courseAdd(payload)
+        const response = await courseAdd(payload)
         await dispatch('getCourses')
-        return data.id
+        const { id } = await response.json()
+        return id
       } catch (err) {
         alert(err.message)
       }

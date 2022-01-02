@@ -17,10 +17,10 @@ const props = defineProps({
 })
 const store = useStore()
 const router = useRouter()
-const name = ref('')
+const title = ref('')
 const homeUrl = ref('')
 if (props.id) {
-  name.value = store.getters.getCourseById(props.id).name
+  title.value = store.getters.getCourseById(props.id).title
   homeUrl.value = store.getters.getCourseById(props.id).homeUrl
 }
 const emit = defineEmits(['update:modelValue'])
@@ -29,14 +29,14 @@ const value = computed({
   set: value => emit('update:modelValue', value)
 })
 const confirm = async () => {
-  const payload = { name: name.value, homeUrl: homeUrl.value }
+  const payload = { title: title.value, homeUrl: homeUrl.value }
   const id = await store.dispatch('courseAdd', payload)
   if (id) {
     router.push(`/courses/${id}`)
   }
 }
 const cancel = () => {
-  name.value = ''
+  title.value = ''
   homeUrl.value = ''
 }
 </script>
@@ -50,11 +50,11 @@ const cancel = () => {
     @confirm="confirm"
     @cancel="cancel"
   >
-    <field label="Name">
+    <field label="Title">
       <control
-        v-model="name"
+        v-model="title"
         type="text"
-        placeholder="Name"
+        placeholder="Title"
       />
     </field>
     <field

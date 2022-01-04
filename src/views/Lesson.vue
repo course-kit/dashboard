@@ -61,20 +61,20 @@ onMounted(() => { pageReady.value = true })
       </table>
     </card-component>
 
-<!--    <card-component-->
-<!--      class="mb-6"-->
-<!--      title="Video"-->
-<!--    >-->
-<!--      <div-->
-<!--        id="video"-->
-<!--        class="flex justify-center"-->
-<!--      >-->
-<!--        <img-->
-<!--          class="h-96"-->
-<!--          src="/video_preview.png"-->
-<!--        >-->
-<!--      </div>-->
-<!--    </card-component>-->
+    <!--    <card-component-->
+    <!--      class="mb-6"-->
+    <!--      title="Video"-->
+    <!--    >-->
+    <!--      <div-->
+    <!--        id="video"-->
+    <!--        class="flex justify-center"-->
+    <!--      >-->
+    <!--        <img-->
+    <!--          class="h-96"-->
+    <!--          src="/video_preview.png"-->
+    <!--        >-->
+    <!--      </div>-->
+    <!--    </card-component>-->
 
     <card-component
       class="mb-6"

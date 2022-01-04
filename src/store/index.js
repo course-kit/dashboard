@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { getCourses, getStudents, courseAdd, getUser, lessonAdd } from '@/apiService'
+import { getCourses, getStudents, courseAdd, getUser, lessonAdd, editLesson } from '@/apiService'
 
 export default createStore({
   state: {
@@ -109,7 +109,7 @@ export default createStore({
     async getStudents ({ commit }) {
       try {
         const response = await getStudents()
-        const { data } = await response.json()
+        const data = await response.json()
         if (response.status === 200) {
           commit('basic', {
             key: 'students',
@@ -123,8 +123,16 @@ export default createStore({
         console.log(err)
       }
     },
-    lessonPosChange ({ state }, { courseId, lessonId, isInc }) {
-
+    async lessonPosChange ({ state, dispatch }, { courseId, lessonId, isInc }) {
+      try {
+        const course = state.courses.find(course => course.id === courseId)
+        const lesson = course.lessons.find(lesson => lesson.id === lessonId)
+        const order = lesson.order + (isInc ? 1 : -1)
+        await editLesson(courseId, lessonId, { order })
+        await dispatch('getCourses')
+      } catch (err) {
+        alert(err.message)
+      }
     },
 
     async courseAdd ({ commit, dispatch }, payload) {

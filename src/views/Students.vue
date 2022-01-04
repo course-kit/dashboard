@@ -6,7 +6,6 @@ import MainSection from '@/components/MainSection.vue'
 import TitleBar from '@/components/TitleBar.vue'
 import StudentsTable from '@/components/StudentsTable.vue'
 import CardComponent from '@/components/CardComponent.vue'
-import CourseAdd from '@/components/CourseAdd.vue'
 
 const titleStack = ref([
   { name: 'Students' }
@@ -16,7 +15,6 @@ const addActive = ref(false)
 </script>
 
 <template>
-  <CourseAdd v-model="addActive" />
   <title-bar :title-stack="titleStack" />
   <main-section>
     <card-component

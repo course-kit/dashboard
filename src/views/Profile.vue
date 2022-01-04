@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from 'vue'
+
 import MainSection from '@/components/MainSection.vue'
 import TitleBar from '@/components/TitleBar.vue'
 
@@ -15,20 +16,22 @@ if (process.env.NODE_ENV === 'production') {
 const logoutUrl = `${baseURL}/logout`
 
 </script>
-
 <template>
   <title-bar :title-stack="titleStack" />
   <main-section>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-      <a
-        v-if="$store.state.loginUrl"
-        :href="$store.state.loginUrl"
-      >Log in</a>
-      <a
-        v-else
-        :href="logoutUrl"
-      >Log out</a>
+      <div>
+        <p class="mb-4">
+          <span class="font-bold">{{ $store.state.userName }}</span>
+          <span>&nbsp;&lt;{{ $store.state.userEmail }}></span>
+        </p>
+        <p>
+          <a
+            :href="logoutUrl"
+            class="inline-flex cursor-pointer justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring-2 focus:border-transparent duration-150 border rounded ring-blue-700 p-2 bg-blue-500 text-white border-blue-600 hover:bg-blue-600 mr-3 last:mr-0 mb-3"
+          >Log out</a>
+        </p>
+      </div>
     </div>
   </main-section>
-  <bottom-other-pages-section />
 </template>

@@ -90,13 +90,13 @@ const pagesList = computed(() => {
               v-if="lessons[0].id !== lesson.id"
               :icon="mdiArrowUpBold"
               small
-              @click="store.dispatch('lessonPosChange', { courseId, lessonId: lesson.id, isInc: false })"
+              @click="$store.dispatch('lessonPosChange', { courseId, lessonId: lesson.id, isInc: false })"
             />
             <jb-button
               v-if="lessons[lessons.length - 1].id !== lesson.id"
               :icon="mdiArrowDownBold"
               small
-              @click="store.dispatch('lessonPosChange', { courseId, lessonId: lesson.id, isInc: true })"
+              @click="$store.dispatch('lessonPosChange', { courseId, lessonId: lesson.id, isInc: true })"
             />
           </jb-buttons>
         </td>

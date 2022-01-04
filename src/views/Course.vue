@@ -35,7 +35,7 @@ const courseEditActive = ref(false)
     :id="course.id"
     v-model="courseEditActive"
   />
-  <LessonAdd v-model="addActive" />
+  <LessonAdd v-model="addActive" :course-id="course.id" />
   <title-bar :title-stack="titleStack" />
   <main-section v-if="course">
     <card-component

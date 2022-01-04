@@ -16,7 +16,7 @@ store.dispatch('getUser')
     if (!user) {
       router.push('login')
     } else {
-      if (route.name === 'login' || !route.name) {
+      if (route.name === 'login') {
         router.push('courses')
       }
       if (!store.state.dataLoaded) {

@@ -29,10 +29,22 @@ const courseAdd = async (payload) => {
   })
 }
 
+const lessonAdd = async (courseId, payload) => {
+  return await fetch(`${baseURL}/courses/${courseId}/lessons`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  })
+}
+
 const getUser = async () => {
   return await fetch(`${baseURL}/user`, {
     credentials: 'include'
   })
 }
 
-export { getCourses, getStudents, courseAdd, getUser }
+export { getCourses, getStudents, courseAdd, getUser, lessonAdd }

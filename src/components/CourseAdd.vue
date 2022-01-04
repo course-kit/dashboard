@@ -30,7 +30,7 @@ const value = computed({
 })
 const confirm = async () => {
   const payload = { title: title.value, homeUrl: homeUrl.value }
-  const id = await store.dispatch('courseAdd', payload)
+  const { id } = await store.dispatch('courseAdd', payload)
   if (id) {
     router.push(`/courses/${id}`)
   }

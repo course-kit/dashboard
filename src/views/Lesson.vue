@@ -16,7 +16,7 @@ const titleStack = computed(() => [
   { name: 'Courses', to: '/courses' },
   { name: course.value ? course.value.title : null, to: course.value ? `/courses/${course.value.id}` : null },
   { name: 'Lessons', to: course.value ? `/courses/${course.value.id}/#lessons` : null },
-  { name: lesson.value ? lesson.value.name : null }
+  { name: lesson.value ? lesson.value.title : null }
 ])
 
 const pageReady = ref(false)
@@ -47,9 +47,9 @@ onMounted(() => { pageReady.value = true })
         <tbody>
           <tr>
             <td class="pl-6">
-              Name
+              Title
             </td>
-            <td>{{ lesson.name }}</td>
+            <td>{{ lesson.title }}</td>
           </tr>
           <tr>
             <td class="pl-6">
@@ -61,19 +61,26 @@ onMounted(() => { pageReady.value = true })
       </table>
     </card-component>
 
+<!--    <card-component-->
+<!--      class="mb-6"-->
+<!--      title="Video"-->
+<!--    >-->
+<!--      <div-->
+<!--        id="video"-->
+<!--        class="flex justify-center"-->
+<!--      >-->
+<!--        <img-->
+<!--          class="h-96"-->
+<!--          src="/video_preview.png"-->
+<!--        >-->
+<!--      </div>-->
+<!--    </card-component>-->
+
     <card-component
       class="mb-6"
-      title="Video"
+      title="Content"
     >
-      <div
-        id="video"
-        class="flex justify-center"
-      >
-        <img
-          class="h-96"
-          src="/video_preview.png"
-        >
-      </div>
+      <pre>{{ lesson.content }}</pre>
     </card-component>
   </main-section>
 </template>

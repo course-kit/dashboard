@@ -65,14 +65,14 @@ const pagesList = computed(() => {
           class="pl-6 w-12 cursor-pointer"
           @click="router.push(`/courses/${courseId}/lessons/${lesson.id}`)"
         >
-          {{ lesson.position + 1 }}
+          {{ lesson.order }}
         </td>
         <td
-          data-label="Name"
+          data-label="Title"
           class="cursor-pointer"
           @click="router.push(`/courses/${courseId}/lessons/${lesson.id}`)"
         >
-          {{ lesson.name }}
+          {{ lesson.title }}
         </td>
         <td
           data-label="ID"

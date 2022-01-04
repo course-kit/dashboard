@@ -35,8 +35,8 @@ const pagesList = computed(() => {
 })
 
 const getCourse = function (id) {
-  const course = store.state.courses.find(course => course.id === id)
-  return course.name
+  const course = store.getters.getCourseById(id)
+  return course.title
 }
 
 </script>
@@ -51,7 +51,6 @@ const getCourse = function (id) {
         <th>Email</th>
         <th>Course</th>
         <th>Status</th>
-        <th />
       </tr>
     </thead>
     <tbody>
@@ -64,7 +63,7 @@ const getCourse = function (id) {
           class="pl-6 cursor-pointer"
           @click="router.push(`/students/${student.id}/`)"
         >
-          {{ student.name }}
+          {{ student.name ? student.name : 'NULL' }}
         </td>
         <td
           data-label="Email"
@@ -85,18 +84,7 @@ const getCourse = function (id) {
           class="cursor-pointer"
           @click="router.push(`/students/${student.id}`)"
         >
-          {{ student.status }}
-        </td>
-        <td class="actions-cell">
-          <jb-buttons
-            type="justify-start lg:justify-end"
-            no-wrap
-          >
-            <jb-button
-              :icon="mdiTrashCan"
-              small
-            />
-          </jb-buttons>
+          {{ student.isPending ? 'PENDING' : 'ACTIVE' }}
         </td>
       </tr>
     </tbody>

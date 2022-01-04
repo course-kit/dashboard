@@ -1,5 +1,5 @@
 import { createStore } from 'vuex'
-import { getCourses, getStudents, courseAdd, getUser, lessonAdd, editLesson } from '@/apiService'
+import { getCourses, getStudents, courseAdd, getUser, lessonAdd, editLesson, courseEdit } from '@/apiService'
 
 export default createStore({
   state: {
@@ -35,6 +35,9 @@ export default createStore({
     getLessonById: (state) => (courseId, lessonId) => {
       const course = state.courses.find(course => course.id === courseId)
       return course ? course.lessons.find(lesson => lesson.id === lessonId) : null
+    },
+    isLoading: (state) => {
+      return !state.dataLoaded
     }
   },
   mutations: {
@@ -140,6 +143,14 @@ export default createStore({
         const response = await courseAdd(payload)
         await dispatch('getCourses')
         return await response.json()
+      } catch (err) {
+        alert(err.message)
+      }
+    },
+    async courseEdit ({ commit, dispatch }, { id, data }) {
+      try {
+        await courseEdit(id, data)
+        await dispatch('getCourses')
       } catch (err) {
         alert(err.message)
       }

@@ -4,7 +4,6 @@ import { useRouter } from 'vue-router'
 import Level from '@/components/Level.vue'
 import JbButtons from '@/components/JbButtons.vue'
 import JbButton from '@/components/JbButton.vue'
-import { mdiTrashCan } from '@mdi/js'
 import { useStore } from 'vuex'
 
 const store = useStore()

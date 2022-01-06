@@ -41,7 +41,10 @@ const overlayClick = () => {
   <aside-menu :menu="menu" />
   <div class="flex flex-col h-screen justify-between">
     <div>
-      <div v-if="$store.getters.isLoading" class="p-6 font-bold">
+      <div
+        v-if="$store.getters.isLoading"
+        class="p-6 font-bold"
+      >
         Loading...
       </div>
       <router-view v-else />

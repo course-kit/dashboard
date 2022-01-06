@@ -37,9 +37,9 @@ const lessonEditActive = ref(false)
 
 <template>
   <LessonAdd
-    :courseId="course.id"
-    :lessonId="lesson.id"
     v-model="lessonEditActive"
+    :course-id="course.id"
+    :lesson-id="lesson.id"
   />
   <title-bar :title-stack="titleStack" />
   <main-section v-if="lesson">

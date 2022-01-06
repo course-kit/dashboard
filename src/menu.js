@@ -3,11 +3,17 @@ import {
   mdiTelevisionGuide,
   // mdiChartLine,
   // mdiReceipt,
+  mdiArrowRightBold,
   mdiAccountGroup
 } from '@mdi/js'
 
 export default [
   [
+    {
+      to: '/start',
+      label: 'Get started',
+      icon: mdiArrowRightBold
+    },
     {
       to: '/courses',
       label: 'Courses',

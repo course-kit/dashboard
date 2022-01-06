@@ -3,6 +3,23 @@ import { createRouter, createWebHistory } from 'vue-router'
 const routes = [
   {
     meta: {
+      title: 'Home',
+      fullScreen: true
+    },
+    path: '/',
+    name: 'home',
+    component: () => import(/* webpackChunkName: "login" */ '@/views/Home.vue')
+  },
+  {
+    meta: {
+      title: 'Get started'
+    },
+    path: '/start',
+    name: 'start',
+    component: () => import(/* webpackChunkName: "home" */ '@/views/Start.vue')
+  },
+  {
+    meta: {
       title: 'Courses'
     },
     path: '/courses',
@@ -64,15 +81,6 @@ const routes = [
     path: '/profile',
     name: 'profile',
     component: () => import(/* webpackChunkName: "profile" */ '@/views/Profile.vue')
-  },
-  {
-    meta: {
-      title: 'Login',
-      fullScreen: true
-    },
-    path: '/login',
-    name: 'login',
-    component: () => import(/* webpackChunkName: "login" */ '@/views/Login.vue')
   },
   {
     meta: {

@@ -155,6 +155,14 @@ export default createStore({
         alert(err.message)
       }
     },
+    async lessonEdit ({ state, dispatch }, { courseId, lessonId, data }) {
+      try {
+        await editLesson(courseId, lessonId, data)
+        await dispatch('getCourses')
+      } catch (err) {
+        alert(err.message)
+      }
+    },
     async lessonAdd ({ commit, dispatch }, { courseId, data }) {
       try {
         const response = await lessonAdd(courseId, data)

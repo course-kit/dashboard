@@ -17,7 +17,7 @@ const darkMode = computed(() => store.state.darkMode)
 
 const componentClass = computed(() => {
   const bgs = {
-    login: 'bg-gradient-to-tr from-purple-400 via-pink-500 to-red-500',
+    login: 'bg-gray-200',
     loginDark: 'bg-gradient-to-tr from-purple-900 via-pink-900 to-red-900',
     error: 'bg-gradient-to-tr from-pink-400 via-red-500 to-yellow-500',
     errorDark: 'bg-gradient-to-tr from-pink-900 via-red-900 to-yellow-900'
@@ -32,8 +32,8 @@ const componentClass = computed(() => {
 <template>
   <main-section :class="componentClass">
     <slot
-      card-class="w-11/12 md:w-7/12 lg:w-6/12 xl:w-4/12 shadow-2xl"
-      card-rounded="rounded-lg"
+      card-class="w-11/12 md:w-7/12 lg:w-6/12 xl:w-4/12"
+      card-rounded="rounded-md"
     />
   </main-section>
 </template>

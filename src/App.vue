@@ -14,10 +14,11 @@ const route = useRoute()
 store.dispatch('getUser')
   .then(user => {
     if (!user) {
-      router.push('login')
+      store.commit('setDataLoaded', true)
+      router.push({ name: 'home' })
     } else {
-      if (route.name === 'login') {
-        router.push('courses')
+      if (route.name === 'home' || window.location.pathname === '/') {
+        router.push({ name: 'start' })
       }
       if (!store.state.dataLoaded) {
         Promise.all([

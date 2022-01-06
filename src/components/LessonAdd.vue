@@ -8,8 +8,10 @@ import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 const store = useStore()
 const router = useRouter()
+
 const title = ref('')
 const content = ref('')
+
 const props = defineProps({
   modelValue: {
     type: [String, Number, Boolean],
@@ -18,8 +20,18 @@ const props = defineProps({
   courseId: {
     type: String,
     required: true
+  },
+  lessonId: {
+    type: String,
+    required: true
   }
 })
+
+if (props.lessonId) {
+  title.value = store.getters.getLessonById(props.courseId, props.lessonId).title
+  content.value = store.getters.getLessonById(props.courseId, props.lessonId).content
+}
+
 const emit = defineEmits(['update:modelValue'])
 const value = computed({
   get: () => props.modelValue,
@@ -29,9 +41,14 @@ const value = computed({
 const confirm = async () => {
   const data = { title: title.value, content: content.value }
   const courseId = props.courseId
-  const { lessonId } = await store.dispatch('lessonAdd', { courseId, data })
-  if (courseId && lessonId) {
-    router.push(`/courses/${courseId}/lessons/${lessonId}`)
+  if (props.lessonId) {
+    await store.dispatch('lessonEdit', { lessonId: props.lessonId, courseId: props.courseId, data })
+    router.push(`/courses/${courseId}/lessons/${props.lessonId}`)
+  } else {
+    const { lessonId } = await store.dispatch('lessonAdd', { courseId, data })
+    if (courseId && lessonId) {
+      router.push(`/courses/${courseId}/lessons/${lessonId}`)
+    }
   }
 }
 const cancel = () => {

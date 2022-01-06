@@ -5,6 +5,7 @@ import { useRoute } from 'vue-router'
 import MainSection from '@/components/MainSection.vue'
 import TitleBar from '@/components/TitleBar.vue'
 import CardComponent from '@/components/CardComponent.vue'
+import LessonAdd from '@/components/LessonAdd.vue'
 
 const store = useStore()
 const route = useRoute()
@@ -31,17 +32,22 @@ watchEffect(() => {
 })
 
 onMounted(() => { pageReady.value = true })
-
+const lessonEditActive = ref(false)
 </script>
 
 <template>
+  <LessonAdd
+    :courseId="course.id"
+    :lessonId="lesson.id"
+    v-model="lessonEditActive"
+  />
   <title-bar :title-stack="titleStack" />
   <main-section v-if="lesson">
     <card-component
       class="mb-6"
       title="Lesson info"
       has-table
-      @header-icon-click="console.log('edit course')"
+      @header-icon-click="lessonEditActive = true"
     >
       <table>
         <tbody>
@@ -79,8 +85,9 @@ onMounted(() => { pageReady.value = true })
     <card-component
       class="mb-6"
       title="Content"
+      @header-icon-click="lessonEditActive = true"
     >
-      <pre>{{ lesson.content }}</pre>
+      <pre class="whitespace-pre-wrap">{{ lesson.content }}</pre>
     </card-component>
   </main-section>
 </template>

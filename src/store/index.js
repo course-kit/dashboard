@@ -186,7 +186,7 @@ export default createStore({
     async schoolEdit ({ commit, dispatch }, payload) {
       try {
         await schoolEdit(payload)
-        await dispatch('getCourses')
+        await dispatch('getUser')
       } catch (err) {
         alert(err.message)
       }

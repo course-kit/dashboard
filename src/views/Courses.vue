@@ -23,7 +23,6 @@ const editSchool = ref(false)
     <card-component
       class="mb-6"
       title="School"
-      :header-icon="mdiPlusBox"
       has-table
       @header-icon-click="editSchool = true"
     >

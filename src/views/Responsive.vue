@@ -19,7 +19,9 @@ const titleStack = ref(['Admin', 'Responsive layout'])
   </titled-section>
 
   <main-section>
-    <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
+    <div
+      class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden"
+    >
       <img
         src="https://static.justboil.me/templates/one/one-tailwind-vue-mobile.png"
         class="block"
@@ -27,12 +29,12 @@ const titleStack = ref(['Admin', 'Responsive layout'])
     </div>
   </main-section>
 
-  <titled-section>
-    Small laptop 1024px
-  </titled-section>
+  <titled-section> Small laptop 1024px </titled-section>
 
   <main-section>
-    <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
+    <div
+      class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden"
+    >
       <img
         src="https://static.justboil.me/templates/one/one-tailwind-vue-1024.png"
         class="block"
@@ -41,7 +43,9 @@ const titleStack = ref(['Admin', 'Responsive layout'])
   </main-section>
 
   <main-section>
-    <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
+    <div
+      class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden"
+    >
       <img
         src="https://static.justboil.me/templates/one/one-tailwind-vue-1024-menu-open.png"
         class="block"
@@ -49,12 +53,12 @@ const titleStack = ref(['Admin', 'Responsive layout'])
     </div>
   </main-section>
 
-  <titled-section>
-    Laptop & desktop
-  </titled-section>
+  <titled-section> Laptop & desktop </titled-section>
 
   <main-section>
-    <div class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden">
+    <div
+      class="md:w-10/12 shadow-2xl md:mx-auto rounded-3xl border-8 border-white overflow-hidden"
+    >
       <img
         src="https://static.justboil.me/templates/one/one-tailwind-vue-widescreen.png"
         class="block"

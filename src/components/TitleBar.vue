@@ -34,7 +34,7 @@ defineProps({
 
 <style scoped>
 li.title-stack-item:not(:last-child):after {
-  content: '/';
+  content: "/";
   @apply inline-block pl-3;
 }
 </style>

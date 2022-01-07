@@ -11,8 +11,7 @@ defineProps({
     required: true
   },
   isDesktopIconOnly: Boolean
-}
-)
+})
 </script>
 
 <template>
@@ -22,6 +21,6 @@ defineProps({
   />
   <span
     class="px-2 transition-colors"
-    :class="{'lg:hidden':isDesktopIconOnly}"
+    :class="{ 'lg:hidden': isDesktopIconOnly }"
   >{{ label }}</span>
 </template>

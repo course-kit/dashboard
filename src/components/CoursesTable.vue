@@ -15,11 +15,16 @@ const perPage = ref(10)
 
 const currentPage = ref(0)
 
-const itemsPaginated = computed(
-  () => items.value.slice(perPage.value * currentPage.value, perPage.value * (currentPage.value + 1))
+const itemsPaginated = computed(() =>
+  items.value.slice(
+    perPage.value * currentPage.value,
+    perPage.value * (currentPage.value + 1)
+  )
 )
 
-const numPages = computed(() => Math.ceil(items.value.length / perPage.value) || 1)
+const numPages = computed(
+  () => Math.ceil(items.value.length / perPage.value) || 1
+)
 
 const currentPageHuman = computed(() => currentPage.value + 1)
 
@@ -32,7 +37,6 @@ const pagesList = computed(() => {
 
   return pagesList
 })
-
 </script>
 
 <template>
@@ -58,9 +62,7 @@ const pagesList = computed(() => {
         >
           {{ course.title }}
         </td>
-        <td
-          data-label="ID"
-        >
+        <td data-label="ID">
           {{ course.id }}
         </td>
       </tr>

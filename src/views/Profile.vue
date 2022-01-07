@@ -14,7 +14,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const logoutUrl = `${baseURL}/logout`
-
 </script>
 <template>
   <title-bar :title-stack="titleStack" />

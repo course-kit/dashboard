@@ -23,8 +23,10 @@ const props = defineProps({
   bg: Boolean
 })
 
-const iconStyle = computed(
-  () => props.bg ? colorsBg[props.type] : [colorsText[props.type], 'bg-gray-50 dark:bg-gray-800']
+const iconStyle = computed(() =>
+  props.bg
+    ? colorsBg[props.type]
+    : [colorsText[props.type], 'bg-gray-50 dark:bg-gray-800']
 )
 </script>
 

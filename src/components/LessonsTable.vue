@@ -23,11 +23,16 @@ const perPage = ref(10)
 
 const currentPage = ref(0)
 
-const lessonsPaginated = computed(
-  () => props.lessons.slice(perPage.value * currentPage.value, perPage.value * (currentPage.value + 1))
+const lessonsPaginated = computed(() =>
+  props.lessons.slice(
+    perPage.value * currentPage.value,
+    perPage.value * (currentPage.value + 1)
+  )
 )
 
-const numPages = computed(() => Math.ceil(props.lessons.length / perPage.value) || 1)
+const numPages = computed(
+  () => Math.ceil(props.lessons.length / perPage.value) || 1
+)
 
 const currentPageHuman = computed(() => currentPage.value + 1)
 
@@ -40,7 +45,6 @@ const pagesList = computed(() => {
 
   return pagesList
 })
-
 </script>
 
 <template>
@@ -90,13 +94,25 @@ const pagesList = computed(() => {
               v-if="lessons[0].id !== lesson.id"
               :icon="mdiArrowUpBold"
               small
-              @click="$store.dispatch('lessonPosChange', { courseId, lessonId: lesson.id, isInc: false })"
+              @click="
+                $store.dispatch('lessonPosChange', {
+                  courseId,
+                  lessonId: lesson.id,
+                  isInc: false,
+                })
+              "
             />
             <jb-button
               v-if="lessons[lessons.length - 1].id !== lesson.id"
               :icon="mdiArrowDownBold"
               small
-              @click="$store.dispatch('lessonPosChange', { courseId, lessonId: lesson.id, isInc: true })"
+              @click="
+                $store.dispatch('lessonPosChange', {
+                  courseId,
+                  lessonId: lesson.id,
+                  isInc: true,
+                })
+              "
             />
           </jb-buttons>
         </td>

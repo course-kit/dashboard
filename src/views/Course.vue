@@ -14,7 +14,9 @@ import CourseAdd from '@/components/CourseAdd.vue'
 const store = useStore()
 const route = useRoute()
 
-const course = computed(() => store.getters.getCourseById(route.params.courseId))
+const course = computed(() =>
+  store.getters.getCourseById(route.params.courseId)
+)
 
 const titleStack = computed(() => [
   {

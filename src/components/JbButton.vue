@@ -66,7 +66,9 @@ const computedType = computed(() => {
   return null
 })
 
-const labelClass = computed(() => props.small && props.icon ? 'px-1' : 'px-2')
+const labelClass = computed(() =>
+  props.small && props.icon ? 'px-1' : 'px-2'
+)
 
 const componentClass = computed(() => {
   const base = [
@@ -82,13 +84,18 @@ const componentClass = computed(() => {
     'duration-150',
     'border',
     'rounded',
-    props.active ? 'ring-2 ring-black border-transparent dark:ring-white' : 'ring-blue-700',
+    props.active
+      ? 'ring-2 ring-black border-transparent dark:ring-white'
+      : 'ring-blue-700',
     props.small ? 'p-1' : 'p-2',
     getButtonColor(props.color, props.outline, !props.disabled)
   ]
 
   if (props.disabled) {
-    base.push('cursor-not-allowed', props.outline ? 'opacity-50' : 'opacity-70')
+    base.push(
+      'cursor-not-allowed',
+      props.outline ? 'opacity-50' : 'opacity-70'
+    )
   }
 
   return base

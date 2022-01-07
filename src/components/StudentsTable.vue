@@ -15,11 +15,16 @@ const perPage = ref(10)
 
 const currentPage = ref(0)
 
-const studentsPaginated = computed(
-  () => items.value.slice(perPage.value * currentPage.value, perPage.value * (currentPage.value + 1))
+const studentsPaginated = computed(() =>
+  items.value.slice(
+    perPage.value * currentPage.value,
+    perPage.value * (currentPage.value + 1)
+  )
 )
 
-const numPages = computed(() => Math.ceil(items.value.length / perPage.value) || 1)
+const numPages = computed(
+  () => Math.ceil(items.value.length / perPage.value) || 1
+)
 
 const currentPageHuman = computed(() => currentPage.value + 1)
 
@@ -37,7 +42,6 @@ const getCourse = function (id) {
   const course = store.getters.getCourseById(id)
   return course.title
 }
-
 </script>
 
 <template>
@@ -62,7 +66,7 @@ const getCourse = function (id) {
           class="pl-6 cursor-pointer"
           @click="router.push(`/students/${student.id}/`)"
         >
-          {{ student.name ? student.name : 'NULL' }}
+          {{ student.name ? student.name : "NULL" }}
         </td>
         <td
           data-label="Email"
@@ -83,7 +87,7 @@ const getCourse = function (id) {
           class="cursor-pointer"
           @click="router.push(`/students/${student.id}`)"
         >
-          {{ student.isPending ? 'PENDING' : 'ACTIVE' }}
+          {{ student.isPending ? "PENDING" : "ACTIVE" }}
         </td>
       </tr>
     </tbody>

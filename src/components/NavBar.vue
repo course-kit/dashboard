@@ -27,13 +27,17 @@ const isAsideMobileExpanded = computed(() => store.state.isAsideMobileExpanded)
 
 const userName = computed(() => store.state.userName)
 
-const menuToggleMobileIcon = computed(() => isAsideMobileExpanded.value ? mdiBackburger : mdiForwardburger)
+const menuToggleMobileIcon = computed(() =>
+  isAsideMobileExpanded.value ? mdiBackburger : mdiForwardburger
+)
 
 const menuToggleMobile = () => store.dispatch('asideMobileToggle')
 
 const isMenuNavBarActive = ref(false)
 
-const menuNavBarToggleIcon = computed(() => isMenuNavBarActive.value ? mdiClose : mdiDotsVertical)
+const menuNavBarToggleIcon = computed(() =>
+  isMenuNavBarActive.value ? mdiClose : mdiDotsVertical
+)
 
 const menuNavBarToggle = () => {
   isMenuNavBarActive.value = !isMenuNavBarActive.value
@@ -47,9 +51,8 @@ const menuOpenLg = () => {
 <template>
   <nav
     v-show="isNavBarVisible"
-    class="top-0 left-0 right-0 fixed flex bg-white h-14 border-b border-gray-100 z-30 w-screen
-    transition-position xl:pl-60 lg:w-auto lg:items-stretch dark:bg-gray-900 dark:border-gray-800"
-    :class="{'ml-60 lg:ml-0':isAsideMobileExpanded}"
+    class="top-0 left-0 right-0 fixed flex bg-white h-14 border-b border-gray-100 z-30 w-screen transition-position xl:pl-60 lg:w-auto lg:items-stretch dark:bg-gray-900 dark:border-gray-800"
+    :class="{ 'ml-60 lg:ml-0': isAsideMobileExpanded }"
   >
     <div class="flex-1 items-stretch flex h-14">
       <nav-bar-item
@@ -80,8 +83,7 @@ const menuOpenLg = () => {
       </nav-bar-item>
     </div>
     <div
-      class="absolute w-screen top-14 left-0 bg-white shadow
-        lg:w-auto lg:items-stretch lg:flex lg:grow lg:static lg:border-b-0 lg:overflow-visible lg:shadow-none dark:bg-gray-900"
+      class="absolute w-screen top-14 left-0 bg-white shadow lg:w-auto lg:items-stretch lg:flex lg:grow lg:static lg:border-b-0 lg:overflow-visible lg:shadow-none dark:bg-gray-900"
       :class="[isMenuNavBarActive ? 'block' : 'hidden']"
     >
       <div

@@ -71,4 +71,16 @@ const editLesson = async (courseId, lessonId, payload) => {
   })
 }
 
-export { getCourses, getStudents, courseAdd, getUser, lessonAdd, editLesson, courseEdit }
+const schoolEdit = async (payload) => {
+  return await fetch(`${baseURL}/user`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  })
+}
+
+export { getCourses, getStudents, courseAdd, getUser, lessonAdd, editLesson, courseEdit, schoolEdit }

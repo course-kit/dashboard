@@ -4,7 +4,6 @@ import MainSection from '@/components/MainSection.vue'
 import TitleBar from '@/components/TitleBar.vue'
 
 const titleStack = ref([{ name: 'Welcome to CourseKit' }])
-
 </script>
 
 <template>
@@ -13,7 +12,8 @@ const titleStack = ref([{ name: 'Welcome to CourseKit' }])
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div>
         <p class="pb-4">
-          Welcome to CourseKit! See the following resources to help you get up and running:
+          Welcome to CourseKit! See the following resources to help you get up
+          and running:
         </p>
         <ul class="list-disc ml-4 pb-4">
           <li class="pb-2">
@@ -53,7 +53,8 @@ const titleStack = ref([{ name: 'Welcome to CourseKit' }])
           </li>
         </ul>
         <p>
-          Need help? Join us on the <a
+          Need help? Join us on the
+          <a
             href="https://discord.gg/ugXJFkw6hv"
             target="_blank"
             class="underline"

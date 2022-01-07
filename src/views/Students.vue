@@ -7,9 +7,7 @@ import TitleBar from '@/components/TitleBar.vue'
 import StudentsTable from '@/components/StudentsTable.vue'
 import CardComponent from '@/components/CardComponent.vue'
 
-const titleStack = ref([
-  { name: 'Students' }
-])
+const titleStack = ref([{ name: 'Students' }])
 
 const addActive = ref(false)
 </script>

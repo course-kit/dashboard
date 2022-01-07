@@ -28,12 +28,10 @@ const props = defineProps({
 
 const emit = defineEmits(['header-icon-click', 'submit'])
 
-const is = computed(() => props.form ? 'form' : 'div')
+const is = computed(() => (props.form ? 'form' : 'div'))
 
 const componentClass = computed(() => {
-  const base = [
-    props.rounded
-  ]
+  const base = [props.rounded]
 
   if (props.hoverable) {
     base.push('hover:shadow-lg transition-shadow duration-500')
@@ -48,7 +46,7 @@ const headerIconClick = () => {
   emit('header-icon-click')
 }
 
-const submit = e => {
+const submit = (e) => {
   emit('submit', e)
 }
 </script>
@@ -66,7 +64,7 @@ const submit = e => {
     >
       <p
         class="flex items-center py-3 grow font-bold"
-        :class="[ icon ? 'px-4' : 'px-6' ]"
+        :class="[icon ? 'px-4' : 'px-6']"
       >
         <icon
           v-if="icon"
@@ -93,7 +91,7 @@ const submit = e => {
     </div>
     <div
       v-else
-      :class="{'p-6':!hasTable}"
+      :class="{ 'p-6': !hasTable }"
     >
       <slot />
     </div>

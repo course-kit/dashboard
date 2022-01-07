@@ -19,11 +19,18 @@ const props = defineProps({
 
 const store = useStore()
 
-const avatar = computed(() => props.username
-  ? `https://avatars.dicebear.com/${props.api}/${props.username.replace(/[^a-z0-9]+/i, '-')}.svg`
-  : store.state.userAvatar)
+const avatar = computed(() =>
+  props.username
+    ? `https://avatars.dicebear.com/${props.api}/${props.username.replace(
+        /[^a-z0-9]+/i,
+        '-'
+      )}.svg`
+    : store.state.userAvatar
+)
 
-const name = computed(() => props.username ? props.username : store.state.userName)
+const name = computed(() =>
+  props.username ? props.username : store.state.userName
+)
 </script>
 
 <template>

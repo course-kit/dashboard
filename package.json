@@ -7,8 +7,7 @@
     "serve:vite": "vite preview",
     "build": "vue-cli-service build",
     "build:vite": "vite build",
-    "lint": "vue-cli-service lint",
-    "lint:fix": "vue-cli-service lint --fix"
+    "lint": "prettier --write src/**/*.vue src/**/*.js && eslint src/**/*.vue src/**/*.js --fix"
   },
   "dependencies": {
     "@api.video/player-sdk": "^1.2.12",

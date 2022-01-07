@@ -26,7 +26,7 @@ if (props.id) {
 const emit = defineEmits(['update:modelValue'])
 const value = computed({
   get: () => props.modelValue,
-  set: value => emit('update:modelValue', value)
+  set: (value) => emit('update:modelValue', value)
 })
 const confirm = async () => {
   const payload = { title: title.value, homeUrl: homeUrl.value }
@@ -47,7 +47,7 @@ const cancel = () => {
 <template>
   <modal-box
     v-model="value"
-    :title="`${props.id ? 'Edit' : 'Add' } course`"
+    :title="`${props.id ? 'Edit' : 'Add'} course`"
     button-label="Save"
     has-cancel
     @confirm="confirm"

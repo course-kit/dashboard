@@ -8,7 +8,7 @@ defineProps({
 
 const emit = defineEmits(['overlay-click'])
 
-const overlayClick = event => {
+const overlayClick = (event) => {
   emit('overlay-click', event)
 }
 </script>

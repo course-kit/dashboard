@@ -120,9 +120,7 @@ const submit = () => {
     </card-component>
   </main-section>
 
-  <titled-section>
-    Custom elements
-  </titled-section>
+  <titled-section> Custom elements </titled-section>
 
   <main-section>
     <card-component

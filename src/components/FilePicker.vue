@@ -34,7 +34,7 @@ const file = ref(props.modelValue)
 
 const modelValueProp = computed(() => props.modelValue)
 
-watch(modelValueProp, value => {
+watch(modelValueProp, (value) => {
   file.value = value
 
   if (!value) {
@@ -42,7 +42,7 @@ watch(modelValueProp, value => {
   }
 })
 
-const upload = event => {
+const upload = (event) => {
   const value = event.target.files || event.dataTransfer.files
 
   file.value = value[0]
@@ -98,7 +98,9 @@ const upload = event => {
       >
     </label>
     <div v-if="file">
-      <span class="inline-flex px-4 py-2 justify-center bg-gray-100 border-gray-200 border rounded-r">{{ file.name }}</span>
+      <span
+        class="inline-flex px-4 py-2 justify-center bg-gray-100 border-gray-200 border rounded-r"
+      >{{ file.name }}</span>
     </div>
   </div>
 </template>

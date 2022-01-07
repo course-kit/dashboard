@@ -1,5 +1,14 @@
 import { createStore } from 'vuex'
-import { getCourses, getStudents, courseAdd, getUser, lessonAdd, editLesson, courseEdit } from '@/apiService'
+import {
+  getCourses,
+  getStudents,
+  courseAdd,
+  getUser,
+  lessonAdd,
+  editLesson,
+  courseEdit,
+  schoolEdit
+} from '@/apiService'
 
 export default createStore({
   state: {
@@ -26,15 +35,19 @@ export default createStore({
     history: [],
     loginUrl: null,
     regUrl: null,
+    schoolId: null,
+    schoolUrl: null,
     dataLoaded: false
   },
   getters: {
     getCourseById: (state) => (id) => {
-      return state.courses.find(course => course.id === id)
+      return state.courses.find((course) => course.id === id)
     },
     getLessonById: (state) => (courseId, lessonId) => {
-      const course = state.courses.find(course => course.id === courseId)
-      return course ? course.lessons.find(lesson => lesson.id === lessonId) : null
+      const course = state.courses.find((course) => course.id === courseId)
+      return course
+        ? course.lessons.find((lesson) => lesson.id === lessonId)
+        : null
     },
     isLoading: (state) => {
       return !state.dataLoaded
@@ -57,6 +70,12 @@ export default createStore({
       if (payload.avatar) {
         state.userAvatar = payload.avatar
       }
+      if (payload.schoolId) {
+        state.schoolId = payload.schoolId
+      }
+      if (payload.schoolUrl) {
+        state.schoolUrl = payload.schoolUrl
+      }
     },
     setAuthUrls (state, { loginUrl, regUrl }) {
       const redirect = encodeURIComponent(window.location.href)
@@ -71,9 +90,13 @@ export default createStore({
     asideMobileToggle ({ commit, state }, payload = null) {
       const isShow = payload !== null ? payload : !state.isAsideMobileExpanded
 
-      document.getElementById('app').classList[isShow ? 'add' : 'remove']('ml-60', 'lg:ml-0')
+      document
+        .getElementById('app')
+        .classList[isShow ? 'add' : 'remove']('ml-60', 'lg:ml-0')
 
-      document.documentElement.classList[isShow ? 'add' : 'remove']('m-clipped')
+      document.documentElement.classList[isShow ? 'add' : 'remove'](
+        'm-clipped'
+      )
 
       commit('basic', {
         key: 'isAsideMobileExpanded',
@@ -82,13 +105,18 @@ export default createStore({
     },
 
     asideLgToggle ({ commit, state }, payload = null) {
-      commit('basic', { key: 'isAsideLgActive', value: payload !== null ? payload : !state.isAsideLgActive })
+      commit('basic', {
+        key: 'isAsideLgActive',
+        value: payload !== null ? payload : !state.isAsideLgActive
+      })
     },
 
     fullScreenToggle ({ commit, state }, value) {
       commit('basic', { key: 'isFullScreen', value })
 
-      document.documentElement.classList[value ? 'add' : 'remove']('full-screen')
+      document.documentElement.classList[value ? 'add' : 'remove'](
+        'full-screen'
+      )
     },
 
     async getCourses ({ commit }) {
@@ -128,8 +156,8 @@ export default createStore({
     },
     async lessonPosChange ({ state, dispatch }, { courseId, lessonId, isInc }) {
       try {
-        const course = state.courses.find(course => course.id === courseId)
-        const lesson = course.lessons.find(lesson => lesson.id === lessonId)
+        const course = state.courses.find((course) => course.id === courseId)
+        const lesson = course.lessons.find((lesson) => lesson.id === lessonId)
         const order = lesson.order + (isInc ? 1 : -1)
         await editLesson(courseId, lessonId, { order })
         await dispatch('getCourses')
@@ -150,6 +178,14 @@ export default createStore({
     async courseEdit ({ commit, dispatch }, { id, data }) {
       try {
         await courseEdit(id, data)
+        await dispatch('getCourses')
+      } catch (err) {
+        alert(err.message)
+      }
+    },
+    async schoolEdit ({ commit, dispatch }, payload) {
+      try {
+        await schoolEdit(payload)
         await dispatch('getCourses')
       } catch (err) {
         alert(err.message)
@@ -190,6 +226,5 @@ export default createStore({
       }
     }
   },
-  modules: {
-  }
+  modules: {}
 })

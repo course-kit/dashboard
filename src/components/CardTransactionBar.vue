@@ -1,6 +1,11 @@
 <script setup>
 import { computed } from 'vue'
-import { mdiCashMinus, mdiCashPlus, mdiReceipt, mdiCreditCardOutline } from '@mdi/js'
+import {
+  mdiCashMinus,
+  mdiCashPlus,
+  mdiReceipt,
+  mdiCreditCardOutline
+} from '@mdi/js'
 import CardComponent from '@/components/CardComponent.vue'
 import Level from '@/components/Level.vue'
 import Pill from '@/components/Pill.vue'
@@ -86,7 +91,8 @@ const icon = computed(() => {
             type="info"
             :text="account"
             small
-          /> <pill
+          />
+          <pill
             :type="icon.type"
             :text="type"
             small

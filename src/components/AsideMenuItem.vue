@@ -19,19 +19,23 @@ const emit = defineEmits(['menu-click'])
 
 const isDropdownActive = ref(false)
 
-const componentIs = computed(() => props.item.to ? 'router-link' : 'a')
+const componentIs = computed(() => (props.item.to ? 'router-link' : 'a'))
 
 const hasDropdown = computed(() => !!props.item.menu)
 
-const dropdownIcon = computed(() => isDropdownActive.value ? mdiMinus : mdiPlus)
+const dropdownIcon = computed(() =>
+  isDropdownActive.value ? mdiMinus : mdiPlus
+)
 
 const itemTo = computed(() => props.item.to || null)
 
 const itemHref = computed(() => props.item.href || null)
 
-const itemTarget = computed(() => componentIs.value === 'a' && props.item.target ? props.item.target : null)
+const itemTarget = computed(() =>
+  componentIs.value === 'a' && props.item.target ? props.item.target : null
+)
 
-const menuClick = event => {
+const menuClick = (event) => {
   emit('menu-click', event, props.item)
 
   if (hasDropdown.value) {
@@ -82,7 +86,11 @@ const styleInactive = 'text-gray-300'
     <aside-menu-list
       v-if="hasDropdown"
       :menu="item.menu"
-      :class="{ 'hidden': !isDropdownActive, 'block bg-gray-700 bg-opacity-50 dark:bg-gray-800 dark:bg-opacity-50': isDropdownActive }"
+      :class="{
+        hidden: !isDropdownActive,
+        'block bg-gray-700 bg-opacity-50 dark:bg-gray-800 dark:bg-opacity-50':
+          isDropdownActive,
+      }"
       is-submenu-list
     />
   </li>

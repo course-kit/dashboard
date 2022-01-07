@@ -1,6 +1,11 @@
 <script setup>
 import { ref } from 'vue'
-import { mdiMonitorCellphone, mdiAccountMultiple, mdiTableBorder, mdiTableOff } from '@mdi/js'
+import {
+  mdiMonitorCellphone,
+  mdiAccountMultiple,
+  mdiTableBorder,
+  mdiTableOff
+} from '@mdi/js'
 import MainSection from '@/components/MainSection.vue'
 import Notification from '@/components/Notification.vue'
 import CardComponent from '@/components/CardComponent.vue'

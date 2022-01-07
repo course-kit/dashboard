@@ -35,10 +35,10 @@ const emit = defineEmits(['update:modelValue', 'cancel', 'confirm'])
 
 const value = computed({
   get: () => props.modelValue,
-  set: value => emit('update:modelValue', value)
+  set: (value) => emit('update:modelValue', value)
 })
 
-const confirmCancel = mode => {
+const confirmCancel = (mode) => {
   value.value = false
   emit(mode)
 }

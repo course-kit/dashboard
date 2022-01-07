@@ -46,7 +46,7 @@ const emit = defineEmits(['update:modelValue', 'right-icon-click'])
 
 const computedValue = computed({
   get: () => props.modelValue,
-  set: value => {
+  set: (value) => {
     emit('update:modelValue', value)
   }
 })
@@ -67,16 +67,18 @@ const inputElClass = computed(() => {
   return base
 })
 
-const computedType = computed(() => props.options ? 'select' : props.type)
+const computedType = computed(() => (props.options ? 'select' : props.type))
 
-const controlIconH = computed(() => props.type === 'textarea' ? 'h-full' : 'h-12')
+const controlIconH = computed(() =>
+  props.type === 'textarea' ? 'h-full' : 'h-12'
+)
 
 const store = useStore()
 
 const inputEl = ref(null)
 
 if (props.ctrlKFocus) {
-  const fieldFocusHook = e => {
+  const fieldFocusHook = (e) => {
     if (e.ctrlKey && e.key === 'k') {
       e.preventDefault()
       inputEl.value.focus()

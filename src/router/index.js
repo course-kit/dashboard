@@ -24,7 +24,8 @@ const routes = [
     },
     path: '/courses',
     name: 'courses',
-    component: () => import(/* webpackChunkName: "courses" */ '@/views/Courses.vue')
+    component: () =>
+      import(/* webpackChunkName: "courses" */ '@/views/Courses.vue')
   },
   // {
   //   meta: {
@@ -40,7 +41,8 @@ const routes = [
     },
     path: '/courses/:courseId',
     name: 'course',
-    component: () => import(/* webpackChunkName: "course" */ '@/views/Course.vue')
+    component: () =>
+      import(/* webpackChunkName: "course" */ '@/views/Course.vue')
   },
   {
     meta: {
@@ -48,7 +50,8 @@ const routes = [
     },
     path: '/courses/:courseId/lessons/:lessonId',
     name: 'lesson',
-    component: () => import(/* webpackChunkName: "lesson" */ '@/views/Lesson.vue')
+    component: () =>
+      import(/* webpackChunkName: "lesson" */ '@/views/Lesson.vue')
   },
   {
     meta: {
@@ -56,7 +59,8 @@ const routes = [
     },
     path: '/students',
     name: 'students',
-    component: () => import(/* webpackChunkName: "students" */ '@/views/Students.vue')
+    component: () =>
+      import(/* webpackChunkName: "students" */ '@/views/Students.vue')
   },
   {
     meta: {
@@ -64,7 +68,8 @@ const routes = [
     },
     path: '/analytics',
     name: 'analytics',
-    component: () => import(/* webpackChunkName: "analytics" */ '@/views/Analytics.vue')
+    component: () =>
+      import(/* webpackChunkName: "analytics" */ '@/views/Analytics.vue')
   },
   {
     meta: {
@@ -72,7 +77,8 @@ const routes = [
     },
     path: '/billing',
     name: 'billing',
-    component: () => import(/* webpackChunkName: "billing" */ '@/views/Billing.vue')
+    component: () =>
+      import(/* webpackChunkName: "billing" */ '@/views/Billing.vue')
   },
   {
     meta: {
@@ -80,7 +86,8 @@ const routes = [
     },
     path: '/profile',
     name: 'profile',
-    component: () => import(/* webpackChunkName: "profile" */ '@/views/Profile.vue')
+    component: () =>
+      import(/* webpackChunkName: "profile" */ '@/views/Profile.vue')
   },
   {
     meta: {
@@ -89,7 +96,8 @@ const routes = [
     },
     path: '/error',
     name: 'error',
-    component: () => import(/* webpackChunkName: "error" */ '@/views/Error.vue')
+    component: () =>
+      import(/* webpackChunkName: "error" */ '@/views/Error.vue')
   }
 ]
 

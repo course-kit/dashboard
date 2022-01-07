@@ -10,13 +10,23 @@ import LessonAdd from '@/components/LessonAdd.vue'
 const store = useStore()
 const route = useRoute()
 
-const course = computed(() => store.getters.getCourseById(route.params.courseId))
-const lesson = computed(() => store.getters.getLessonById(route.params.courseId, route.params.lessonId))
+const course = computed(() =>
+  store.getters.getCourseById(route.params.courseId)
+)
+const lesson = computed(() =>
+  store.getters.getLessonById(route.params.courseId, route.params.lessonId)
+)
 
 const titleStack = computed(() => [
   { name: 'Courses', to: '/courses' },
-  { name: course.value ? course.value.title : null, to: course.value ? `/courses/${course.value.id}` : null },
-  { name: 'Lessons', to: course.value ? `/courses/${course.value.id}/#lessons` : null },
+  {
+    name: course.value ? course.value.title : null,
+    to: course.value ? `/courses/${course.value.id}` : null
+  },
+  {
+    name: 'Lessons',
+    to: course.value ? `/courses/${course.value.id}/#lessons` : null
+  },
   { name: lesson.value ? lesson.value.title : null }
 ])
 
@@ -31,7 +41,9 @@ watchEffect(() => {
   }
 })
 
-onMounted(() => { pageReady.value = true })
+onMounted(() => {
+  pageReady.value = true
+})
 const lessonEditActive = ref(false)
 </script>
 

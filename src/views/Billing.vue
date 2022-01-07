@@ -4,7 +4,6 @@ import MainSection from '@/components/MainSection.vue'
 import TitleBar from '@/components/TitleBar.vue'
 
 const titleStack = ref([{ name: 'Billilng' }])
-
 </script>
 
 <template>

@@ -28,21 +28,31 @@ const props = defineProps({
 })
 
 if (props.lessonId) {
-  title.value = store.getters.getLessonById(props.courseId, props.lessonId).title
-  content.value = store.getters.getLessonById(props.courseId, props.lessonId).content
+  title.value = store.getters.getLessonById(
+    props.courseId,
+    props.lessonId
+  ).title
+  content.value = store.getters.getLessonById(
+    props.courseId,
+    props.lessonId
+  ).content
 }
 
 const emit = defineEmits(['update:modelValue'])
 const value = computed({
   get: () => props.modelValue,
-  set: value => emit('update:modelValue', value)
+  set: (value) => emit('update:modelValue', value)
 })
 
 const confirm = async () => {
   const data = { title: title.value, content: content.value }
   const courseId = props.courseId
   if (props.lessonId) {
-    await store.dispatch('lessonEdit', { lessonId: props.lessonId, courseId: props.courseId, data })
+    await store.dispatch('lessonEdit', {
+      lessonId: props.lessonId,
+      courseId: props.courseId,
+      data
+    })
     router.push(`/courses/${courseId}/lessons/${props.lessonId}`)
   } else {
     const { lessonId } = await store.dispatch('lessonAdd', { courseId, data })
@@ -55,7 +65,6 @@ const cancel = () => {
   title.value = ''
   content.value = ''
 }
-
 </script>
 
 <template>

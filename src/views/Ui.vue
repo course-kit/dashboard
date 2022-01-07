@@ -37,15 +37,23 @@ const modalThreeActive = ref(false)
 
 const notificationSettingsModel = ref([])
 
-const notificationsOutline = computed(() => notificationSettingsModel.value.indexOf('outline') > -1)
+const notificationsOutline = computed(
+  () => notificationSettingsModel.value.indexOf('outline') > -1
+)
 
 const buttonSettingsModel = ref([])
 
-const buttonsOutline = computed(() => buttonSettingsModel.value.indexOf('outline') > -1)
+const buttonsOutline = computed(
+  () => buttonSettingsModel.value.indexOf('outline') > -1
+)
 
-const buttonsSmall = computed(() => buttonSettingsModel.value.indexOf('small') > -1)
+const buttonsSmall = computed(
+  () => buttonSettingsModel.value.indexOf('small') > -1
+)
 
-const buttonsDisabled = computed(() => buttonSettingsModel.value.indexOf('disabled') > -1)
+const buttonsDisabled = computed(
+  () => buttonSettingsModel.value.indexOf('disabled') > -1
+)
 
 const store = useStore()
 
@@ -101,9 +109,7 @@ const darkModeToggle = () => {
     </card-component>
   </main-section>
 
-  <titled-section>
-    Modal examples
-  </titled-section>
+  <titled-section> Modal examples </titled-section>
 
   <main-section>
     <div class="space-y-12">
@@ -286,7 +292,11 @@ const darkModeToggle = () => {
           v-model="buttonSettingsModel"
           name="buttons-switch"
           type="switch"
-          :options="{ outline: 'Outline', small: 'Small', disabled: 'Disabled' }"
+          :options="{
+            outline: 'Outline',
+            small: 'Small',
+            disabled: 'Disabled',
+          }"
         />
       </field>
 
@@ -442,12 +452,14 @@ const darkModeToggle = () => {
   <titled-section>Cards</titled-section>
 
   <main-section>
-    <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2 ">
+    <div class="grid grid-cols-1 gap-6 mb-6 lg:grid-cols-2">
       <card-component
         title="With Title"
         mb=""
       >
-        <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-gray-400">
+        <div
+          class="text-center py-24 lg:py-12 text-gray-500 dark:text-gray-400"
+        >
           With title
         </div>
       </card-component>
@@ -458,7 +470,9 @@ const darkModeToggle = () => {
         :header-icon="mdiClose"
         mb=""
       >
-        <div class="text-center py-24 lg:py-12 text-gray-500 dark:text-gray-400">
+        <div
+          class="text-center py-24 lg:py-12 text-gray-500 dark:text-gray-400"
+        >
           With title & icons
         </div>
       </card-component>

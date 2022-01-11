@@ -32,9 +32,11 @@ const confirm = async () => {
   const payload = { title: title.value, homeUrl: homeUrl.value }
   if (props.id) {
     await store.dispatch('courseEdit', { id: props.id, data: payload })
+    cancel()
     router.push(`/courses/${props.id}`)
   } else {
     const { id } = await store.dispatch('courseAdd', payload)
+    cancel()
     router.push(`/courses/${id}`)
   }
 }

@@ -23,7 +23,7 @@ const props = defineProps({
   },
   lessonId: {
     type: String,
-    required: true
+    default: null
   }
 })
 
@@ -53,9 +53,11 @@ const confirm = async () => {
       courseId: props.courseId,
       data
     })
+    cancel()
     router.push(`/courses/${courseId}/lessons/${props.lessonId}`)
   } else {
     const { lessonId } = await store.dispatch('lessonAdd', { courseId, data })
+    cancel()
     if (courseId && lessonId) {
       router.push(`/courses/${courseId}/lessons/${lessonId}`)
     }

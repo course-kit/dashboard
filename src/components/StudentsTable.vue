@@ -64,14 +64,12 @@ const getCourse = function (id) {
         <td
           data-label="Name"
           class="pl-6 cursor-pointer"
-          @click="router.push(`/students/${student.id}/`)"
         >
           {{ student.name ? student.name : "NULL" }}
         </td>
         <td
           data-label="Email"
           class="cursor-pointer"
-          @click="router.push(`/students/${student.id}`)"
         >
           {{ student.email }}
         </td>
@@ -85,7 +83,6 @@ const getCourse = function (id) {
         <td
           data-label="Status"
           class="cursor-pointer"
-          @click="router.push(`/students/${student.id}`)"
         >
           {{ student.isPending ? "PENDING" : "ACTIVE" }}
         </td>

@@ -16,6 +16,7 @@ store.dispatch('getUser')
     if (!user) {
       store.commit('setDataLoaded', true)
       router.push({ name: 'home' })
+      console.log('Redirected to login.')
     } else {
       if (route.name === 'home' || window.location.pathname === '/') {
         router.push({ name: 'start' })

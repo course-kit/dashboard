@@ -70,7 +70,7 @@ const pagesList = computed(() => {
   </table>
   <div class="table-pagination">
     <level>
-      <jb-buttons>
+      <jb-buttons v-if="pagesList.length > 1">
         <jb-button
           v-for="page in pagesList"
           :key="page"

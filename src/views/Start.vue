@@ -16,14 +16,14 @@ const titleStack = ref([{ name: 'Welcome to CourseKit' }])
           and running:
         </p>
         <ul class="list-disc ml-4 pb-4">
-<!--          <li class="pb-2">-->
-<!--            <a-->
-<!--              class="underline"-->
-<!--              href="https://github.com/course-kit/guides/blob/master/quick-start.md"-->
-<!--            >-->
-<!--              Quick start guide-->
-<!--            </a>-->
-<!--          </li>-->
+          <li class="pb-2">
+            <a
+              class="underline"
+              href="https://github.com/course-kit/guides/blob/master/quick-start.md"
+            >
+              Quick start guide
+            </a>
+          </li>
           <li class="pb-2">
             <a
               class="underline"

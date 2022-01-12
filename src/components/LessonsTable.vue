@@ -1,5 +1,5 @@
 <script setup>
-import { computed, ref, onMounted } from 'vue'
+import { computed, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import Level from '@/components/Level.vue'
 import JbButtons from '@/components/JbButtons.vue'

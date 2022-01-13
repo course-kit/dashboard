@@ -17,12 +17,14 @@ const props = defineProps({
 })
 const store = useStore()
 const router = useRouter()
-const courses = computed(() => store.state.courses.map(course => {
-  return {
-    id: course.id,
-    label: course.title
-  }
-}))
+const courses = computed(() =>
+  store.state.courses.map((course) => {
+    return {
+      id: course.id,
+      label: course.title
+    }
+  })
+)
 const name = ref('')
 const email = ref('')
 const course = ref('')
@@ -37,13 +39,18 @@ const value = computed({
   set: (value) => emit('update:modelValue', value)
 })
 const confirm = async () => {
-  const payload = { name: name.value, email: email.value, courseId: course.value.id }
+  const payload = {
+    name: name.value,
+    email: email.value,
+    courseId: course.value.id
+  }
   if (props.id) {
     await store.dispatch('studentEdit', { id: props.id, data: payload })
     cancel()
     router.push(`/students/${props.id}`)
   } else {
     const { id } = await store.dispatch('studentAdd', payload)
+    console.log(id)
     cancel()
   }
 }
@@ -70,18 +77,14 @@ const cancel = () => {
         placeholder="Full name"
       />
     </field>
-    <field
-      label="Email"
-    >
+    <field label="Email">
       <control
         v-model="email"
         type="email"
         placeholder="Email"
       />
     </field>
-    <field
-      label="Course"
-    >
+    <field label="Course">
       <control
         v-model="course"
         type="select"

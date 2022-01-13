@@ -65,7 +65,6 @@ const studentAdd = async (payload) => {
   })
 }
 
-
 const getUser = async () => {
   return await fetch(`${baseURL}/user`, {
     credentials: 'include'

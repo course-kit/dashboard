@@ -7,7 +7,8 @@ import {
   lessonAdd,
   editLesson,
   courseEdit,
-  schoolEdit
+  schoolEdit,
+  studentAdd
 } from '@/apiService'
 
 export default createStore({
@@ -40,6 +41,9 @@ export default createStore({
     dataLoaded: false
   },
   getters: {
+    getStudentById: (state) => (id) => {
+      return state.students.find((student) => student.id === id)
+    },
     getCourseById: (state) => (id) => {
       return state.courses.find((course) => course.id === id)
     },
@@ -203,6 +207,15 @@ export default createStore({
       try {
         const response = await lessonAdd(courseId, data)
         await dispatch('getCourses')
+        return await response.json()
+      } catch (err) {
+        alert(err.message)
+      }
+    },
+    async studentAdd ({ dispatch }, payload) {
+      try {
+        const response = await studentAdd(payload)
+        await dispatch('getStudents')
         return await response.json()
       } catch (err) {
         alert(err.message)

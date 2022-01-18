@@ -10,7 +10,6 @@ const store = useStore()
 const router = useRouter()
 
 const title = ref('')
-const content = ref('')
 
 const props = defineProps({
   modelValue: {
@@ -32,10 +31,6 @@ if (props.lessonId) {
     props.courseId,
     props.lessonId
   ).title
-  content.value = store.getters.getLessonById(
-    props.courseId,
-    props.lessonId
-  ).content
 }
 
 const emit = defineEmits(['update:modelValue'])
@@ -45,27 +40,29 @@ const value = computed({
 })
 
 const confirm = async () => {
-  const data = { title: title.value, content: content.value }
   const courseId = props.courseId
+  const lessonId = props.lessonId
   if (props.lessonId) {
     await store.dispatch('lessonEdit', {
-      lessonId: props.lessonId,
-      courseId: props.courseId,
-      data
+      lessonId,
+      courseId,
+      title: title.value
     })
     cancel()
-    router.push(`/courses/${courseId}/lessons/${props.lessonId}`)
+    router.push(`/courses/${courseId}/lessons/${lessonId}`)
   } else {
-    const { lessonId } = await store.dispatch('lessonAdd', { courseId, data })
+    const { id } = await store.dispatch('lessonAdd', {
+      courseId,
+      title: title.value
+    })
     cancel()
-    if (courseId && lessonId) {
-      router.push(`/courses/${courseId}/lessons/${lessonId}`)
+    if (courseId && id) {
+      router.push(`/courses/${courseId}/lessons/${id}`)
     }
   }
 }
 const cancel = () => {
   title.value = ''
-  content.value = ''
 }
 </script>
 
@@ -83,13 +80,6 @@ const cancel = () => {
         v-model="title"
         type="text"
         placeholder="Title"
-      />
-    </field>
-    <field label="Content">
-      <control
-        v-model="content"
-        type="textarea"
-        placeholder="Content"
       />
     </field>
   </modal-box>

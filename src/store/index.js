@@ -195,17 +195,30 @@ export default createStore({
         alert(err.message)
       }
     },
-    async lessonEdit ({ state, dispatch }, { courseId, lessonId, data }) {
+    async lessonEdit (
+      { state, dispatch },
+      { courseId, lessonId, title, publicContent, privateContent }
+    ) {
       try {
-        await editLesson(courseId, lessonId, data)
+        const payload = {}
+        if (title) {
+          payload.title = title
+        }
+        if (publicContent) {
+          payload.publicContent = publicContent
+        }
+        if (privateContent) {
+          payload.privateContent = privateContent
+        }
+        await editLesson(courseId, lessonId, payload)
         await dispatch('getCourses')
       } catch (err) {
         alert(err.message)
       }
     },
-    async lessonAdd ({ commit, dispatch }, { courseId, data }) {
+    async lessonAdd ({ commit, dispatch }, { courseId, title }) {
       try {
-        const response = await lessonAdd(courseId, data)
+        const response = await lessonAdd(courseId, { title })
         await dispatch('getCourses')
         return await response.json()
       } catch (err) {

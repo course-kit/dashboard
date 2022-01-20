@@ -15,14 +15,15 @@ const isFooterBarVisible = computed(() => !store.state.isFullScreen)
     v-show="isFooterBarVisible"
     class="bg-white py-2 px-6 dark:bg-gray-900"
   >
-    <level>
-      <div class="text-center md:text-left">
-        <b>&copy; {{ year }},
+    <level type="justify-end" class="w-full">
+      <div class="text-sm text-gray-500">
+        <span>Beta v1&nbsp;</span>
+        <span>| &copy; {{ year }} |
           <a
             href="https://coursekit.dev/"
             target="_blank"
-          >CourseKit.dev</a>
-        </b>
+          >Course Kit Pty Ltd</a>
+        </span>
       </div>
     </level>
   </footer>

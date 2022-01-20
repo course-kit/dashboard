@@ -63,11 +63,15 @@ const save = async () => {
     const { publicContent, privateContent } = await parseContent(content.value)
     const action = props.lessonId ? 'lessonEdit' : 'courseEdit'
     const payload = {
-      courseId: props.courseId,
       publicContent,
       privateContent
     }
-    payload.lessonId = props.lessonId
+    if (props.lessonId) {
+      payload.lessonId = props.lessonId
+      payload.courseId = props.courseId
+    } else {
+      payload.id = props.courseId
+    }
     await store.dispatch(action, payload)
     savedVersion.value = content.value
   } catch (err) {

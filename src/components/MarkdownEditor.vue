@@ -97,7 +97,9 @@ const savedVersion = ref(content.value)
 <template>
   <div>
     <header class="flex items-stretch bg-gray-300">
-      <p class="flex items-center py-3 grow font-bold px-6">Content</p>
+      <p class="flex items-center py-3 grow font-bold px-6">
+        Content
+      </p>
     </header>
     <v-md-editor
       ref="codemirrorEditor"

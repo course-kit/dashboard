@@ -1,0 +1,136 @@
+<script setup>
+import { loadFront } from 'yaml-front-matter'
+import { computed, ref, watchEffect } from 'vue'
+import yaml from 'js-yaml'
+import { useStore } from 'vuex'
+const store = useStore()
+const content = ref(null)
+
+const props = defineProps({
+  publicContentString: {
+    type: String,
+    required: true
+  },
+  privateContentString: {
+    type: String,
+    required: true
+  },
+  lessonId: {
+    type: String,
+    default: null
+  },
+  courseId: {
+    type: String,
+    required: true
+  }
+})
+
+const privateContent = JSON.parse(props.privateContentString)
+const publicContent = JSON.parse(props.publicContentString)
+
+watchEffect(() => {
+  if (content.value === null) {
+    const markdown = privateContent.markdown
+    delete privateContent.markdown
+    privateContent.public = publicContent
+    const frontmatter = yaml.dump(privateContent)
+    content.value = `---\n${frontmatter}---\n${markdown}`
+  }
+})
+
+async function parseContent (content) {
+  const str = content.replace(/\t/g, '  ')
+  const vars = loadFront(str)
+  let publicContent = {}
+  let privateContent = {}
+  if (vars) {
+    if (typeof vars.public === 'object') {
+      publicContent = vars.public
+      delete vars.public
+    }
+    privateContent = vars
+    privateContent.markdown = privateContent.__content.substring(1)
+    delete privateContent.__content
+  }
+  return {
+    publicContent: JSON.stringify(publicContent),
+    privateContent: JSON.stringify(privateContent)
+  }
+}
+
+const save = async () => {
+  try {
+    const { publicContent, privateContent } = await parseContent(content.value)
+    const action = props.lessonId ? 'lessonEdit' : 'courseEdit'
+    const payload = {
+      courseId: props.courseId,
+      publicContent,
+      privateContent
+    }
+    payload.lessonId = props.lessonId
+    await store.dispatch(action, payload)
+    savedVersion.value = content.value
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+const changed = computed(() => {
+  return content.value !== savedVersion.value
+})
+
+const codemirrorConfig = {
+  mode: 'yaml-frontmatter',
+  lineNumbers: false,
+  extraKeys: {
+    Tab: function (cm) {
+      const spaces = Array(cm.getOption('indentUnit') + 1).join(' ')
+      cm.replaceSelection(spaces)
+    }
+  }
+}
+
+const codemirrorEditor = ref()
+
+const savedVersion = ref(content.value)
+</script>
+<template>
+  <div>
+    <header class="flex items-stretch bg-gray-300">
+      <p class="flex items-center py-3 grow font-bold px-6">Content</p>
+    </header>
+    <v-md-editor
+      ref="codemirrorEditor"
+      v-model="content"
+      left-toolbar="undo redo | save"
+      right-toolbar="preview sync-scroll fullscreen"
+      :codemirror-config="codemirrorConfig"
+      mode="edit"
+      :autofocus="true"
+      @save="save"
+    />
+    <div
+      v-if="changed"
+      class="rounded mt-4 bg-red-100 px-4 py-2 text-sm text-red-500 flex flex-row justify-between items-center"
+    >
+      <span>You have unsaved changes.</span>
+      <button
+        class="border border-red-500 py-2 px-4 rounded"
+        @click="save"
+      >
+        Save
+      </button>
+    </div>
+  </div>
+</template>
+<style>
+.v-md-editor {
+  box-shadow: none;
+}
+.v-md-editor__toolbar {
+  background-color: rgb(249 250 251);
+}
+.v-md-editor__main {
+  padding: 1rem 0 1.5rem;
+}
+</style>

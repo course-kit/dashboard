@@ -10,6 +10,7 @@ import LessonsTable from '@/components/LessonsTable.vue'
 import CardComponent from '@/components/CardComponent.vue'
 import LessonAdd from '@/components/LessonAdd.vue'
 import CourseAdd from '@/components/CourseAdd.vue'
+import MarkdownEditor from '@/components/MarkdownEditor.vue'
 
 const store = useStore()
 const route = useRoute()
@@ -90,5 +91,11 @@ const courseEditActive = ref(false)
         :course-id="course.id"
       />
     </card-component>
+    <markdown-editor
+      v-if="course"
+      :public-content-string="course.publicContent"
+      :private-content-string="course.privateContent"
+      :course-id="course.id"
+    />
   </main-section>
 </template>

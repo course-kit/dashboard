@@ -179,9 +179,25 @@ export default createStore({
         alert(err.message)
       }
     },
-    async courseEdit ({ commit, dispatch }, { id, data }) {
+    async courseEdit (
+      { commit, dispatch },
+      { id, title, homeUrl, publicContent, privateContent }
+    ) {
+      const payload = {}
+      if (title) {
+        payload.title = title
+      }
+      if (homeUrl) {
+        payload.homeUrl = homeUrl
+      }
+      if (publicContent) {
+        payload.publicContent = publicContent
+      }
+      if (privateContent) {
+        payload.privateContent = privateContent
+      }
       try {
-        await courseEdit(id, data)
+        await courseEdit(id, payload)
         await dispatch('getCourses')
       } catch (err) {
         alert(err.message)

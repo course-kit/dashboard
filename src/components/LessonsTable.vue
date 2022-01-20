@@ -52,9 +52,9 @@ const pagesList = computed(() => {
     <thead>
       <tr>
         <th class="pl-6">
-          Pos
+          Order
         </th>
-        <th>Name</th>
+        <th>Title</th>
         <th>ID</th>
         <th />
       </tr>

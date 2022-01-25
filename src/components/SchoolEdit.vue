@@ -13,7 +13,8 @@ const props = defineProps({
 })
 const store = useStore()
 const router = useRouter()
-const schoolUrl = ref(store.state.schoolUrl)
+const schoolUrlDev = ref(store.state.schoolUrlDev)
+const schoolUrlProd = ref(store.state.schoolUrlProd)
 
 const emit = defineEmits(['update:modelValue'])
 const value = computed({
@@ -21,12 +22,12 @@ const value = computed({
   set: (value) => emit('update:modelValue', value)
 })
 const confirm = async () => {
-  const payload = { schoolUrl: schoolUrl.value }
+  const payload = {
+    schoolUrlDev: schoolUrlDev.value,
+    schoolUrlProd: schoolUrlProd.value
+  }
   await store.dispatch('schoolEdit', payload)
   router.push('/courses')
-}
-const cancel = () => {
-  schoolUrl.value = ''
 }
 </script>
 
@@ -37,14 +38,23 @@ const cancel = () => {
     button-label="Save"
     has-cancel
     @confirm="confirm"
-    @cancel="cancel"
   >
     <field
-      label="School URL"
-      help="Redirect students here after logout"
+      label="School URL (development)"
+      help="Redirect students here after logout (for local development)"
     >
       <control
-        v-model="schoolUrl"
+        v-model="schoolUrlDev"
+        type="text"
+        placeholder="School URL"
+      />
+    </field>
+    <field
+      label="School URL (production)"
+      help="Redirect students here after logout (for production)"
+    >
+      <control
+        v-model="schoolUrlProd"
         type="text"
         placeholder="School URL"
       />

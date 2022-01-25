@@ -18,10 +18,12 @@ const props = defineProps({
 const store = useStore()
 const router = useRouter()
 const title = ref('')
-const homeUrl = ref('')
+const urlDev = ref('')
+const urlProd = ref('')
 if (props.id) {
   title.value = store.getters.getCourseById(props.id).title
-  homeUrl.value = store.getters.getCourseById(props.id).homeUrl
+  urlDev.value = store.getters.getCourseById(props.id).urlDev
+  urlProd.value = store.getters.getCourseById(props.id).urlProd
 }
 const emit = defineEmits(['update:modelValue'])
 const value = computed({
@@ -29,7 +31,7 @@ const value = computed({
   set: (value) => emit('update:modelValue', value)
 })
 const confirm = async () => {
-  const payload = { title: title.value, homeUrl: homeUrl.value }
+  const payload = { title: title.value, urlDev: urlDev.value, urlProd: urlProd.value }
   if (props.id) {
     await store.dispatch('courseEdit', { id: props.id, ...payload })
     cancel()
@@ -41,8 +43,11 @@ const confirm = async () => {
   }
 }
 const cancel = () => {
-  title.value = ''
-  homeUrl.value = ''
+  if (!props.id) {
+    title.value = ''
+    urlDev.value = ''
+    urlProd.value = ''
+  }
 }
 </script>
 
@@ -63,13 +68,23 @@ const cancel = () => {
       />
     </field>
     <field
-      label="Home page URL"
-      help="Redirect students here after enrollment"
+      label="Homepage URL (development)"
+      help="Redirect students here after enrollment (for local development)"
     >
       <control
-        v-model="homeUrl"
+        v-model="urlDev"
         type="text"
-        placeholder="Home page URL"
+        placeholder="Homepage URL"
+      />
+    </field>
+    <field
+      label="Homepage URL (development)"
+      help="Redirect students here after enrollment (for production)"
+    >
+      <control
+        v-model="urlProd"
+        type="text"
+        placeholder="Homepage URL"
       />
     </field>
   </modal-box>

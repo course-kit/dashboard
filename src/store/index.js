@@ -37,7 +37,8 @@ export default createStore({
     loginUrl: null,
     regUrl: null,
     schoolId: null,
-    schoolUrl: null,
+    schoolUrlDev: null,
+    schoolUrlProd: null,
     dataLoaded: false
   },
   getters: {
@@ -77,8 +78,11 @@ export default createStore({
       if (payload.schoolId) {
         state.schoolId = payload.schoolId
       }
-      if (payload.schoolUrl) {
-        state.schoolUrl = payload.schoolUrl
+      if (payload.schoolUrlDev) {
+        state.schoolUrlDev = payload.schoolUrlDev
+      }
+      if (payload.schoolUrlProd) {
+        state.schoolUrlProd = payload.schoolUrlProd
       }
     },
     setAuthUrls (state, { loginUrl, regUrl }) {
@@ -181,14 +185,17 @@ export default createStore({
     },
     async courseEdit (
       { commit, dispatch },
-      { id, title, homeUrl, publicContent, privateContent }
+      { id, title, urlDev, urlProd, publicContent, privateContent }
     ) {
       const payload = {}
       if (title) {
         payload.title = title
       }
-      if (homeUrl) {
-        payload.homeUrl = homeUrl
+      if (urlDev) {
+        payload.urlDev = urlDev
+      }
+      if (urlProd) {
+        payload.urlProd = urlProd
       }
       if (publicContent) {
         payload.publicContent = publicContent

@@ -66,9 +66,15 @@ const courseEditActive = ref(false)
           </tr>
           <tr>
             <td class="pl-6">
-              Home URL
+              Homepage URL (development)
             </td>
-            <td>{{ course.homeUrl }}</td>
+            <td>{{ course.urlDev }}</td>
+          </tr>
+          <tr>
+            <td class="pl-6">
+              Homepage URL (production)
+            </td>
+            <td>{{ course.urlProd }}</td>
           </tr>
           <tr>
             <td class="pl-6">

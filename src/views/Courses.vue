@@ -38,10 +38,18 @@ const editSchool = ref(false)
           </tr>
           <tr>
             <td class="pl-6">
-              URL
+              School URL (development)
             </td>
             <td>
-              {{ $store.state.schoolUrl }}
+              {{ $store.state.schoolUrlDev }}
+            </td>
+          </tr>
+          <tr>
+            <td class="pl-6">
+              School URL (production)
+            </td>
+            <td>
+              {{ $store.state.schoolUrlProd }}
             </td>
           </tr>
         </tbody>

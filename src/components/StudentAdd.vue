@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import Field from '@/components/Field.vue'
 import Control from '@/components/Control.vue'
 import ModalBox from '@/components/ModalBox.vue'
+import CheckboxCell from '@/components/CheckboxCell.vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 const props = defineProps({
@@ -28,6 +29,7 @@ const courses = computed(() =>
 const name = ref('')
 const email = ref('')
 const course = ref('')
+const devMode = ref('')
 if (props.id) {
   name.value = store.getters.getStudentById(props.id).name
   email.value = store.getters.getStudentById(props.id).email
@@ -42,7 +44,8 @@ const confirm = async () => {
   const payload = {
     name: name.value,
     email: email.value,
-    courseId: course.value.id
+    courseId: course.value.id,
+    devMode: devMode.value
   }
   if (props.id) {
     await store.dispatch('studentEdit', { id: props.id, data: payload })
@@ -54,10 +57,16 @@ const confirm = async () => {
     cancel()
   }
 }
+
+function devModeChecked (e) {
+  devMode.value = e
+}
+
 const cancel = () => {
   name.value = ''
   email.value = ''
   course.value = ''
+  devMode.value = false
 }
 </script>
 
@@ -90,6 +99,11 @@ const cancel = () => {
         type="select"
         :options="courses"
       />
+    </field>
+    <field
+      label="Redirect to dev homepage URL"
+    >
+      <checkbox-cell type="span" @checked="devModeChecked" />
     </field>
   </modal-box>
 </template>

@@ -31,7 +31,11 @@ const value = computed({
   set: (value) => emit('update:modelValue', value)
 })
 const confirm = async () => {
-  const payload = { title: title.value, urlDev: urlDev.value, urlProd: urlProd.value }
+  const payload = {
+    title: title.value,
+    urlDev: urlDev.value,
+    urlProd: urlProd.value
+  }
   if (props.id) {
     await store.dispatch('courseEdit', { id: props.id, ...payload })
     cancel()

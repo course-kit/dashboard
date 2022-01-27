@@ -198,10 +198,16 @@ export default createStore({
       if (typeof urlProd !== 'undefined' && urlProd !== course.urlProd) {
         payload.urlProd = urlProd
       }
-      if (typeof publicContent !== 'undefined' && publicContent !== course.publicContent) {
+      if (
+        typeof publicContent !== 'undefined' &&
+        publicContent !== course.publicContent
+      ) {
         payload.publicContent = publicContent
       }
-      if (typeof privateContent !== 'undefined' && privateContent !== course.privateContent) {
+      if (
+        typeof privateContent !== 'undefined' &&
+        privateContent !== course.privateContent
+      ) {
         payload.privateContent = privateContent
       }
       try {
@@ -229,10 +235,16 @@ export default createStore({
         if (typeof title !== 'undefined' && title !== lesson.title) {
           payload.title = title
         }
-        if (typeof publicContent !== 'undefined' && publicContent !== lesson.publicContent) {
+        if (
+          typeof publicContent !== 'undefined' &&
+          publicContent !== lesson.publicContent
+        ) {
           payload.publicContent = publicContent
         }
-        if (typeof privateContent !== 'undefined' && privateContent !== lesson.privateContent) {
+        if (
+          typeof privateContent !== 'undefined' &&
+          privateContent !== lesson.privateContent
+        ) {
           payload.privateContent = privateContent
         }
         await editLesson(courseId, lessonId, payload)

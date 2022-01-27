@@ -54,7 +54,7 @@ const confirm = async () => {
     cancel()
     router.push(`/students/${props.id}`)
   } else {
-    const id = await store.dispatch('studentAdd', payload)
+    await store.dispatch('studentAdd', payload)
     cancel()
   }
 }
@@ -102,10 +102,12 @@ const cancel = () => {
         :options="courses"
       />
     </field>
-    <field
-      label="Redirect to dev homepage URL"
-    >
-      <checkbox-cell type="span" @checked="devModeChecked" :key="componentKey"/>
+    <field label="Redirect to dev homepage URL">
+      <checkbox-cell
+        :key="componentKey"
+        type="span"
+        @checked="devModeChecked"
+      />
     </field>
   </modal-box>
 </template>

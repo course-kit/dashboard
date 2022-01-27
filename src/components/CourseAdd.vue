@@ -78,7 +78,7 @@ const cancel = () => {
       />
     </field>
     <field
-      label="Homepage URL (development)"
+      label="Homepage URL (production)"
       help="Redirect students here after enrollment (for production)"
     >
       <control

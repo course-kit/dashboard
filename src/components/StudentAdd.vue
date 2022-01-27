@@ -30,6 +30,8 @@ const name = ref('')
 const email = ref('')
 const course = ref('')
 const devMode = ref('')
+const componentKey = ref(0)
+
 if (props.id) {
   name.value = store.getters.getStudentById(props.id).name
   email.value = store.getters.getStudentById(props.id).email
@@ -52,8 +54,7 @@ const confirm = async () => {
     cancel()
     router.push(`/students/${props.id}`)
   } else {
-    const { id } = await store.dispatch('studentAdd', payload)
-    console.log(id)
+    const id = await store.dispatch('studentAdd', payload)
     cancel()
   }
 }
@@ -67,6 +68,7 @@ const cancel = () => {
   email.value = ''
   course.value = ''
   devMode.value = false
+  componentKey.value++
 }
 </script>
 
@@ -103,7 +105,7 @@ const cancel = () => {
     <field
       label="Redirect to dev homepage URL"
     >
-      <checkbox-cell type="span" @checked="devModeChecked" />
+      <checkbox-cell type="span" @checked="devModeChecked" :key="componentKey"/>
     </field>
   </modal-box>
 </template>

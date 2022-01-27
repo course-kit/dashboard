@@ -184,23 +184,24 @@ export default createStore({
       }
     },
     async courseEdit (
-      { commit, dispatch },
+      { commit, dispatch, getters },
       { id, title, urlDev, urlProd, publicContent, privateContent }
     ) {
+      const course = getters.getCourseById(id)
       const payload = {}
-      if (title) {
+      if (typeof title !== 'undefined' && title !== course.title) {
         payload.title = title
       }
-      if (urlDev) {
+      if (typeof urlDev !== 'undefined' && urlDev !== course.urlDev) {
         payload.urlDev = urlDev
       }
-      if (urlProd) {
+      if (typeof urlProd !== 'undefined' && urlProd !== course.urlProd) {
         payload.urlProd = urlProd
       }
-      if (publicContent) {
+      if (typeof publicContent !== 'undefined' && publicContent !== course.publicContent) {
         payload.publicContent = publicContent
       }
-      if (privateContent) {
+      if (typeof privateContent !== 'undefined' && privateContent !== course.privateContent) {
         payload.privateContent = privateContent
       }
       try {
@@ -219,18 +220,19 @@ export default createStore({
       }
     },
     async lessonEdit (
-      { state, dispatch },
+      { state, dispatch, getters },
       { courseId, lessonId, title, publicContent, privateContent }
     ) {
       try {
+        const lesson = getters.getLessonById(courseId, lessonId)
         const payload = {}
-        if (title) {
+        if (typeof title !== 'undefined' && title !== lesson.title) {
           payload.title = title
         }
-        if (publicContent) {
+        if (typeof publicContent !== 'undefined' && publicContent !== lesson.publicContent) {
           payload.publicContent = publicContent
         }
-        if (privateContent) {
+        if (typeof privateContent !== 'undefined' && privateContent !== lesson.privateContent) {
           payload.privateContent = privateContent
         }
         await editLesson(courseId, lessonId, payload)
@@ -251,8 +253,15 @@ export default createStore({
     async studentAdd ({ dispatch }, payload) {
       try {
         const response = await studentAdd(payload)
-        await dispatch('getStudents')
-        return await response.json()
+        if (response.status === 200) {
+          await dispatch('getStudents')
+          const { id } = await response.json()
+          return id
+        } else {
+          const { error } = await response.json()
+          alert(error)
+          return null
+        }
       } catch (err) {
         alert(err.message)
       }

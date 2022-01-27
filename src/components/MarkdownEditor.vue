@@ -9,11 +9,11 @@ const content = ref(null)
 const props = defineProps({
   publicContentString: {
     type: String,
-    required: true
+    default: ''
   },
   privateContentString: {
     type: String,
-    required: true
+    default: ''
   },
   lessonId: {
     type: String,
@@ -25,33 +25,44 @@ const props = defineProps({
   }
 })
 
-const privateContent = JSON.parse(props.privateContentString)
+const privateContent = JSON.parse(props.privateContentString) || {}
 const publicContent = JSON.parse(props.publicContentString)
 
 watchEffect(() => {
   if (content.value === null) {
+    if (!privateContent.markdown) {
+      privateContent.markdown = ''
+    }
     const markdown = privateContent.markdown
     delete privateContent.markdown
-    privateContent.public = publicContent
-    const frontmatter = yaml.dump(privateContent)
-    content.value = `---\n${frontmatter}---\n${markdown}`
+    if (publicContent && Object.keys(publicContent).length > 0) {
+      privateContent.public = publicContent
+    }
+    if (Object.keys(privateContent).length === 0) {
+      content.value = markdown
+    } else {
+      const frontmatter = yaml.dump(privateContent)
+      content.value = `---\n${frontmatter}---\n${markdown}`
+    }
   }
 })
 
 async function parseContent (content) {
+  console.log(content)
   const str = content.replace(/\t/g, '  ')
   const vars = loadFront(str)
   let publicContent = {}
-  let privateContent = {}
-  if (vars) {
-    if (typeof vars.public === 'object') {
-      publicContent = vars.public
-      delete vars.public
-    }
-    privateContent = vars
-    privateContent.markdown = privateContent.__content.substring(1)
-    delete privateContent.__content
+  const privateContent = vars
+  if (typeof vars.public === 'object') {
+    publicContent = vars.public
+    delete vars.public
   }
+  let md = privateContent.__content
+  if (md.charAt(0) === '\n') {
+    md = privateContent.__content.substring(1)
+  }
+  privateContent.markdown = md
+  delete privateContent.__content
   return {
     publicContent: JSON.stringify(publicContent),
     privateContent: JSON.stringify(privateContent)

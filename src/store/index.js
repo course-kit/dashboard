@@ -217,8 +217,15 @@ export default createStore({
         alert(err.message)
       }
     },
-    async schoolEdit ({ commit, dispatch }, payload) {
+    async schoolEdit ({ state, commit, dispatch }, { schoolUrlDev, schoolUrlProd }) {
       try {
+        const payload = {}
+        if (typeof schoolUrlDev !== 'undefined' && schoolUrlDev !== state.schoolUrlDev) {
+          payload.schoolUrlDev = schoolUrlDev
+        }
+        if (typeof schoolUrlProd !== 'undefined' && schoolUrlProd !== state.schoolUrlProd) {
+          payload.schoolUrlProd = schoolUrlProd
+        }
         await schoolEdit(payload)
         await dispatch('getUser')
       } catch (err) {

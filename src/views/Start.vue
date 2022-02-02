@@ -20,17 +20,9 @@ const titleStack = ref([{ name: 'Welcome to CourseKit' }])
             <a
               class="underline"
               href="https://github.com/course-kit/guides/blob/master/quick-start.md"
-            >
-              Quick start guide
-            </a>
-          </li>
-          <li class="pb-2">
-            <a
-              class="underline"
-              href="https://github.com/course-kit/guides/blob/master/getting-started.md"
               target="_blank"
             >
-              Getting started guide
+              Quick start guide
             </a>
           </li>
           <li class="pb-2">

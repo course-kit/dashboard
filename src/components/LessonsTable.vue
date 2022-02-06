@@ -4,8 +4,8 @@ import { useRouter } from 'vue-router'
 import Level from '@/components/Level.vue'
 import JbButtons from '@/components/JbButtons.vue'
 import JbButton from '@/components/JbButton.vue'
-import { mdiArrowUpBold, mdiArrowDownBold } from '@mdi/js'
-
+import { mdiArrowUpBold, mdiArrowDownBold, mdiTrashCan } from '@mdi/js'
+import LessonDelete from '@/components/LessonDelete.vue'
 const props = defineProps({
   courseId: {
     type: String,
@@ -45,9 +45,21 @@ const pagesList = computed(() => {
 
   return pagesList
 })
+const deleteId = ref(null)
+const deleteActive = ref(false)
+const del = (id) => {
+  deleteId.value = id
+  deleteActive.value = true
+}
 </script>
 
 <template>
+  <LessonDelete
+    :courseId="courseId"
+    :lessonId="deleteId"
+    v-model="deleteActive"
+    @confirm="deleteId = null"
+  />
   <table>
     <thead>
       <tr>
@@ -113,6 +125,11 @@ const pagesList = computed(() => {
                   isInc: true,
                 })
               "
+            />
+            <jb-button
+              :icon="mdiTrashCan"
+              small
+              @click="del(lesson.id)"
             />
           </jb-buttons>
         </td>

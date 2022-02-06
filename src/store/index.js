@@ -10,7 +10,8 @@ import {
   schoolEdit,
   studentAdd,
   courseDelete,
-  addTestCourses
+  addTestCourses,
+  lessonDelete
 } from '@/apiService'
 
 export default createStore({
@@ -231,6 +232,14 @@ export default createStore({
     async courseDelete ({ state, commit, dispatch }, id) {
       try {
         await courseDelete(id)
+        await dispatch('getCourses')
+      } catch (err) {
+        alert(err.message)
+      }
+    },
+    async lessonDelete ({ state, commit, dispatch }, { courseId, lessonId }) {
+      try {
+        await lessonDelete(courseId, lessonId)
         await dispatch('getCourses')
       } catch (err) {
         alert(err.message)

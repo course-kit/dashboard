@@ -7,17 +7,22 @@ import TitleBar from '@/components/TitleBar.vue'
 import CoursesTable from '@/components/CoursesTable.vue'
 import CardComponent from '@/components/CardComponent.vue'
 import CourseAdd from '@/components/CourseAdd.vue'
+import CoursesAddTest from '@/components/CoursesAddTest.vue'
 import SchoolEdit from '@/components/SchoolEdit.vue'
+import JbButtons from '@/components/JbButtons.vue'
+import JbButton from '@/components/JbButton.vue'
 
 const titleStack = ref([{ name: 'Courses' }])
 
 const addActive = ref(false)
+const addTestActive = ref(false)
 const editSchool = ref(false)
 </script>
 
 <template>
   <CourseAdd v-model="addActive" />
   <SchoolEdit v-model="editSchool" />
+  <CoursesAddTest v-model="addTestActive" />
   <title-bar :title-stack="titleStack" />
   <main-section>
     <card-component
@@ -64,5 +69,12 @@ const editSchool = ref(false)
     >
       <courses-table />
     </card-component>
+    <JbButtons>
+      <JbButton
+        label="Add test courses"
+        small
+        @click="addTestActive = true"
+      ></JbButton>
+    </JbButtons>
   </main-section>
 </template>

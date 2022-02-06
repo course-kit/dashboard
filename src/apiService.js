@@ -29,6 +29,13 @@ const courseAdd = async (payload) => {
   })
 }
 
+const courseDelete = async (id) => {
+  return await fetch(`${baseURL}/courses/${id}`, {
+    method: 'DELETE',
+    credentials: 'include',
+  })
+}
+
 const courseEdit = async (id, payload) => {
   return await fetch(`${baseURL}/courses/${id}`, {
     method: 'POST',
@@ -95,4 +102,11 @@ const schoolEdit = async (payload) => {
   })
 }
 
-export { getCourses, getStudents, courseAdd, getUser, lessonAdd, editLesson, courseEdit, schoolEdit, studentAdd }
+const addTestCourses = async () => {
+  return await fetch(`${baseURL}/courses/seed`, {
+    method: 'POST',
+    credentials: 'include'
+  })
+}
+
+export { getCourses, getStudents, courseAdd, getUser, lessonAdd, editLesson, courseEdit, schoolEdit, studentAdd, courseDelete, addTestCourses }

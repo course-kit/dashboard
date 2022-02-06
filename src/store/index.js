@@ -8,7 +8,9 @@ import {
   editLesson,
   courseEdit,
   schoolEdit,
-  studentAdd
+  studentAdd,
+  courseDelete,
+  addTestCourses
 } from '@/apiService'
 
 export default createStore({
@@ -127,6 +129,15 @@ export default createStore({
       )
     },
 
+    async addTestCourses ({ dispatch }) {
+      try {
+        await addTestCourses()
+        await dispatch('getCourses')
+      } catch (err) {
+        alert(err.message)
+      }
+    },
+
     async getCourses ({ commit }) {
       try {
         const response = await getCourses()
@@ -212,6 +223,14 @@ export default createStore({
       }
       try {
         await courseEdit(id, payload)
+        await dispatch('getCourses')
+      } catch (err) {
+        alert(err.message)
+      }
+    },
+    async courseDelete ({ state, commit, dispatch }, id) {
+      try {
+        await courseDelete(id)
         await dispatch('getCourses')
       } catch (err) {
         alert(err.message)

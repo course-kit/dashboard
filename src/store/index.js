@@ -67,8 +67,14 @@ export default createStore({
       state[payload.key] = payload.value
     },
 
+    setSchool (state, payload) {
+      state.courses = payload.courses
+      state.schoolUrlDev = payload.urlDev
+      state.schoolUrlProd = payload.urlProd
+    },
     /* User */
     user (state, payload) {
+      state.schoolId = payload.schoolId
       if (payload.name) {
         state.userName = payload.name
       }
@@ -77,15 +83,6 @@ export default createStore({
       }
       if (payload.avatar) {
         state.userAvatar = payload.avatar
-      }
-      if (payload.schoolId) {
-        state.schoolId = payload.schoolId
-      }
-      if (payload.schoolUrlDev) {
-        state.schoolUrlDev = payload.schoolUrlDev
-      }
-      if (payload.schoolUrlProd) {
-        state.schoolUrlProd = payload.schoolUrlProd
       }
     },
     setAuthUrls (state, { loginUrl, regUrl }) {
@@ -130,24 +127,21 @@ export default createStore({
       )
     },
 
-    async addTestCourses ({ dispatch }) {
+    async addTestCourses ({ state, dispatch }) {
       try {
-        await addTestCourses()
+        await addTestCourses(state.schoolId)
         await dispatch('getCourses')
       } catch (err) {
         alert(err.message)
       }
     },
 
-    async getCourses ({ commit }) {
+    async getCourses ({ state, commit }) {
       try {
-        const response = await getCourses()
+        const response = await getCourses(state.schoolId)
         if (response.status === 200) {
           const data = await response.json()
-          commit('basic', {
-            key: 'courses',
-            value: data
-          })
+          commit('setSchool', data)
         }
         if (response.status === 401) {
           alert('Network error.')
@@ -157,9 +151,9 @@ export default createStore({
       }
     },
 
-    async getStudents ({ commit }) {
+    async getStudents ({ state, commit }) {
       try {
-        const response = await getStudents()
+        const response = await getStudents(state.schoolId)
         const data = await response.json()
         if (response.status === 200) {
           commit('basic', {
@@ -179,16 +173,16 @@ export default createStore({
         const course = state.courses.find((course) => course.id === courseId)
         const lesson = course.lessons.find((lesson) => lesson.id === lessonId)
         const order = lesson.order + (isInc ? 1 : -1)
-        await editLesson(courseId, lessonId, { order })
+        await editLesson(state.schoolId, courseId, lessonId, { order })
         await dispatch('getCourses')
       } catch (err) {
         alert(err.message)
       }
     },
 
-    async courseAdd ({ commit, dispatch }, payload) {
+    async courseAdd ({ state, commit, dispatch }, payload) {
       try {
-        const response = await courseAdd(payload)
+        const response = await courseAdd(state.schoolId, payload)
         await dispatch('getCourses')
         return await response.json()
       } catch (err) {
@@ -196,7 +190,7 @@ export default createStore({
       }
     },
     async courseEdit (
-      { commit, dispatch, getters },
+      { state, commit, dispatch, getters },
       { id, title, urlDev, urlProd, publicContent, privateContent }
     ) {
       const course = getters.getCourseById(id)
@@ -223,7 +217,7 @@ export default createStore({
         payload.privateContent = privateContent
       }
       try {
-        await courseEdit(id, payload)
+        await courseEdit(state.schoolId, id, payload)
         await dispatch('getCourses')
       } catch (err) {
         alert(err.message)
@@ -231,7 +225,7 @@ export default createStore({
     },
     async courseDelete ({ state, commit, dispatch }, id) {
       try {
-        await courseDelete(id)
+        await courseDelete(state.schoolId, id)
         await dispatch('getCourses')
       } catch (err) {
         alert(err.message)
@@ -239,7 +233,7 @@ export default createStore({
     },
     async lessonDelete ({ state, commit, dispatch }, { courseId, lessonId }) {
       try {
-        await lessonDelete(courseId, lessonId)
+        await lessonDelete(state.schoolId, courseId, lessonId)
         await dispatch('getCourses')
       } catch (err) {
         alert(err.message)
@@ -263,7 +257,7 @@ export default createStore({
         ) {
           payload.schoolUrlProd = schoolUrlProd
         }
-        await schoolEdit(payload)
+        await schoolEdit(state.schoolId, payload)
         await dispatch('getUser')
       } catch (err) {
         alert(err.message)
@@ -291,24 +285,24 @@ export default createStore({
         ) {
           payload.privateContent = privateContent
         }
-        await editLesson(courseId, lessonId, payload)
+        await editLesson(state.schoolId, courseId, lessonId, payload)
         await dispatch('getCourses')
       } catch (err) {
         alert(err.message)
       }
     },
-    async lessonAdd ({ commit, dispatch }, { courseId, title }) {
+    async lessonAdd ({ state, commit, dispatch }, { courseId, title }) {
       try {
-        const response = await lessonAdd(courseId, { title })
+        const response = await lessonAdd(state.schoolId, courseId, { title })
         await dispatch('getCourses')
         return await response.json()
       } catch (err) {
         alert(err.message)
       }
     },
-    async studentAdd ({ dispatch }, payload) {
+    async studentAdd ({ state, dispatch }, payload) {
       try {
-        const response = await studentAdd(payload)
+        const response = await studentAdd(state.schoolId, payload)
         if (response.status === 200) {
           await dispatch('getStudents')
           const { id } = await response.json()

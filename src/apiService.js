@@ -116,4 +116,11 @@ const addTestCourses = async (schoolId) => {
   })
 }
 
-export { getCourses, getStudents, courseAdd, getUser, lessonAdd, editLesson, courseEdit, schoolEdit, studentAdd, courseDelete, addTestCourses, lessonDelete }
+const getSchools = async () => {
+  return await fetch(`${baseURL}/schools`, {
+    method: 'GET',
+    credentials: 'include'
+  })
+}
+
+export { getSchools, getCourses, getStudents, courseAdd, getUser, lessonAdd, editLesson, courseEdit, schoolEdit, studentAdd, courseDelete, addTestCourses, lessonDelete }

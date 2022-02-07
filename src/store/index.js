@@ -11,7 +11,8 @@ import {
   studentAdd,
   courseDelete,
   addTestCourses,
-  lessonDelete
+  lessonDelete,
+  getSchools
 } from '@/apiService'
 
 export default createStore({
@@ -37,12 +38,14 @@ export default createStore({
     /* Sample data (commonly used) */
     courses: [],
     history: [],
+    schools: [],
     loginUrl: null,
     regUrl: null,
     schoolId: null,
     schoolUrlDev: null,
     schoolUrlProd: null,
-    dataLoaded: false
+    dataLoaded: false,
+    isAdmin: false
   },
   getters: {
     getStudentById: (state) => (id) => {
@@ -72,9 +75,11 @@ export default createStore({
       state.schoolUrlDev = payload.urlDev
       state.schoolUrlProd = payload.urlProd
     },
+
     /* User */
     user (state, payload) {
       state.schoolId = payload.schoolId
+      state.isAdmin = payload.isAdmin
       if (payload.name) {
         state.userName = payload.name
       }
@@ -127,12 +132,35 @@ export default createStore({
       )
     },
 
+    async changeSchool ({ state, commit, dispatch }, schoolId) {
+      commit('basic', { key: 'schoolId', value: schoolId })
+      await Promise.all([dispatch('getCourses'), dispatch('getStudents')])
+    },
+
     async addTestCourses ({ state, dispatch }) {
       try {
         await addTestCourses(state.schoolId)
         await dispatch('getCourses')
       } catch (err) {
         alert(err.message)
+      }
+    },
+
+    async getSchools ({ commit }) {
+      try {
+        const response = await getSchools()
+        if (response.status === 200) {
+          const { schools } = await response.json()
+          commit('basic', {
+            key: 'schools',
+            value: schools
+          })
+        }
+        if (response.status === 401) {
+          alert('Network error.')
+        }
+      } catch (err) {
+        console.log(err)
       }
     },
 

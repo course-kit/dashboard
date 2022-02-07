@@ -18,7 +18,9 @@ const props = defineProps({
 })
 const store = useStore()
 const title = computed(() => {
-  return props.courseId && props.lessonId ? store.getters.getLessonById(props.courseId, props.lessonId).title : null
+  return props.courseId && props.lessonId
+    ? store.getters.getLessonById(props.courseId, props.lessonId).title
+    : null
 })
 
 const emit = defineEmits(['update:modelValue', 'confirm'])
@@ -27,7 +29,10 @@ const value = computed({
   set: (value) => emit('update:modelValue', value)
 })
 const confirm = async () => {
-  await store.dispatch('lessonDelete', { courseId: props.courseId, lessonId: props.lessonId })
+  await store.dispatch('lessonDelete', {
+    courseId: props.courseId,
+    lessonId: props.lessonId
+  })
   emit('confirm')
 }
 </script>

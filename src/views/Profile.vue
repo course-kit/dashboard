@@ -3,6 +3,8 @@ import { ref } from 'vue'
 
 import MainSection from '@/components/MainSection.vue'
 import TitleBar from '@/components/TitleBar.vue'
+import SchoolsTable from '@/components/SchoolsTable.vue'
+import CardComponent from '@/components/CardComponent.vue'
 
 const titleStack = ref([{ name: 'Profile' }])
 
@@ -32,5 +34,14 @@ const logoutUrl = `${baseURL}/logout`
         </p>
       </div>
     </div>
+    <card-component
+      v-if="$store.state.isAdmin"
+      class="mb-6"
+      title="Schools"
+      header-icon=""
+      has-table
+    >
+      <schools-table />
+    </card-component>
   </main-section>
 </template>

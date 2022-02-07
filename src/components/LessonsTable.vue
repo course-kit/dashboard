@@ -55,9 +55,9 @@ const del = (id) => {
 
 <template>
   <LessonDelete
-    :courseId="courseId"
-    :lessonId="deleteId"
     v-model="deleteActive"
+    :course-id="courseId"
+    :lesson-id="deleteId"
     @confirm="deleteId = null"
   />
   <table>

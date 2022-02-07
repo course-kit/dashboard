@@ -24,7 +24,8 @@ store.dispatch('getUser')
       if (!store.state.dataLoaded) {
         Promise.all([
           store.dispatch('getCourses'),
-          store.dispatch('getStudents')
+          store.dispatch('getStudents'),
+          store.dispatch('getSchools')
         ])
           .then(() => store.commit('setDataLoaded', true))
       }

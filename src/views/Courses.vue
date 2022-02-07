@@ -74,7 +74,7 @@ const editSchool = ref(false)
         label="Add test courses"
         small
         @click="addTestActive = true"
-      ></JbButton>
+      />
     </JbButtons>
   </main-section>
 </template>

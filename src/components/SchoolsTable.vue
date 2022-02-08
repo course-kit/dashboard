@@ -46,22 +46,34 @@ const selectSchool = function (id) {
     <thead>
       <tr>
         <th class="pl-6">
-          School ID
+          ID
+        </th>
+        <th>
+          Owner name
+        </th>
+        <th>
+          Owner email
         </th>
       </tr>
     </thead>
     <tbody>
       <tr
         v-for="school in schoolsPaginated"
-        :key="school"
+        :key="school.id"
         class="cursor-pointer"
-        @click="selectSchool(school)"
+        @click="selectSchool(school.id)"
       >
         <td
           data-label="School ID"
           class="pl-6"
         >
-          {{ school }}
+          {{ school.id }}
+        </td>
+        <td>
+          {{ school.owner.name }}
+        </td>
+        <td>
+          {{ school.owner.email }}
         </td>
       </tr>
     </tbody>

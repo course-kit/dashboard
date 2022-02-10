@@ -48,12 +48,8 @@ const selectSchool = function (id) {
         <th class="pl-6">
           ID
         </th>
-        <th>
-          Owner name
-        </th>
-        <th>
-          Owner email
-        </th>
+        <th>Owner name</th>
+        <th>Owner email</th>
       </tr>
     </thead>
     <tbody>

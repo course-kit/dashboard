@@ -98,7 +98,7 @@ const editLesson = async (schoolId, courseId, lessonId, payload) => {
 }
 
 const schoolEdit = async (schoolId, payload) => {
-  return await fetch(`${baseURL}/schools/${schoolId}/user`, {
+  return await fetch(`${baseURL}/schools/${schoolId}`, {
     method: 'POST',
     credentials: 'include',
     headers: {

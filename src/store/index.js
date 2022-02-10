@@ -255,6 +255,7 @@ export default createStore({
       try {
         await courseDelete(state.schoolId, id)
         await dispatch('getCourses')
+        await dispatch('getStudents')
       } catch (err) {
         alert(err.message)
       }
@@ -277,16 +278,16 @@ export default createStore({
           typeof schoolUrlDev !== 'undefined' &&
           schoolUrlDev !== state.schoolUrlDev
         ) {
-          payload.schoolUrlDev = schoolUrlDev
+          payload.urlDev = schoolUrlDev
         }
         if (
           typeof schoolUrlProd !== 'undefined' &&
           schoolUrlProd !== state.schoolUrlProd
         ) {
-          payload.schoolUrlProd = schoolUrlProd
+          payload.urlProd = schoolUrlProd
         }
         await schoolEdit(state.schoolId, payload)
-        await dispatch('getUser')
+        await dispatch('getCourses')
       } catch (err) {
         alert(err.message)
       }

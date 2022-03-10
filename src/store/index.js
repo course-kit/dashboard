@@ -21,6 +21,9 @@ export default createStore({
     userName: null,
     userEmail: null,
     userAvatar: null,
+    userPlan: null,
+    userTrialDaysRemaining: null,
+    userPaymentOverdue: false,
 
     /* fullScreen - fullscreen form layout (e.g. login page) */
     isFullScreen: false,
@@ -85,6 +88,15 @@ export default createStore({
       }
       if (payload.email) {
         state.userEmail = payload.email
+      }
+      if (payload.plan) {
+        state.userPlan = payload.plan
+      }
+      if (payload.trialDaysRemaining) {
+        state.userTrialDaysRemaining = payload.trialDaysRemaining
+      }
+      if (payload.paymentOverdue) {
+        state.userPaymentOverdue = payload.paymentOverdue
       }
       if (payload.avatar) {
         state.userAvatar = payload.avatar

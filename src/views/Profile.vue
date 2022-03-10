@@ -3,12 +3,11 @@ import { ref } from 'vue'
 
 import MainSection from '@/components/MainSection.vue'
 import TitleBar from '@/components/TitleBar.vue'
-import SchoolsTable from '@/components/SchoolsTable.vue'
-import CardComponent from '@/components/CardComponent.vue'
 
 const titleStack = ref([{ name: 'Profile' }])
 
 let baseURL
+
 if (process.env.NODE_ENV === 'production') {
   baseURL = process.env.VUE_APP_API_URL
 } else {
@@ -20,7 +19,7 @@ const logoutUrl = `${baseURL}/logout`
 <template>
   <title-bar :title-stack="titleStack" />
   <main-section>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    <div>
       <div>
         <p class="mb-4">
           <span class="font-bold">{{ $store.state.userName }}</span>
@@ -34,14 +33,5 @@ const logoutUrl = `${baseURL}/logout`
         </p>
       </div>
     </div>
-    <card-component
-      v-if="$store.state.isAdmin"
-      class="mb-6"
-      title="Schools"
-      header-icon=""
-      has-table
-    >
-      <schools-table />
-    </card-component>
   </main-section>
 </template>

@@ -27,6 +27,15 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "courses" */ '@/views/Courses.vue')
   },
+  {
+    meta: {
+      title: 'Billing'
+    },
+    path: '/billing',
+    name: 'billing',
+    component: () =>
+      import(/* webpackChunkName: "billing" */ '@/views/Billing.vue')
+  },
   // {
   //   meta: {
   //     title: 'Add course'
@@ -64,6 +73,15 @@ const routes = [
   },
   {
     meta: {
+      title: 'School'
+    },
+    path: '/school',
+    name: 'school',
+    component: () =>
+      import(/* webpackChunkName: "school" */ '@/views/School.vue')
+  },
+  {
+    meta: {
       title: 'Analytics'
     },
     path: '/analytics',
@@ -79,6 +97,25 @@ const routes = [
     name: 'billing',
     component: () =>
       import(/* webpackChunkName: "billing" */ '@/views/Billing.vue')
+  },
+  {
+    meta: {
+      title: 'Billing'
+    },
+    path: '/billing',
+    name: 'billing',
+    component: () =>
+      import(/* webpackChunkName: "billing" */ '@/views/Billing.vue')
+  },
+  {
+    meta: {
+      title: 'Trial Ended',
+      fullScreen: true
+    },
+    path: '/trial-ended',
+    name: 'trial-ended',
+    component: () =>
+      import(/* webpackChunkName: "trial-ended" */ '@/views/TrialEnded.vue')
   },
   {
     meta: {

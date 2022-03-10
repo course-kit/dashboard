@@ -18,16 +18,21 @@ store.dispatch('getUser')
       router.push({ name: 'home' })
       console.log('Redirected to login.')
     } else {
-      if (route.name === 'home' || window.location.pathname === '/') {
-        router.push({ name: 'start' })
-      }
-      if (!store.state.dataLoaded) {
-        Promise.all([
-          store.dispatch('getCourses'),
-          store.dispatch('getStudents'),
-          store.dispatch('getSchools')
-        ])
-          .then(() => store.commit('setDataLoaded', true))
+      if (!user.plan && user.trialDaysRemaining === 0) {
+        store.commit('setDataLoaded', true)
+        router.push({ name: 'trial-ended' })
+      } else {
+        if (route.name === 'home' || window.location.pathname === '/') {
+          router.push({ name: 'start' })
+        }
+        if (!store.state.dataLoaded) {
+          Promise.all([
+            store.dispatch('getCourses'),
+            store.dispatch('getStudents'),
+            store.dispatch('getSchools')
+          ])
+            .then(() => store.commit('setDataLoaded', true))
+        }
       }
     }
   })

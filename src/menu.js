@@ -2,7 +2,8 @@ import {
   mdiAccountCircle,
   mdiTelevisionGuide,
   // mdiChartLine,
-  // mdiReceipt,
+  mdiReceipt,
+  mdiSchool,
   mdiArrowRightBold,
   mdiAccountGroup
 } from '@mdi/js'
@@ -13,6 +14,11 @@ export default [
       to: '/start',
       label: 'Get started',
       icon: mdiArrowRightBold
+    },
+    {
+      to: '/school',
+      label: 'School',
+      icon: mdiSchool
     },
     {
       to: '/courses',
@@ -29,6 +35,11 @@ export default [
     //   label: 'Analytics',
     //   icon: mdiChartLine
     // },
+    {
+      to: '/billing',
+      label: 'Billing',
+      icon: mdiReceipt
+    },
     {
       to: '/profile',
       label: 'Profile',

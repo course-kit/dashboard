@@ -5,6 +5,17 @@ let pk
 const basic = []
 const pro = []
 
+const props = defineProps({
+  hasPlan: {
+    type: Boolean,
+    default: false
+  },
+  customerPortalUrl: {
+    type: String,
+    required: true
+  }
+})
+
 if (process.env.NODE_ENV === 'production') {
   pk = process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY
   basic.push({
@@ -27,22 +38,32 @@ if (process.env.NODE_ENV === 'production') {
   })
 }
 
-const basicFeatures = ['Feature 1', 'Feature 2']
-const proFeatures = ['Feature 1', 'Feature 2']
+function selectCustomerPortal () {
+  window.location.href = props.customerPortalUrl
+}
+
+const basicFeatures = ['Unlimited students & courses', 'Max 1 school']
+const proFeatures = ['Unlimited students & courses', 'Max 10 schools']
 </script>
 <template>
-  <div class="grid grid-cols-3 gap-6 w-full">
+  <div class="grid grid-cols-2 gap-6">
     <Plan
       :pk="pk"
       :line-items="basic"
       title="Basic"
       :features="basicFeatures"
+      :has-plan="props.hasPlan"
+      :is-selected="$store.state.userPlan === 2"
+      @select-customer-portal="selectCustomerPortal"
     />
     <Plan
       :pk="pk"
       :line-items="pro"
       title="Pro"
       :features="proFeatures"
+      :has-plan="props.hasPlan"
+      :is-selected="$store.state.userPlan === 3"
+      @select-customer-portal="selectCustomerPortal"
     />
   </div>
 </template>

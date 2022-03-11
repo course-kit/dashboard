@@ -3,18 +3,10 @@ import { ref } from 'vue'
 
 import MainSection from '@/components/MainSection.vue'
 import TitleBar from '@/components/TitleBar.vue'
+import LogoutButton from '@/components/LogoutButton.vue'
 
 const titleStack = ref([{ name: 'Profile' }])
 
-let baseURL
-
-if (process.env.NODE_ENV === 'production') {
-  baseURL = process.env.VUE_APP_API_URL
-} else {
-  baseURL = import.meta.env.VITE_API_URL
-}
-
-const logoutUrl = `${baseURL}/logout`
 </script>
 <template>
   <title-bar :title-stack="titleStack" />
@@ -26,10 +18,7 @@ const logoutUrl = `${baseURL}/logout`
           <span>&nbsp;&lt;{{ $store.state.userEmail }}></span>
         </p>
         <p>
-          <a
-            :href="logoutUrl"
-            class="inline-flex cursor-pointer justify-center items-center whitespace-nowrap focus:outline-none transition-colors focus:ring-2 focus:border-transparent duration-150 border rounded ring-blue-700 p-2 bg-blue-500 text-white border-blue-600 hover:bg-blue-600 mr-3 last:mr-0 mb-3"
-          >Log out</a>
+          <logout-button />
         </p>
       </div>
     </div>

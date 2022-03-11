@@ -6,6 +6,7 @@ import { colorsBg, colorsBorders, colorsOutline } from '@/colors.js'
 import Level from '@/components/Level.vue'
 import Icon from '@/components/Icon.vue'
 import JbButton from '@/components/JbButton.vue'
+import Cookie from 'js-cookie'
 
 const props = defineProps({
   icon: {
@@ -14,6 +15,14 @@ const props = defineProps({
   },
   outline: Boolean,
   color: {
+    type: String,
+    required: true
+  },
+  persistDismissLength: {
+    type: Number,
+    default: 1000 * 60 * 60 * 24
+  },
+  id: {
     type: String,
     required: true
   }
@@ -29,6 +38,9 @@ const isDismissed = ref(false)
 
 const dismiss = () => {
   isDismissed.value = true
+  if (props.persistDismissLength) {
+    Cookie.set(props.id, true, { expires: props.persistDismissLength })
+  }
 }
 
 const slots = useSlots()

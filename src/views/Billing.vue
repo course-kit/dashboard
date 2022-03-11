@@ -12,22 +12,11 @@ if (process.env.NODE_ENV === 'production') {
   baseURL = import.meta.env.VITE_API_URL
 }
 
-const managePlanUrl = `${baseURL}/plans/manage`
+const customerPortalUrl = `${baseURL}/plans/manage`
 
 const store = useStore()
 
-const currentPlan = computed(() => {
-  switch (store.state.userPlan) {
-    case 1:
-      return 'Free'
-    case 2:
-      return 'Basic'
-    case 3:
-      return 'Pro'
-    default:
-      return 'None'
-  }
-})
+const hasPlan = store.state.userPlan !== null && store.state.userPlan !== 0
 
 const trialDaysRemaining = computed(() => {
   return store.state.userTrialDaysRemaining
@@ -39,18 +28,22 @@ const titleStack = ref([{ name: 'Billing' }])
 <template>
   <title-bar :title-stack="titleStack" />
   <main-section>
-    <div class="mb-8">
-      <p>
-        <strong>Current plan:</strong> {{ currentPlan }}.
-        <a
-          :href="managePlanUrl"
-          class="underline"
-        >Manage your plan</a>.
-      </p>
-      <p v-if="trialDaysRemaining">
+    <div v-if="trialDaysRemaining">
+      <p class="mb-8">
         <strong>Free trial days remaining:</strong> {{ trialDaysRemaining }}
       </p>
     </div>
-    <Plans />
+    <Plans
+      :has-plan="hasPlan"
+      :customer-portal-url="customerPortalUrl"
+    />
+    <div class="mt-8">
+      <p v-if="hasPlan">
+        <a
+          :href="customerPortalUrl"
+          class="underline"
+        >Manage your account</a>
+      </p>
+    </div>
   </main-section>
 </template>

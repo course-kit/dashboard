@@ -89,6 +89,7 @@ async function redirectToCheckout () {
 <template>
   <jb-button
     type="button"
+    color="info"
     :label="loading ? 'Loading...' : 'Select'"
     class="mt-4"
     @click="redirectToCheckout"

@@ -34,15 +34,6 @@ const titleStack = ref([{ name: 'Welcome to CourseKit' }])
               CourseKit JavaScript Client
             </a>
           </li>
-          <li class="pb-2">
-            <a
-              class="underline"
-              href="https://github.com/course-kit/nuxt-demo"
-              target="_blank"
-            >
-              CourseKit Nuxt Demo
-            </a>
-          </li>
         </ul>
         <p>
           Need help? Join us on the

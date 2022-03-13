@@ -5,13 +5,23 @@ import TitleBar from '@/components/TitleBar.vue'
 import SchoolsTable from '@/components/SchoolsTable.vue'
 import CardComponent from '@/components/CardComponent.vue'
 import SchoolEdit from '@/components/SchoolEdit.vue'
-
+import SchoolAdd from '@/components/SchoolAdd.vue'
+import { mdiPlusBox } from '@mdi/js'
+import Notification from '@/components/Notification.vue'
 const titleStack = ref([{ name: 'School' }])
+const addActive = ref(false)
 const editSchool = ref(false)
+const error = ref(null)
 </script>
 
 <template>
+  <SchoolAdd v-model="addActive" @error="error = $event" />
   <SchoolEdit v-model="editSchool" />
+  <div v-if="error" class="mx-6 mt-6">
+    <notification :persist-dismiss-length="0" id="error" color="danger" >
+      {{ error.message }}
+    </notification>
+  </div>
   <title-bar :title-stack="titleStack" />
   <main-section>
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-6" />
@@ -29,6 +39,14 @@ const editSchool = ref(false)
             </td>
             <td>
               {{ $store.state.schoolId }}
+            </td>
+          </tr>
+          <tr>
+            <td class="pl-6">
+              Title
+            </td>
+            <td>
+              {{ $store.state.schoolTitle }}
             </td>
           </tr>
           <tr>
@@ -54,7 +72,8 @@ const editSchool = ref(false)
       v-if="$store.state.isAdmin"
       class="mb-6"
       title="Your schools"
-      header-icon=""
+      :header-icon="mdiPlusBox"
+      @header-icon-click="addActive = true"
       has-table
     >
       <schools-table />

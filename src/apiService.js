@@ -29,6 +29,18 @@ const courseAdd = async (schoolId, payload) => {
   })
 }
 
+const schoolAdd = async (payload) => {
+  return await fetch(`${baseURL}/schools`, {
+    method: 'POST',
+    credentials: 'include',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(payload)
+  })
+}
+
 const courseDelete = async (schoolId, id) => {
   return await fetch(`${baseURL}/schools/${schoolId}/courses/${id}`, {
     method: 'DELETE',
@@ -123,4 +135,4 @@ const getSchools = async () => {
   })
 }
 
-export { getSchools, getCourses, getStudents, courseAdd, getUser, lessonAdd, editLesson, courseEdit, schoolEdit, studentAdd, courseDelete, addTestCourses, lessonDelete }
+export { getSchools, getCourses, getStudents, courseAdd, getUser, lessonAdd, editLesson, courseEdit, schoolEdit, studentAdd, courseDelete, addTestCourses, lessonDelete, schoolAdd }

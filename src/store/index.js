@@ -12,7 +12,8 @@ import {
   courseDelete,
   addTestCourses,
   lessonDelete,
-  getSchools
+  getSchools,
+  schoolAdd
 } from '@/apiService'
 
 export default createStore({
@@ -45,6 +46,7 @@ export default createStore({
     loginUrl: null,
     regUrl: null,
     schoolId: null,
+    schoolTitle: null,
     schoolUrlDev: null,
     schoolUrlProd: null,
     dataLoaded: false,
@@ -74,7 +76,7 @@ export default createStore({
     },
 
     setSchool (state, payload) {
-      state.courses = payload.courses
+      state.schoolTitle = payload.title
       state.schoolUrlDev = payload.urlDev
       state.schoolUrlProd = payload.urlProd
     },
@@ -181,6 +183,10 @@ export default createStore({
         const response = await getCourses(state.schoolId)
         if (response.status === 200) {
           const data = await response.json()
+          commit('basic', {
+            key: 'courses',
+            value: data.courses
+          })
           commit('setSchool', data)
         }
         if (response.status === 401) {
@@ -219,7 +225,20 @@ export default createStore({
         alert(err.message)
       }
     },
-
+    async schoolAdd ({ state, commit, dispatch }, payload) {
+      try {
+        const response = await schoolAdd(payload)
+        if (response.status === 200) {
+          const { id } = await response.json()
+          await dispatch('getSchools')
+          return id
+        } else {
+          return null
+        }
+      } catch (err) {
+        alert(err.message)
+      }
+    },
     async courseAdd ({ state, commit, dispatch }, payload) {
       try {
         const response = await courseAdd(state.schoolId, payload)
@@ -282,10 +301,16 @@ export default createStore({
     },
     async schoolEdit (
       { state, commit, dispatch },
-      { schoolUrlDev, schoolUrlProd }
+      { schoolTitle, schoolUrlDev, schoolUrlProd }
     ) {
       try {
         const payload = {}
+        if (
+          typeof schoolTitle !== 'undefined' &&
+          schoolTitle !== state.schoolTitle
+        ) {
+          payload.title = schoolTitle
+        }
         if (
           typeof schoolUrlDev !== 'undefined' &&
           schoolUrlDev !== state.schoolUrlDev
@@ -299,7 +324,8 @@ export default createStore({
           payload.urlProd = schoolUrlProd
         }
         await schoolEdit(state.schoolId, payload)
-        await dispatch('getCourses')
+        commit('setSchool', payload)
+        await dispatch('getSchools')
       } catch (err) {
         alert(err.message)
       }

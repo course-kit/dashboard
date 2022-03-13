@@ -26,16 +26,15 @@ const props = defineProps({
   }
 })
 
-if (props.lessonId) {
-  title.value = store.getters.getLessonById(
-    props.courseId,
-    props.lessonId
-  ).title
-}
-
 const emit = defineEmits(['update:modelValue'])
 const value = computed({
-  get: () => props.modelValue,
+  get: () => {
+    if (props.modelValue) {
+      // modal opened, reset form
+      reset()
+    }
+    return props.modelValue
+  },
   set: (value) => emit('update:modelValue', value)
 })
 
@@ -48,21 +47,28 @@ const confirm = async () => {
       courseId,
       title: title.value
     })
-    cancel()
+    reset()
     router.push(`/courses/${courseId}/lessons/${lessonId}`)
   } else {
     const { id } = await store.dispatch('lessonAdd', {
       courseId,
       title: title.value
     })
-    cancel()
+    reset()
     if (courseId && id) {
       router.push(`/courses/${courseId}/lessons/${id}`)
     }
   }
 }
-const cancel = () => {
-  title.value = ''
+const reset = () => {
+  if (props.lessonId) {
+    title.value = store.getters.getLessonById(
+      props.courseId,
+      props.lessonId
+    ).title
+  } else {
+    title.value = ''
+  }
 }
 </script>
 
@@ -73,7 +79,7 @@ const cancel = () => {
     button-label="Save"
     has-cancel
     @confirm="confirm"
-    @cancel="cancel"
+    @cancel="reset"
   >
     <field label="Title">
       <control

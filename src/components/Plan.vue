@@ -18,6 +18,10 @@ const props = defineProps({
     type: Array,
     required: true
   },
+  price: {
+    type: Number,
+    required: true
+  },
   pk: {
     type: String,
     required: true
@@ -41,8 +45,8 @@ const props = defineProps({
     :class="{ 'w-full': true, 'border-blue-400 bg-blue-50': props.isSelected }"
   >
     <div>
-      <h2 class="text-xl font-bold text-center">
-        {{ title }} plan
+      <h2 class="font-bold text-center">
+        <span class="text-2xl mr-2">{{ title }}</span><span class="text-base">${{ price }}/mo</span>
       </h2>
       <ul class="pt-2">
         <li

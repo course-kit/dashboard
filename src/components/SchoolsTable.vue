@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import Level from '@/components/Level.vue'
 import JbButtons from '@/components/JbButtons.vue'
 import JbButton from '@/components/JbButton.vue'
+
 import { useStore } from 'vuex'
 
 const store = useStore()
@@ -46,7 +47,7 @@ const selectSchool = function (id) {
     <thead>
       <tr>
         <th class="pl-6">
-          ID
+          Title
         </th>
         <th>Owner name</th>
         <th>Owner email</th>
@@ -58,12 +59,13 @@ const selectSchool = function (id) {
         :key="school.id"
         class="cursor-pointer"
         @click="selectSchool(school.id)"
+        :class="{ 'bg-blue-50 hover:bg-blue-50 text-blue-900' : school.id === $store.state.schoolId }"
       >
         <td
-          data-label="School ID"
+          data-label="School title"
           class="pl-6"
         >
-          {{ school.id }}
+          {{ school.title }}
         </td>
         <td>
           {{ school.owner.name }}

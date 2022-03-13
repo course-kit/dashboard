@@ -20,14 +20,15 @@ const router = useRouter()
 const title = ref('')
 const urlDev = ref('')
 const urlProd = ref('')
-if (props.id) {
-  title.value = store.getters.getCourseById(props.id).title
-  urlDev.value = store.getters.getCourseById(props.id).urlDev
-  urlProd.value = store.getters.getCourseById(props.id).urlProd
-}
+
 const emit = defineEmits(['update:modelValue'])
 const value = computed({
-  get: () => props.modelValue,
+  get: () => {
+    if (props.modelValue) {
+      reset()
+    }
+    return props.modelValue
+  },
   set: (value) => emit('update:modelValue', value)
 })
 const confirm = async () => {
@@ -38,19 +39,23 @@ const confirm = async () => {
   }
   if (props.id) {
     await store.dispatch('courseEdit', { id: props.id, ...payload })
-    cancel()
+    reset()
     router.push(`/courses/${props.id}`)
   } else {
     const { id } = await store.dispatch('courseAdd', payload)
-    cancel()
+    reset()
     router.push(`/courses/${id}`)
   }
 }
-const cancel = () => {
+const reset = () => {
   if (!props.id) {
     title.value = ''
     urlDev.value = ''
     urlProd.value = ''
+  } else {
+    title.value = store.getters.getCourseById(props.id).title
+    urlDev.value = store.getters.getCourseById(props.id).urlDev
+    urlProd.value = store.getters.getCourseById(props.id).urlProd
   }
 }
 </script>
@@ -62,7 +67,7 @@ const cancel = () => {
     button-label="Save"
     has-cancel
     @confirm="confirm"
-    @cancel="cancel"
+    @cancel="reset"
   >
     <field label="Title">
       <control

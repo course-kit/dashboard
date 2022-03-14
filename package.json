@@ -1,6 +1,6 @@
 {
   "name": "coursekit-dashboard",
-  "version": "0.0.1",
+  "version": "1.1.0",
   "scripts": {
     "dev": "vite --host",
     "serve": "vue-cli-service serve",

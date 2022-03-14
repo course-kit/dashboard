@@ -37,8 +37,10 @@ const pagesList = computed(() => {
   return pagesList
 })
 
-const selectSchool = function (id) {
-  store.dispatch('changeSchool', id)
+const selectSchool = function (school) {
+  if (school.active) {
+    store.dispatch('changeSchool', school.id)
+  }
 }
 </script>
 
@@ -47,10 +49,10 @@ const selectSchool = function (id) {
     <thead>
       <tr>
         <th class="pl-6">
-          Title
+          ID
         </th>
-        <th>Owner name</th>
-        <th>Owner email</th>
+        <th>Title</th>
+        <th>Status</th>
       </tr>
     </thead>
     <tbody>
@@ -58,20 +60,22 @@ const selectSchool = function (id) {
         v-for="school in schoolsPaginated"
         :key="school.id"
         class="cursor-pointer"
-        @click="selectSchool(school.id)"
+        @click="selectSchool(school)"
         :class="{ 'bg-blue-50 hover:bg-blue-50 text-blue-900' : school.id === $store.state.schoolId }"
       >
         <td
-          data-label="School title"
+          data-label="School ID"
           class="pl-6"
+        >
+          {{ school.id }}
+        </td>
+        <td
+          data-label="School title"
         >
           {{ school.title }}
         </td>
         <td>
-          {{ school.owner.name }}
-        </td>
-        <td>
-          {{ school.owner.email }}
+          {{ school.active ? 'Active' : 'Inactive' }}
         </td>
       </tr>
     </tbody>

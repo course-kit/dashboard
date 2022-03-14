@@ -19,7 +19,7 @@ const props = defineProps({
   },
   successUrl: {
     type: String,
-    default: window.location.href
+    default: `${window.location.href}?post-purchase=true`
   },
   cancelUrl: {
     type: String,

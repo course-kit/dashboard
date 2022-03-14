@@ -4,6 +4,12 @@ import MainSection from '@/components/MainSection.vue'
 import TitleBar from '@/components/TitleBar.vue'
 import Plans from '@/components/Plans.vue'
 import { useStore } from 'vuex'
+import { useRoute } from 'vue-router'
+import Notification from '@/components/Notification.vue'
+
+const route = useRoute()
+
+const showThankYou = ref(route.query['post-purchase'])
 
 let baseURL
 if (process.env.NODE_ENV === 'production') {
@@ -26,6 +32,11 @@ const titleStack = ref([{ name: 'Billing' }])
 </script>
 
 <template>
+  <div v-if="showThankYou" class="mx-6 mt-6">
+    <notification color="success">
+      Your plan has been successfully updated!
+    </notification>
+  </div>
   <title-bar :title-stack="titleStack" />
   <main-section>
     <div v-if="trialDaysRemaining">

@@ -15,10 +15,20 @@ const error = ref(null)
 </script>
 
 <template>
-  <SchoolAdd v-model="addActive" @error="error = $event" />
+  <SchoolAdd
+    v-model="addActive"
+    @error="error = $event"
+  />
   <SchoolEdit v-model="editSchool" />
-  <div v-if="error" class="mx-6 mt-6">
-    <notification :persist-dismiss-length="0" id="error" color="danger" >
+  <div
+    v-if="error"
+    class="mx-6 mt-6"
+  >
+    <notification
+      id="error"
+      :persist-dismiss-length="0"
+      color="danger"
+    >
       {{ error.message }}
     </notification>
   </div>
@@ -69,12 +79,11 @@ const error = ref(null)
       </table>
     </card-component>
     <card-component
-      v-if="$store.state.isAdmin"
       class="mb-6"
       title="Your schools"
       :header-icon="mdiPlusBox"
-      @header-icon-click="addActive = true"
       has-table
+      @header-icon-click="addActive = true"
     >
       <schools-table />
     </card-component>

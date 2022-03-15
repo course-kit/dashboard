@@ -6,7 +6,6 @@ import TitleBar from '@/components/TitleBar.vue'
 import LogoutButton from '@/components/LogoutButton.vue'
 
 const titleStack = ref([{ name: 'Profile' }])
-
 </script>
 <template>
   <title-bar :title-stack="titleStack" />

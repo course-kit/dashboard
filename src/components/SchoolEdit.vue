@@ -43,7 +43,6 @@ const reset = async () => {
   schoolUrlDev.value = store.state.schoolUrlDev
   schoolUrlProd.value = store.state.schoolUrlProd
 }
-
 </script>
 
 <template>

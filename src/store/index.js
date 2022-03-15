@@ -324,7 +324,11 @@ export default createStore({
           payload.urlProd = schoolUrlProd
         }
         await schoolEdit(state.schoolId, payload)
-        commit('setSchool', payload)
+        commit('setSchool', {
+          title: schoolTitle,
+          urlDev: schoolUrlDev,
+          urlProd: schoolUrlProd
+        })
         await dispatch('getSchools')
       } catch (err) {
         alert(err.message)

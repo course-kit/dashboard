@@ -60,8 +60,11 @@ const selectSchool = function (school) {
         v-for="school in schoolsPaginated"
         :key="school.id"
         class="cursor-pointer"
+        :class="{
+          'bg-blue-50 hover:bg-blue-50 text-blue-900':
+            school.id === $store.state.schoolId,
+        }"
         @click="selectSchool(school)"
-        :class="{ 'bg-blue-50 hover:bg-blue-50 text-blue-900' : school.id === $store.state.schoolId }"
       >
         <td
           data-label="School ID"
@@ -69,13 +72,11 @@ const selectSchool = function (school) {
         >
           {{ school.id }}
         </td>
-        <td
-          data-label="School title"
-        >
+        <td data-label="School title">
           {{ school.title }}
         </td>
         <td>
-          {{ school.active ? 'Active' : 'Inactive' }}
+          {{ school.active ? "Active" : "Inactive" }}
         </td>
       </tr>
     </tbody>

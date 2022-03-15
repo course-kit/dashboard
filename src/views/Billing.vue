@@ -32,7 +32,10 @@ const titleStack = ref([{ name: 'Billing' }])
 </script>
 
 <template>
-  <div v-if="showThankYou" class="mx-6 mt-6">
+  <div
+    v-if="showThankYou"
+    class="mx-6 mt-6"
+  >
     <notification color="success">
       Your plan has been successfully updated!
     </notification>

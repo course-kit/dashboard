@@ -26,7 +26,9 @@ const confirm = async () => {
     cancel()
     await store.dispatch('changeSchool', id)
   } else {
-    emit('error', { message: 'Cannot add additional schools on this plan. Please upgrade.' })
+    emit('error', {
+      message: 'Cannot add additional schools on this plan. Please upgrade.'
+    })
   }
 }
 const cancel = () => {

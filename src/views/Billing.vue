@@ -42,7 +42,12 @@ const titleStack = ref([{ name: 'Billing' }])
     v-if="showThankYou"
     class="mx-6 mt-6"
   >
-    <notification color="success" id="plan--updated" @dismissed="removeRouteQuery" :icon="mdiCheckBold">
+    <notification
+      id="plan--updated"
+      color="success"
+      :icon="mdiCheckBold"
+      @dismissed="removeRouteQuery"
+    >
       Your plan has been successfully updated!
     </notification>
   </div>

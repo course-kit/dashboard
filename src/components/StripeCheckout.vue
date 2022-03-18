@@ -24,7 +24,7 @@ const props = defineProps({
   locale: {
     type: String,
     default: 'en'
-  },
+  }
 })
 
 const loading = ref(false)

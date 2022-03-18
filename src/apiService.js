@@ -135,4 +135,11 @@ const getSchools = async () => {
   })
 }
 
-export { getSchools, getCourses, getStudents, courseAdd, getUser, lessonAdd, editLesson, courseEdit, schoolEdit, studentAdd, courseDelete, addTestCourses, lessonDelete, schoolAdd }
+const planCheckout = async (planId) => {
+  return await fetch(`${baseURL}/plans/${planId}/checkout`, {
+    method: 'GET',
+    credentials: 'include'
+  })
+}
+
+export { planCheckout, getSchools, getCourses, getStudents, courseAdd, getUser, lessonAdd, editLesson, courseEdit, schoolEdit, studentAdd, courseDelete, addTestCourses, lessonDelete, schoolAdd }

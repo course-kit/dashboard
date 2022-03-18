@@ -25,8 +25,7 @@ const error = ref(null)
     class="mx-6 mt-6"
   >
     <notification
-      id="error"
-      :persist-dismiss-length="0"
+      id="edit-school-error"
       color="danger"
     >
       {{ error.message }}

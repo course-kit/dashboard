@@ -2,8 +2,6 @@
 import Plan from '@/components/Plan.vue'
 
 let pk
-const basic = []
-const pro = []
 
 const props = defineProps({
   hasPlan: {
@@ -18,24 +16,8 @@ const props = defineProps({
 
 if (process.env.NODE_ENV === 'production') {
   pk = process.env.VUE_APP_STRIPE_PUBLISHABLE_KEY
-  basic.push({
-    price: process.env.VUE_APP_STRIPE_PRODUCT_BASIC,
-    quantity: 1
-  })
-  pro.push({
-    price: process.env.VUE_APP_STRIPE_PRODUCT_PRO,
-    quantity: 1
-  })
 } else {
   pk = import.meta.env.VITE_STRIPE_PUBLISHABLE_KEY
-  basic.push({
-    price: import.meta.env.VITE_STRIPE_PRODUCT_BASIC,
-    quantity: 1
-  })
-  pro.push({
-    price: import.meta.env.VITE_STRIPE_PRODUCT_PRO,
-    quantity: 1
-  })
 }
 
 function selectCustomerPortal () {
@@ -49,7 +31,7 @@ const proFeatures = ['Unlimited students & courses', 'Max 10 schools']
   <div class="grid grid-cols-2 gap-6">
     <Plan
       :pk="pk"
-      :line-items="basic"
+      :plan-id="2"
       title="Basic"
       :price="19"
       :features="basicFeatures"
@@ -59,7 +41,7 @@ const proFeatures = ['Unlimited students & courses', 'Max 10 schools']
     />
     <Plan
       :pk="pk"
-      :line-items="pro"
+      :plan-id="3"
       title="Pro"
       :price="49"
       :features="proFeatures"

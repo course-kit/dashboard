@@ -5,9 +5,7 @@ import JbButton from '@/components/JbButton.vue'
 import { mdiCheckBold } from '@mdi/js'
 import Icon from '@/components/Icon.vue'
 
-defineEmits({
-  selectCustomerPortal: {}
-})
+defineEmits(['select-customer-portal'])
 
 const props = defineProps({
   title: {
@@ -26,8 +24,8 @@ const props = defineProps({
     type: String,
     required: true
   },
-  lineItems: {
-    type: Array,
+  planId: {
+    type: Number,
     required: true
   },
   hasPlan: {
@@ -65,9 +63,7 @@ const props = defineProps({
       <stripe-checkout
         v-if="!hasPlan"
         :pk="pk"
-        mode="subscription"
-        :line-items="lineItems"
-        :customer-email="$store.state.userEmail"
+        :plan-id="planId"
       />
       <jb-button
         v-else-if="!isSelected"

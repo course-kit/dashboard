@@ -59,6 +59,15 @@ const showPaymentOverdueReminder = computed(() => {
   return !cookie && store.state.userPaymentOverdue
 })
 
+let baseURL
+if (process.env.NODE_ENV === 'production') {
+  baseURL = process.env.VUE_APP_API_URL
+} else {
+  baseURL = import.meta.env.VITE_API_URL
+}
+
+const customerPortalUrl = `${baseURL}/plans/manage`
+
 </script>
 
 <template>
@@ -66,11 +75,11 @@ const showPaymentOverdueReminder = computed(() => {
   <div class="flex flex-col h-screen justify-between">
     <div>
       <div class="px-6" v-if="!$store.state.isFullScreen">
-        <notification class="mt-6" :id="freeTrialReminder" :icon="mdiAlert" color="warning" v-if="showFreeTrialReminder">
+        <notification class="mt-6" :id="freeTrialReminder" :icon="mdiAlert" color="warning" v-if="showFreeTrialReminder" :persist-dismiss-length="1000 * 60 * 60 * 24">
           Your free trial ends in {{ $store.state.userTrialDaysRemaining }} days. Select a plan <router-link to="/billing" class="underline">here</router-link>.
         </notification>
         <notification class="mt-6" :id="paymentOverdueReminder" :icon="mdiAlert" color="danger" v-if="showPaymentOverdueReminder" :persist-dismiss-length="0">
-          Your plan has expired. Please select another <router-link to="/billing" class="underline">here</router-link>.
+          Looks like there's an issue with your subscription. Please update your billing details <a :href="customerPortalUrl" class="underline">here</a>.
         </notification>
       </div>
       <div

@@ -20,13 +20,15 @@ const props = defineProps({
   },
   persistDismissLength: {
     type: Number,
-    default: 1000 * 60 * 60 * 24
+    default: -1
   },
   id: {
     type: String,
     required: true
   }
 })
+
+const emit = defineEmits(['dismissed'])
 
 const componentClass = computed(() =>
   props.outline
@@ -38,9 +40,10 @@ const isDismissed = ref(false)
 
 const dismiss = () => {
   isDismissed.value = true
-  if (props.persistDismissLength) {
+  if (props.persistDismissLength >= 0) {
     Cookie.set(props.id, true, { expires: props.persistDismissLength })
   }
+  emit('dismissed')
 }
 
 const slots = useSlots()

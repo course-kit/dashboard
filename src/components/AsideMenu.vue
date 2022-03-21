@@ -15,7 +15,7 @@ defineProps({
 
 const store = useStore()
 
-const isFullScreen = computed(() => store.state.isFullScreen)
+const show = computed(() => !store.state.isFullScreen && store.state.dataLoaded)
 
 const isAsideMobileExpanded = computed(() => store.state.isAsideMobileExpanded)
 
@@ -32,7 +32,7 @@ const menuClick = (event, item) => {
 
 <template>
   <aside
-    v-show="!isFullScreen"
+    v-show="show"
     id="aside"
     class="w-60 fixed top-0 z-40 h-screen bg-gray-800 transition-position lg:left-0 dark:border-r dark:border-gray-800 dark:bg-gray-900"
     :class="[

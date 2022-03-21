@@ -50,9 +50,36 @@ VueMarkdownEditor.use(vuepressTheme, {
 const defaultDocumentTitle = 'CourseKit'
 
 /* Collapse mobile aside menu on route change */
-router.beforeEach(to => {
+router.beforeEach(async (to) => {
   store.dispatch('asideMobileToggle', false)
   store.dispatch('asideLgToggle', false)
+  if (store.state.userEmail === null) {
+    await store.dispatch('getUser')
+  }
+  if (store.state.userEmail === null) {
+    store.commit('setDataLoaded', true)
+    if (to.name !== 'home') {
+      return { name: 'home' }
+    }
+  } else {
+    if (!store.state.userPlan && store.state.userTrialDaysRemaining === 0 && to.name !== 'trial-ended') {
+      store.commit('setDataLoaded', true)
+      return { name: 'trial-ended' }
+    } else {
+      if (to.name === 'home') {
+        return { name: 'start' }
+      }
+      if (!store.state.dataLoaded) {
+        await Promise.all([
+          store.dispatch('getCourses'),
+          store.dispatch('getStudents'),
+          store.dispatch('getSchools')
+        ])
+        store.commit('setDataLoaded', true)
+        return true
+      }
+    }
+  }
 })
 
 router.afterEach(to => {

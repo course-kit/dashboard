@@ -24,7 +24,7 @@ const customerPortalUrl = `${baseURL}/plans/manage`
 
 const store = useStore()
 
-const hasPlan = store.state.userPlan !== null && store.state.userPlan !== 0
+const hasPlan = store.state.userPlan !== null && store.state.userPlan >= 2
 
 const trialDaysRemaining = computed(() => {
   return store.state.userTrialDaysRemaining

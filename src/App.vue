@@ -5,40 +5,11 @@ import menu from '@/menu.js'
 import AsideMenu from '@/components/AsideMenu.vue'
 import FooterBar from '@/components/FooterBar.vue'
 import Overlay from '@/components/Overlay.vue'
-import { useRouter, useRoute } from 'vue-router'
 import Notification from '@/components/Notification.vue'
 import { mdiAlert } from '@mdi/js'
 import Cookie from 'js-cookie'
 
 const store = useStore()
-const router = useRouter()
-const route = useRoute()
-
-store.dispatch('getUser')
-  .then(user => {
-    if (!user) {
-      store.commit('setDataLoaded', true)
-      router.push({ name: 'home' })
-      console.log('Redirected to login.')
-    } else {
-      if (!user.plan && user.trialDaysRemaining === 0) {
-        store.commit('setDataLoaded', true)
-        router.push({ name: 'trial-ended' })
-      } else {
-        if (route.name === 'home' || window.location.pathname === '/') {
-          router.push({ name: 'start' })
-        }
-        if (!store.state.dataLoaded) {
-          Promise.all([
-            store.dispatch('getCourses'),
-            store.dispatch('getStudents'),
-            store.dispatch('getSchools')
-          ])
-            .then(() => store.commit('setDataLoaded', true))
-        }
-      }
-    }
-  })
 
 const isAsideLgActive = computed(() => store.state.isAsideLgActive)
 

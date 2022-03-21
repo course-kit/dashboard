@@ -94,7 +94,7 @@ export default createStore({
       if (payload.plan) {
         state.userPlan = payload.plan
       }
-      if (payload.trialDaysRemaining) {
+      if (typeof payload.trialDaysRemaining !== 'undefined') {
         state.userTrialDaysRemaining = payload.trialDaysRemaining
       }
       if (payload.paymentOverdue) {

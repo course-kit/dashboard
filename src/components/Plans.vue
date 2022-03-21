@@ -24,17 +24,17 @@ function selectCustomerPortal () {
   window.location.href = props.customerPortalUrl
 }
 
-const basicFeatures = ['Unlimited students & courses', 'Max 1 school']
-const proFeatures = ['Unlimited students & courses', 'Max 10 schools']
+const soloFeatures = ['Unlimited students & courses', 'Max 1 school']
+const agencyFeatures = ['Unlimited students & courses', 'Max 10 schools']
 </script>
 <template>
   <div class="grid grid-cols-2 gap-6">
     <Plan
       :pk="pk"
       :plan-id="2"
-      title="Basic"
+      title="Solo"
       :price="19"
-      :features="basicFeatures"
+      :features="soloFeatures"
       :has-plan="props.hasPlan"
       :is-selected="$store.state.userPlan === 2"
       @select-customer-portal="selectCustomerPortal"
@@ -42,9 +42,9 @@ const proFeatures = ['Unlimited students & courses', 'Max 10 schools']
     <Plan
       :pk="pk"
       :plan-id="3"
-      title="Pro"
+      title="Agency"
       :price="49"
-      :features="proFeatures"
+      :features="agencyFeatures"
       :has-plan="props.hasPlan"
       :is-selected="$store.state.userPlan === 3"
       @select-customer-portal="selectCustomerPortal"

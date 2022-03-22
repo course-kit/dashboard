@@ -15,7 +15,9 @@ defineProps({
 
 const store = useStore()
 
-const show = computed(() => !store.state.isFullScreen && store.state.dataLoaded)
+const show = computed(
+  () => !store.state.isFullScreen && store.state.dataLoaded
+)
 
 const isAsideMobileExpanded = computed(() => store.state.isAsideMobileExpanded)
 

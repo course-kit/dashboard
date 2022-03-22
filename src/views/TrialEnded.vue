@@ -20,7 +20,10 @@ import LogoutButton from '@/components/LogoutButton.vue'
       <Plans :has-plan="false" />
       <p class="mt-12 text-gray-600">
         Got a question or issues with your account? Please contact
-        <a class="underline" href="mailto:hi@coursekit.dev">hi@coursekit.dev</a>
+        <a
+          class="underline"
+          href="mailto:hi@coursekit.dev"
+        >hi@coursekit.dev</a>
       </p>
     </div>
   </div>

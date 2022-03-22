@@ -43,7 +43,7 @@ const agencyFeatures = ['Unlimited students & courses', 'Max 10 schools']
       :pk="pk"
       :plan-id="3"
       title="Agency"
-      :price="49"
+      :price="99"
       :features="agencyFeatures"
       :has-plan="props.hasPlan"
       :is-selected="$store.state.userPlan === 3"

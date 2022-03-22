@@ -135,6 +135,16 @@ const routes = [
     name: 'error',
     component: () =>
       import(/* webpackChunkName: "error" */ '@/views/Error.vue')
+  },
+  {
+    meta: {
+      title: '404',
+      fullScreen: true
+    },
+    path: '/:pathMatch(.*)*',
+    name: '404',
+    component: () =>
+      import(/* webpackChunkName: "404" */ '@/views/404.vue')
   }
 ]
 

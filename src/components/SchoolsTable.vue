@@ -51,6 +51,8 @@ const selectSchool = function (school) {
         <th class="pl-6">
           ID
         </th>
+        <td v-if="$store.state.isAdmin">Owner name</td>
+        <td v-if="$store.state.isAdmin">Owner email</td>
         <th>Title</th>
         <th>Status</th>
       </tr>
@@ -74,6 +76,12 @@ const selectSchool = function (school) {
         </td>
         <td data-label="School title">
           {{ school.title }}
+        </td>
+        <td data-label="School owner name" v-if="$store.state.isAdmin">
+          {{ school.owner.name }}
+        </td>
+        <td data-label="School owner email" v-if="$store.state.isAdmin">
+          {{ school.owner.email }}
         </td>
         <td>
           {{ school.active ? "Active" : "Inactive" }}

@@ -5,7 +5,6 @@ import yaml from 'js-yaml'
 import { useStore } from 'vuex'
 
 const store = useStore()
-const content = ref(null)
 
 const props = defineProps({
   publicContentString: {
@@ -27,15 +26,32 @@ const props = defineProps({
 })
 
 const privateContent = JSON.parse(props.privateContentString) || {}
-const publicContent = JSON.parse(props.publicContentString)
+const publicContent = JSON.parse(props.publicContentString) || {}
+
+const content = ref(null)
+
+function extractMarkdown () {
+  let markdown
+  if (publicContent.content) {
+    if (!publicContent.markdown) {
+      publicContent.markdown = ''
+    }
+    markdown = publicContent.markdown
+    delete publicContent.markdown
+  } else {
+    if (!privateContent.markdown) {
+      privateContent.markdown = ''
+    }
+    markdown = privateContent.markdown
+    delete privateContent.markdown
+  }
+  return markdown
+}
 
 function initializeContent () {
-  if (!privateContent.markdown) {
-    privateContent.markdown = ''
-  }
-  const markdown = privateContent.markdown
-  delete privateContent.markdown
-  if (publicContent && Object.keys(publicContent).length > 0) {
+  const markdown = extractMarkdown()
+  // console.log(markdown)
+  if (Object.keys(publicContent).length > 0) {
     privateContent.public = publicContent
   }
   if (Object.keys(privateContent).length === 0) {
@@ -47,21 +63,24 @@ function initializeContent () {
 }
 
 async function parseContent (content) {
-  console.log(content)
   const str = content.replace(/\t/g, '  ')
   const vars = loadFront(str)
   let publicContent = {}
-  const privateContent = vars
   if (typeof vars.public === 'object') {
     publicContent = vars.public
     delete vars.public
   }
-  let md = privateContent.__content
+  let md = vars.__content
   if (md.charAt(0) === '\n') {
-    md = privateContent.__content.substring(1)
+    md = vars.__content.substring(1)
   }
-  privateContent.markdown = md
-  delete privateContent.__content
+  delete vars.__content
+  const privateContent = vars
+  if (publicContent.content) {
+    publicContent.markdown = md
+  } else {
+    privateContent.markdown = md
+  }
   return {
     publicContent: JSON.stringify(publicContent),
     privateContent: JSON.stringify(privateContent)

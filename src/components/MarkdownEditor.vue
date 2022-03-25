@@ -3,6 +3,7 @@ import { loadFront } from 'yaml-front-matter'
 import { computed, ref, watchEffect } from 'vue'
 import yaml from 'js-yaml'
 import { useStore } from 'vuex'
+
 const store = useStore()
 const content = ref(null)
 
@@ -28,24 +29,22 @@ const props = defineProps({
 const privateContent = JSON.parse(props.privateContentString) || {}
 const publicContent = JSON.parse(props.publicContentString)
 
-watchEffect(() => {
-  if (content.value === null) {
-    if (!privateContent.markdown) {
-      privateContent.markdown = ''
-    }
-    const markdown = privateContent.markdown
-    delete privateContent.markdown
-    if (publicContent && Object.keys(publicContent).length > 0) {
-      privateContent.public = publicContent
-    }
-    if (Object.keys(privateContent).length === 0) {
-      content.value = markdown
-    } else {
-      const frontmatter = yaml.dump(privateContent)
-      content.value = `---\n${frontmatter}---\n${markdown}`
-    }
+function initializeContent () {
+  if (!privateContent.markdown) {
+    privateContent.markdown = ''
   }
-})
+  const markdown = privateContent.markdown
+  delete privateContent.markdown
+  if (publicContent && Object.keys(publicContent).length > 0) {
+    privateContent.public = publicContent
+  }
+  if (Object.keys(privateContent).length === 0) {
+    content.value = markdown
+  } else {
+    const frontmatter = yaml.dump(privateContent)
+    content.value = `---\n${frontmatter}---\n${markdown}`
+  }
+}
 
 async function parseContent (content) {
   console.log(content)
@@ -69,7 +68,13 @@ async function parseContent (content) {
   }
 }
 
-const save = async () => {
+watchEffect(() => {
+  if (content.value === null) {
+    initializeContent()
+  }
+})
+
+async function save () {
   try {
     const { publicContent, privateContent } = await parseContent(content.value)
     const action = props.lessonId ? 'lessonEdit' : 'courseEdit'

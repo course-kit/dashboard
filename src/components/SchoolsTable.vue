@@ -51,13 +51,13 @@ const selectSchool = function (school) {
         <th class="pl-6">
           ID
         </th>
+        <th>Title</th>
         <td v-if="$store.state.isAdmin">
           Owner name
         </td>
         <td v-if="$store.state.isAdmin">
           Owner email
         </td>
-        <th>Title</th>
         <th>Status</th>
       </tr>
     </thead>

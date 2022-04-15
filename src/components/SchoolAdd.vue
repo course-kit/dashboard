@@ -27,7 +27,7 @@ const confirm = async () => {
     await store.dispatch('changeSchool', id)
   } else {
     emit('error', {
-      message: 'Cannot add additional schools on this plan. Please upgrade.'
+      message: 'Unable to add new school.'
     })
   }
 }

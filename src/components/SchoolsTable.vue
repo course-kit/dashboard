@@ -38,9 +38,7 @@ const pagesList = computed(() => {
 })
 
 const selectSchool = function (school) {
-  if (school.active) {
-    store.dispatch('changeSchool', school.id)
-  }
+  store.dispatch('changeSchool', school.id)
 }
 </script>
 
@@ -52,13 +50,12 @@ const selectSchool = function (school) {
           ID
         </th>
         <th>Title</th>
-        <td v-if="$store.state.isAdmin">
+        <th v-if="$store.state.isAdmin">
           Owner name
-        </td>
-        <td v-if="$store.state.isAdmin">
+        </th>
+        <th v-if="$store.state.isAdmin">
           Owner email
-        </td>
-        <th>Status</th>
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -92,9 +89,6 @@ const selectSchool = function (school) {
           data-label="School owner email"
         >
           {{ school.owner.email }}
-        </td>
-        <td>
-          {{ school.active ? "Active" : "Inactive" }}
         </td>
       </tr>
     </tbody>

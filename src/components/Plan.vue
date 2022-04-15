@@ -1,13 +1,11 @@
 <script setup>
 import CardComponent from '@/components/CardComponent.vue'
-import StripeCheckout from '@/components/StripeCheckout.vue'
-import JbButton from '@/components/JbButton.vue'
 import { mdiCheckBold } from '@mdi/js'
 import Icon from '@/components/Icon.vue'
 
 defineEmits(['select-customer-portal'])
 
-const props = defineProps({
+defineProps({
   title: {
     type: String,
     required: true
@@ -20,18 +18,6 @@ const props = defineProps({
     type: Number,
     required: true
   },
-  pk: {
-    type: String,
-    required: true
-  },
-  planId: {
-    type: Number,
-    required: true
-  },
-  hasPlan: {
-    type: Boolean,
-    default: false
-  },
   isSelected: {
     type: Boolean,
     default: false
@@ -40,7 +26,7 @@ const props = defineProps({
 </script>
 <template>
   <card-component
-    :class="{ 'w-full': true, 'border-blue-400 bg-blue-50': props.isSelected }"
+    :class="{ 'w-full': true, 'border-blue-400 bg-blue-50': isSelected }"
   >
     <div>
       <h2 class="font-bold text-center">
@@ -60,25 +46,7 @@ const props = defineProps({
       </ul>
     </div>
     <div class="flex justify-center">
-      <stripe-checkout
-        v-if="!hasPlan"
-        :pk="pk"
-        :plan-id="planId"
-      />
-      <jb-button
-        v-else-if="!isSelected"
-        type="button"
-        label="Select"
-        class="mt-4"
-        @click="$emit('select-customer-portal')"
-      />
-      <jb-button
-        v-else
-        type="button"
-        label="Current"
-        class="mt-4"
-        disabled
-      />
+      <slot></slot>
     </div>
   </card-component>
 </template>

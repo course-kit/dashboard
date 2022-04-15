@@ -109,16 +109,6 @@ const routes = [
   },
   {
     meta: {
-      title: 'Trial Ended',
-      fullScreen: true
-    },
-    path: '/trial-ended',
-    name: 'trial-ended',
-    component: () =>
-      import(/* webpackChunkName: "trial-ended" */ '@/views/TrialEnded.vue')
-  },
-  {
-    meta: {
       title: 'Profile'
     },
     path: '/profile',

@@ -62,10 +62,7 @@ router.beforeEach(async (to) => {
       return { name: 'home' }
     }
   } else {
-    if (!store.state.userPlan && store.state.userTrialDaysRemaining === 0 && to.name !== 'trial-ended') {
-      store.commit('setDataLoaded', true)
-      return { name: 'trial-ended' }
-    } else {
+
       if (to.name === 'home') {
         return { name: 'start' }
       }
@@ -78,7 +75,7 @@ router.beforeEach(async (to) => {
         store.commit('setDataLoaded', true)
         return true
       }
-    }
+
   }
 })
 

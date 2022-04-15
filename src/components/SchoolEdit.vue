@@ -3,6 +3,7 @@ import { computed, ref } from 'vue'
 import Field from '@/components/Field.vue'
 import Control from '@/components/Control.vue'
 import ModalBox from '@/components/ModalBox.vue'
+import validUrl from 'valid-url'
 import { useStore } from 'vuex'
 const props = defineProps({
   modelValue: {
@@ -14,6 +15,7 @@ const store = useStore()
 const title = ref('')
 const schoolUrlDev = ref('')
 const schoolUrlProd = ref('')
+const error = ref(null)
 
 const emit = defineEmits(['update:modelValue'])
 const value = computed({
@@ -28,6 +30,23 @@ const value = computed({
     emit('update:modelValue', value)
   }
 })
+
+const validators = [
+  () => {
+    if (schoolUrlDev.value && !validUrl.isWebUri(schoolUrlDev.value)) {
+      return 'School URL (development) is invalid.'
+    } else {
+      return null
+    }
+  },
+  () => {
+    if (schoolUrlProd.value && !validUrl.isWebUri(schoolUrlProd.value)) {
+      return 'School URL (production) is invalid.'
+    } else {
+      return null
+    }
+  }
+]
 
 const confirm = async () => {
   const payload = {
@@ -53,6 +72,7 @@ const reset = async () => {
     has-cancel
     @confirm="confirm"
     @cancel="reset"
+    :validators="validators"
   >
     <field label="Title">
       <control

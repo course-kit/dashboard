@@ -5,6 +5,7 @@ import Control from '@/components/Control.vue'
 import ModalBox from '@/components/ModalBox.vue'
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
+import validUrl from 'valid-url'
 const props = defineProps({
   modelValue: {
     type: [String, Number, Boolean],
@@ -18,8 +19,7 @@ const props = defineProps({
 const store = useStore()
 const router = useRouter()
 const title = ref('')
-const urlDev = ref('')
-const urlProd = ref('')
+const path = ref('')
 
 const emit = defineEmits(['update:modelValue'])
 const value = computed({
@@ -34,8 +34,7 @@ const value = computed({
 const confirm = async () => {
   const payload = {
     title: title.value,
-    urlDev: urlDev.value,
-    urlProd: urlProd.value
+    path: path.value,
   }
   if (props.id) {
     await store.dispatch('courseEdit', { id: props.id, ...payload })
@@ -50,14 +49,29 @@ const confirm = async () => {
 const reset = () => {
   if (!props.id) {
     title.value = ''
-    urlDev.value = ''
-    urlProd.value = ''
+    path.value = ''
   } else {
     title.value = store.getters.getCourseById(props.id).title
-    urlDev.value = store.getters.getCourseById(props.id).urlDev
-    urlProd.value = store.getters.getCourseById(props.id).urlProd
+    path.value = store.getters.getCourseById(props.id).path
   }
 }
+
+const validators = [
+  () => {
+    let url
+    try {
+      url = new URL(path.value, 'https://google.com').href
+    } catch (err) {
+      console.log(err)
+      url = ''
+    }
+    if (!validUrl.isWebUri(url)) {
+      return 'Path is invalid.'
+    } else {
+      return null
+    }
+  }
+]
 </script>
 
 <template>
@@ -68,6 +82,7 @@ const reset = () => {
     has-cancel
     @confirm="confirm"
     @cancel="reset"
+    :validators="validators"
   >
     <field label="Title">
       <control
@@ -77,23 +92,13 @@ const reset = () => {
       />
     </field>
     <field
-      label="Homepage URL (development)"
-      help="Redirect students here after enrollment (for local development)"
+      label="Path"
+      help="Path to course e.g. /courses/my-course. Can use {id} for course ID e.g. /courses/{id}."
     >
       <control
-        v-model="urlDev"
+        v-model="path"
         type="text"
-        placeholder="Homepage URL"
-      />
-    </field>
-    <field
-      label="Homepage URL (production)"
-      help="Redirect students here after enrollment (for production)"
-    >
-      <control
-        v-model="urlProd"
-        type="text"
-        placeholder="Homepage URL"
+        placeholder="Path"
       />
     </field>
   </modal-box>

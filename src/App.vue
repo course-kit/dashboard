@@ -17,13 +17,7 @@ const overlayClick = () => {
   store.dispatch('asideLgToggle', false)
 }
 
-const freeTrialReminder = 'free-trial-reminder'
 const paymentOverdueReminder = 'payment-overdue-reminder'
-
-const showFreeTrialReminder = computed(() => {
-  const cookie = Cookie.get(freeTrialReminder)
-  return !cookie && store.state.userTrialDaysRemaining
-})
 
 const showPaymentOverdueReminder = computed(() => {
   const cookie = Cookie.get(paymentOverdueReminder)
@@ -46,9 +40,6 @@ const customerPortalUrl = `${baseURL}/plans/manage`
   <div class="flex flex-col h-screen justify-between">
     <div>
       <div class="px-6" v-if="!$store.state.isFullScreen">
-        <notification class="mt-6" :id="freeTrialReminder" :icon="mdiAlert" color="warning" v-if="showFreeTrialReminder" :persist-dismiss-length="1000 * 60 * 60 * 24">
-          Your free trial ends in {{ $store.state.userTrialDaysRemaining }} days. Select a plan <router-link to="/billing" class="underline">here</router-link>.
-        </notification>
         <notification class="mt-6" :id="paymentOverdueReminder" :icon="mdiAlert" color="danger" v-if="showPaymentOverdueReminder" :persist-dismiss-length="0">
           Looks like there's an issue with your subscription. Please update your billing details <a :href="customerPortalUrl" class="underline">here</a>.
         </notification>

@@ -1,9 +1,8 @@
 <script setup>
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import MainSection from '@/components/MainSection.vue'
 import TitleBar from '@/components/TitleBar.vue'
 import Plans from '@/components/Plans.vue'
-import { useStore } from 'vuex'
 import { useRoute, useRouter } from 'vue-router'
 import Notification from '@/components/Notification.vue'
 import { mdiCheckBold } from '@mdi/js'
@@ -21,14 +20,6 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 const customerPortalUrl = `${baseURL}/plans/manage`
-
-const store = useStore()
-
-const hasPlan = store.state.userPlan !== null && store.state.userPlan >= 2
-
-const trialDaysRemaining = computed(() => {
-  return store.state.userTrialDaysRemaining
-})
 
 const removeRouteQuery = function () {
   router.replace({ query: null })
@@ -53,22 +44,8 @@ const titleStack = ref([{ name: 'Billing' }])
   </div>
   <title-bar :title-stack="titleStack" />
   <main-section>
-    <div v-if="trialDaysRemaining">
-      <p class="mb-8">
-        <strong>Free trial days remaining:</strong> {{ trialDaysRemaining }}
-      </p>
-    </div>
     <Plans
-      :has-plan="hasPlan"
       :customer-portal-url="customerPortalUrl"
     />
-    <div class="mt-8">
-      <p v-if="hasPlan">
-        <a
-          :href="customerPortalUrl"
-          class="underline"
-        >Manage your account</a>
-      </p>
-    </div>
   </main-section>
 </template>

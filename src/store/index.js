@@ -23,7 +23,7 @@ export default createStore({
     userEmail: null,
     userAvatar: null,
     userPlan: null,
-    userTrialDaysRemaining: null,
+
     userPaymentOverdue: false,
 
     /* fullScreen - fullscreen form layout (e.g. login page) */
@@ -93,9 +93,6 @@ export default createStore({
       }
       if (payload.plan) {
         state.userPlan = payload.plan
-      }
-      if (typeof payload.trialDaysRemaining !== 'undefined') {
-        state.userTrialDaysRemaining = payload.trialDaysRemaining
       }
       if (payload.paymentOverdue) {
         state.userPaymentOverdue = payload.paymentOverdue
@@ -250,18 +247,15 @@ export default createStore({
     },
     async courseEdit (
       { state, commit, dispatch, getters },
-      { id, title, urlDev, urlProd, publicContent, privateContent }
+      { id, title, path, publicContent, privateContent }
     ) {
       const course = getters.getCourseById(id)
       const payload = {}
       if (typeof title !== 'undefined' && title !== course.title) {
         payload.title = title
       }
-      if (typeof urlDev !== 'undefined' && urlDev !== course.urlDev) {
-        payload.urlDev = urlDev
-      }
-      if (typeof urlProd !== 'undefined' && urlProd !== course.urlProd) {
-        payload.urlProd = urlProd
+      if (typeof path !== 'undefined' && path !== course.path) {
+        payload.path = path
       }
       if (
         typeof publicContent !== 'undefined' &&

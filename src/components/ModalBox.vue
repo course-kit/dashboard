@@ -1,5 +1,5 @@
 <script setup>
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { mdiClose } from '@mdi/js'
 import JbButton from '@/components/JbButton.vue'
 import JbButtons from '@/components/JbButtons.vue'
@@ -28,6 +28,10 @@ const props = defineProps({
   modelValue: {
     type: [String, Number, Boolean],
     default: null
+  },
+  validators: {
+    type: Array,
+    default: () => []
   }
 })
 
@@ -38,12 +42,30 @@ const value = computed({
   set: (value) => emit('update:modelValue', value)
 })
 
+const error = ref(null)
+
 const confirmCancel = (mode) => {
   value.value = false
   emit(mode)
 }
 
-const confirm = () => confirmCancel('confirm')
+const isValid = () => {
+  if (props.validators.length) {
+    const err = props.validators.find(validator => validator() !== null)
+    if (err) {
+      error.value = err()
+    } else {
+      error.value = null
+    }
+  }
+  return !error.value
+}
+
+const confirm = () => {
+  if (isValid()) {
+    confirmCancel('confirm')
+  }
+}
 
 const cancel = () => confirmCancel('cancel')
 </script>
@@ -68,6 +90,9 @@ const cancel = () => confirmCancel('cancel')
           {{ largeTitle }}
         </h1>
         <slot />
+        <div v-if="error" class="bg-red-100 text-red-500 text-sm py-2 px-4 rounded-sm">
+          {{ error }}
+        </div>
       </div>
 
       <divider />

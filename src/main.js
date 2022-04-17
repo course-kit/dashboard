@@ -62,20 +62,18 @@ router.beforeEach(async (to) => {
       return { name: 'home' }
     }
   } else {
-
-      if (to.name === 'home') {
-        return { name: 'start' }
-      }
-      if (!store.state.dataLoaded) {
-        await Promise.all([
-          store.dispatch('getCourses'),
-          store.dispatch('getStudents'),
-          store.dispatch('getSchools')
-        ])
-        store.commit('setDataLoaded', true)
-        return true
-      }
-
+    if (to.name === 'home') {
+      return { name: 'start' }
+    }
+    if (!store.state.dataLoaded) {
+      await Promise.all([
+        store.dispatch('getCourses'),
+        store.dispatch('getStudents'),
+        store.dispatch('getSchools')
+      ])
+      store.commit('setDataLoaded', true)
+      return true
+    }
   }
 })
 

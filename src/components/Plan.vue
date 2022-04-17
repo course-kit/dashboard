@@ -46,7 +46,7 @@ defineProps({
       </ul>
     </div>
     <div class="flex justify-center">
-      <slot></slot>
+      <slot />
     </div>
   </card-component>
 </template>

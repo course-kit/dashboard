@@ -15,7 +15,6 @@ const store = useStore()
 const title = ref('')
 const schoolUrlDev = ref('')
 const schoolUrlProd = ref('')
-const error = ref(null)
 
 const emit = defineEmits(['update:modelValue'])
 const value = computed({
@@ -70,9 +69,9 @@ const reset = async () => {
     title="Edit school"
     button-label="Save"
     has-cancel
+    :validators="validators"
     @confirm="confirm"
     @cancel="reset"
-    :validators="validators"
   >
     <field label="Title">
       <control

@@ -44,8 +44,6 @@ const titleStack = ref([{ name: 'Billing' }])
   </div>
   <title-bar :title-stack="titleStack" />
   <main-section>
-    <Plans
-      :customer-portal-url="customerPortalUrl"
-    />
+    <Plans :customer-portal-url="customerPortalUrl" />
   </main-section>
 </template>

@@ -80,9 +80,9 @@ const validators = [
     :title="`${props.id ? 'Edit' : 'Add'} course`"
     button-label="Save"
     has-cancel
+    :validators="validators"
     @confirm="confirm"
     @cancel="reset"
-    :validators="validators"
   >
     <field label="Title">
       <control

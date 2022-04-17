@@ -34,7 +34,7 @@ const value = computed({
 const confirm = async () => {
   const payload = {
     title: title.value,
-    path: path.value,
+    path: path.value
   }
   if (props.id) {
     await store.dispatch('courseEdit', { id: props.id, ...payload })
@@ -92,6 +92,7 @@ const validators = [
       />
     </field>
     <field
+      v-if="props.id"
       label="Path"
       help="Path to course e.g. /courses/my-course. Can use {id} for course ID e.g. /courses/{id}."
     >

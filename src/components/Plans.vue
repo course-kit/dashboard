@@ -3,9 +3,6 @@ import Plan from '@/components/Plan.vue'
 import StripeCheckout from '@/components/StripeCheckout.vue'
 import JbButton from '@/components/JbButton.vue'
 
-import { useStore } from 'vuex'
-
-const store = useStore()
 let pk
 
 const props = defineProps({
@@ -38,7 +35,7 @@ const proFeatures = ['Unlimited students & courses', 'No transaction fees', 'Cus
       :is-selected="$store.state.userPlan === 1"
     >
       <jb-button
-        v-if="$store.state.userPlan !== 1"
+        v-if="$store.state.userPlan === 1"
         type="button"
         label="Current"
         class="mt-4"
@@ -46,6 +43,7 @@ const proFeatures = ['Unlimited students & courses', 'No transaction fees', 'Cus
       />
       <jb-button
         v-else
+        color="info"
         type="button"
         label="Select"
         class="mt-4"
@@ -73,7 +71,7 @@ const proFeatures = ['Unlimited students & courses', 'No transaction fees', 'Cus
     </Plan>
   </div>
   <div class="mt-8">
-    <p v-if="hasPlan">
+    <p v-if="$store.state.userPlan > 1">
       <a
         :href="customerPortalUrl"
         class="underline"

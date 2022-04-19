@@ -11,6 +11,7 @@ import CardComponent from '@/components/CardComponent.vue'
 import LessonAdd from '@/components/LessonAdd.vue'
 import CourseAdd from '@/components/CourseAdd.vue'
 import MarkdownEditor from '@/components/MarkdownEditor.vue'
+import { PLAN_FREE } from '@/constants.js'
 
 const store = useStore()
 const route = useRoute()
@@ -70,11 +71,17 @@ const courseEditActive = ref(false)
             </td>
             <td>{{ course.path }}</td>
           </tr>
-          <tr>
+          <tr v-if="$store.state.userPlan !== PLAN_FREE">
             <td class="pl-6">
               Enrollment URL
             </td>
             <td>{{ course.enrollmentUrl }}</td>
+          </tr>
+          <tr v-else>
+            <td class="pl-6">
+              Price
+            </td>
+            <td>{{ course.price > 0 ? `USD $${course.price}` : "Free" }}</td>
           </tr>
         </tbody>
       </table>

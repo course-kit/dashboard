@@ -41,6 +41,11 @@ export default [
       icon: mdiReceipt
     },
     {
+      to: '/integrations',
+      label: 'Integrations',
+      icon: mdiReceipt
+    },
+    {
       to: '/profile',
       label: 'Profile',
       icon: mdiAccountCircle

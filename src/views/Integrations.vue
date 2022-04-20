@@ -6,7 +6,7 @@ import { useRoute, useRouter } from 'vue-router'
 import Notification from '@/components/Notification.vue'
 import { mdiCheckBold, mdiAlert } from '@mdi/js'
 import JbButton from '@/components/JbButton.vue'
-import { PLAN_PRO } from '@/constants.js'
+import { PLAN_FREE } from '@/constants.js'
 const route = useRoute()
 const router = useRouter()
 
@@ -58,7 +58,7 @@ const titleStack = ref([{ name: 'Integrations' }])
   </div>
   <title-bar :title-stack="titleStack" />
   <main-section>
-    <div v-if="$store.state.userPlan !== PLAN_PRO">
+    <div v-if="$store.state.userPlan === PLAN_FREE">
       <h3 class="text-lg font-bold mb-2">
         Stripe Connect
       </h3>
@@ -77,6 +77,9 @@ const titleStack = ref([{ name: 'Integrations' }])
           :href="stripeConnectUrl"
         />
       </p>
+    </div>
+    <div v-else>
+      <p>No integrations currently available.</p>
     </div>
   </main-section>
 </template>

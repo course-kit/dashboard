@@ -79,7 +79,7 @@ const proFeatures = [
     </Plan>
   </div>
   <div class="mt-8">
-    <p v-if="$store.state.userPlan !== PLAN_FREE">
+    <p v-if="$store.state.userPlan === PLAN_PRO">
       <a
         :href="customerPortalUrl"
         class="underline"

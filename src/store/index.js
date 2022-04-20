@@ -23,7 +23,7 @@ export default createStore({
     userEmail: null,
     userAvatar: null,
     userPlan: null,
-
+    userStripeConnectEnabled: null,
     userPaymentOverdue: false,
 
     /* fullScreen - fullscreen form layout (e.g. login page) */
@@ -85,6 +85,7 @@ export default createStore({
     user (state, payload) {
       state.schoolId = payload.schoolId
       state.isAdmin = payload.isAdmin
+      state.userStripeConnectEnabled = payload.stripeConnectEnabled
       if (payload.name) {
         state.userName = payload.name
       }
@@ -247,7 +248,7 @@ export default createStore({
     },
     async courseEdit (
       { state, commit, dispatch, getters },
-      { id, title, path, publicContent, privateContent }
+      { id, title, path, price, publicContent, privateContent }
     ) {
       const course = getters.getCourseById(id)
       const payload = {}
@@ -256,6 +257,9 @@ export default createStore({
       }
       if (typeof path !== 'undefined' && path !== course.path) {
         payload.path = path
+      }
+      if (typeof price !== 'undefined' && price !== course.price) {
+        payload.price = price
       }
       if (
         typeof publicContent !== 'undefined' &&

@@ -2,6 +2,7 @@
 import Plan from '@/components/Plan.vue'
 import StripeCheckout from '@/components/StripeCheckout.vue'
 import JbButton from '@/components/JbButton.vue'
+import { PLAN_FREE, PLAN_PRO } from '@/constants.js'
 
 let pk
 
@@ -39,10 +40,10 @@ const proFeatures = [
       title="Free"
       :price="0"
       :features="freeFeatures"
-      :is-selected="$store.state.userPlan === 1"
+      :is-selected="$store.state.userPlan === PLAN_FREE"
     >
       <jb-button
-        v-if="$store.state.userPlan === 1"
+        v-if="$store.state.userPlan !== PLAN_PRO"
         type="button"
         label="Current"
         class="mt-4"
@@ -61,12 +62,12 @@ const proFeatures = [
       title="Pro"
       :price="49"
       :features="proFeatures"
-      :is-selected="$store.state.userPlan === 4"
+      :is-selected="$store.state.userPlan === PLAN_PRO"
     >
       <stripe-checkout
-        v-if="$store.state.userPlan !== 4"
+        v-if="$store.state.userPlan !== PLAN_PRO"
         :pk="pk"
-        :plan-id="4"
+        :plan-id="PLAN_PRO"
       />
       <jb-button
         v-else
@@ -78,7 +79,7 @@ const proFeatures = [
     </Plan>
   </div>
   <div class="mt-8">
-    <p v-if="$store.state.userPlan > 1">
+    <p v-if="$store.state.userPlan !== PLAN_FREE">
       <a
         :href="customerPortalUrl"
         class="underline"

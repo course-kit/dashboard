@@ -109,6 +109,15 @@ const routes = [
   },
   {
     meta: {
+      title: 'Integrations'
+    },
+    path: '/integrations',
+    name: 'integrations',
+    component: () =>
+      import(/* webpackChunkName: "integrations" */ '@/views/Integrations.vue')
+  },
+  {
+    meta: {
       title: 'Profile'
     },
     path: '/profile',

@@ -23,8 +23,15 @@ function selectCustomerPortal () {
   window.location.href = props.customerPortalUrl
 }
 
-const freeFeatures = ['Unlimited students & courses', '$1 + 10% transaction fee per student']
-const proFeatures = ['Unlimited students & courses', 'No transaction fees', 'Custom payment platform']
+const freeFeatures = [
+  'Unlimited students & courses',
+  '$1 + 10% transaction fee per student'
+]
+const proFeatures = [
+  'Unlimited students & courses',
+  'No transaction fees',
+  'Custom payment platform'
+]
 </script>
 
 <template>

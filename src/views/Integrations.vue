@@ -40,8 +40,7 @@ const titleStack = ref([{ name: 'Integrations' }])
       :icon="mdiCheckBold"
       @dismissed="removeRouteQuery"
     >
-      You have successfully completed Stripe Connect onboarding. Wait for an
-      email to confirm completion.
+      You have successfully completed Stripe Connect onboarding.
     </notification>
   </div>
   <div
@@ -55,7 +54,6 @@ const titleStack = ref([{ name: 'Integrations' }])
       @dismissed="removeRouteQuery"
     >
       Looks like there was a problem completing Stripe Connect onboarding.
-      Please try again.
     </notification>
   </div>
   <title-bar :title-stack="titleStack" />

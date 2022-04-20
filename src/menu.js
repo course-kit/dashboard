@@ -5,7 +5,8 @@ import {
   mdiReceipt,
   mdiSchool,
   mdiArrowRightBold,
-  mdiAccountGroup
+  mdiAccountGroup,
+  mdiSwapHorizontal
 } from '@mdi/js'
 
 export default [
@@ -43,7 +44,7 @@ export default [
     {
       to: '/integrations',
       label: 'Integrations',
-      icon: mdiReceipt
+      icon: mdiSwapHorizontal
     },
     {
       to: '/profile',

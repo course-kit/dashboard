@@ -51,7 +51,7 @@ const confirmCancel = (mode) => {
 
 const isValid = () => {
   if (props.validators.length) {
-    const err = props.validators.find(validator => validator() !== null)
+    const err = props.validators.find((validator) => validator() !== null)
     if (err) {
       error.value = err()
     } else {
@@ -90,7 +90,10 @@ const cancel = () => confirmCancel('cancel')
           {{ largeTitle }}
         </h1>
         <slot />
-        <div v-if="error" class="bg-red-100 text-red-500 text-sm py-2 px-4 rounded-sm">
+        <div
+          v-if="error"
+          class="bg-red-100 text-red-500 text-sm py-2 px-4 rounded-sm"
+        >
           {{ error }}
         </div>
       </div>

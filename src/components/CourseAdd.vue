@@ -78,7 +78,7 @@ const validators = [
   },
   () => {
     if (!store.state.userStripeConnectEnabled && price.value !== 0) {
-      return 'Price cannot be set until user has connected Stripe. See Billing page.'
+      return 'Price cannot be set without Stripe Connect integration. See Integrations tab.'
     } else {
       return null
     }
@@ -92,9 +92,9 @@ const validators = [
     :title="`${props.id ? 'Edit' : 'Add'} course`"
     button-label="Save"
     has-cancel
+    :validators="validators"
     @confirm="confirm"
     @cancel="reset"
-    :validators="validators"
   >
     <field label="Title">
       <control

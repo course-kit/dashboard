@@ -102,7 +102,10 @@ const cancel = () => {
         :options="courses"
       />
     </field>
-    <field label="Redirect to dev homepage URL">
+    <field
+      label="Redirect to development URL"
+      help="Check this for local testing"
+    >
       <checkbox-cell
         :key="componentKey"
         type="span"

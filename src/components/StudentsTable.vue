@@ -5,6 +5,8 @@ import Level from '@/components/Level.vue'
 import JbButtons from '@/components/JbButtons.vue'
 import JbButton from '@/components/JbButton.vue'
 import { useStore } from 'vuex'
+import { mdiTrashCan } from '@mdi/js'
+import StudentDelete from '@/components/StudentDelete.vue'
 
 const store = useStore()
 const router = useRouter()
@@ -42,9 +44,21 @@ const getCourse = function (id) {
   const course = store.getters.getCourseById(id)
   return course.title
 }
+
+const deleteId = ref(null)
+const deleteActive = ref(false)
+const del = (id) => {
+  deleteId.value = id
+  deleteActive.value = true
+}
 </script>
 
 <template>
+  <StudentDelete
+    :id="deleteId"
+    v-model="deleteActive"
+    @confirm="deleteId = null"
+  />
   <table>
     <thead>
       <tr>
@@ -54,6 +68,7 @@ const getCourse = function (id) {
         <th>Email</th>
         <th>Course</th>
         <th>Status</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -85,6 +100,15 @@ const getCourse = function (id) {
           class="cursor-pointer"
         >
           {{ student.isPending ? "PENDING" : "ACTIVE" }}
+        </td>
+        <td data-label="Actions">
+          <jb-buttons>
+            <jb-button
+              :icon="mdiTrashCan"
+              small
+              @click="del(student.id)"
+            />
+          </jb-buttons>
         </td>
       </tr>
     </tbody>

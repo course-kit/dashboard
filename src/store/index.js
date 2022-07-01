@@ -10,6 +10,7 @@ import {
   schoolEdit,
   studentAdd,
   courseDelete,
+  studentDelete,
   addTestCourses,
   lessonDelete,
   getSchools,
@@ -284,6 +285,14 @@ export default createStore({
       try {
         await courseDelete(state.schoolId, id)
         await dispatch('getCourses')
+        await dispatch('getStudents')
+      } catch (err) {
+        alert(err.message)
+      }
+    },
+    async studentDelete ({ state, commit, dispatch }, id) {
+      try {
+        await studentDelete(state.schoolId, id)
         await dispatch('getStudents')
       } catch (err) {
         alert(err.message)

@@ -48,6 +48,18 @@ const courseDelete = async (schoolId, id) => {
   })
 }
 
+const studentDelete = async (schoolId, id) => {
+  return await fetch(`${baseURL}/schools/${schoolId}/students`, {
+    method: 'DELETE',
+    credentials: 'include',
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ id })
+  })
+}
+
 const lessonDelete = async (schoolId, courseId, lessonId) => {
   return await fetch(`${baseURL}/schools/${schoolId}/courses/${courseId}/lessons/${lessonId}`, {
     method: 'DELETE',
@@ -142,4 +154,4 @@ const planCheckout = async (planId) => {
   })
 }
 
-export { planCheckout, getSchools, getCourses, getStudents, courseAdd, getUser, lessonAdd, editLesson, courseEdit, schoolEdit, studentAdd, courseDelete, addTestCourses, lessonDelete, schoolAdd }
+export { planCheckout, getSchools, getCourses, getStudents, courseAdd, getUser, lessonAdd, editLesson, courseEdit, schoolEdit, studentAdd, courseDelete, studentDelete, addTestCourses, lessonDelete, schoolAdd }

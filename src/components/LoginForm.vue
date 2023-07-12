@@ -42,14 +42,17 @@ onMounted(() => {
       method="POST"
       action="http://app.coursekit.test:8080/login"
     >
-      <div v-if="err" class="bg-red-200 text-red-800 p-2 text-center rounded mb-4">
+      <div
+        v-if="err"
+        class="bg-red-200 text-red-800 p-2 text-center rounded mb-4"
+      >
         {{ err }}
       </div>
       <Field>
         <input
-          class="rounded w-full"
           id="email"
           v-model="email"
+          class="rounded w-full"
           name="email"
           type="email"
           placeholder="Email"
@@ -59,9 +62,9 @@ onMounted(() => {
       </Field>
       <Field>
         <input
-          class="rounded w-full"
           id="password"
           v-model="password"
+          class="rounded w-full"
           name="password"
           type="password"
           placeholder="Password"
@@ -76,7 +79,10 @@ onMounted(() => {
         label="Login"
       />
     </form>
-    <button @click="toggleFormType" class="text-gray-500 text-sm">
+    <button
+      class="text-gray-500 text-sm"
+      @click="toggleFormType"
+    >
       Don't have an account? <span class="underline">Create one here.</span>
     </button>
   </div>
@@ -85,13 +91,16 @@ onMounted(() => {
       method="POST"
       action="http://app.coursekit.test:8080/register"
     >
-      <div v-if="err" class="bg-red-200 text-red-800 p-2 text-center rounded mb-4">
+      <div
+        v-if="err"
+        class="bg-red-200 text-red-800 p-2 text-center rounded mb-4"
+      >
         {{ err }}
       </div>
       <Field>
         <input
-          class="rounded w-full"
           v-model="name"
+          class="rounded w-full"
           name="name"
           type="text"
           placeholder="John Smith"
@@ -101,8 +110,8 @@ onMounted(() => {
       </Field>
       <Field>
         <input
-          class="rounded w-full"
           v-model="email"
+          class="rounded w-full"
           name="email"
           type="email"
           placeholder="me@example.com"
@@ -112,8 +121,8 @@ onMounted(() => {
       </Field>
       <Field>
         <input
-          class="rounded w-full"
           v-model="password"
+          class="rounded w-full"
           name="password"
           type="password"
           placeholder="Password"
@@ -123,8 +132,8 @@ onMounted(() => {
       </Field>
       <Field>
         <input
-          class="rounded w-full"
           v-model="confirmPassword"
+          class="rounded w-full"
           name="confirm_password"
           type="password"
           placeholder="Confirm password"
@@ -139,7 +148,10 @@ onMounted(() => {
         label="Create account"
       />
     </form>
-    <button @click="toggleFormType" class="text-gray-500 text-sm">
+    <button
+      class="text-gray-500 text-sm"
+      @click="toggleFormType"
+    >
       Already have an account? <span class="underline">Log in here.</span>
     </button>
   </div>

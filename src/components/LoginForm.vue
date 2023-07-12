@@ -7,12 +7,21 @@ const password = ref('')
 const name = ref('')
 const confirmPassword = ref('')
 const isLogin = ref(true)
+const registrationCode = ref('')
+
+let baseURL;
+if (process.env.NODE_ENV === 'production') {
+  baseURL = process.env.VUE_APP_API_URL
+} else {
+  baseURL = import.meta.env.VITE_API_URL
+}
 
 function resetForm () {
   email.value = ''
   password.value = ''
   name.value = ''
   confirmPassword.value = ''
+  registrationCode.value = ''
 }
 
 function toggleFormType () {
@@ -40,7 +49,7 @@ onMounted(() => {
   <div v-if="isLogin">
     <form
       method="POST"
-      action="http://app.coursekit.test:8080/login"
+      :action="`${baseURL}/login`"
     >
       <div
         v-if="err"
@@ -89,7 +98,7 @@ onMounted(() => {
   <div v-else>
     <form
       method="POST"
-      action="http://app.coursekit.test:8080/register"
+      :action="`${baseURL}/register`"
     >
       <div
         v-if="err"
@@ -138,6 +147,16 @@ onMounted(() => {
           type="password"
           placeholder="Confirm password"
           autocomplete="new-password"
+          required
+        >
+      </Field>
+      <Field>
+        <input
+          v-model="registrationCode"
+          class="rounded w-full"
+          name="registration_code"
+          type="text"
+          placeholder="Registration code (contact us)"
           required
         >
       </Field>

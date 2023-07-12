@@ -13,8 +13,11 @@ const props = defineProps({
   }
 })
 const store = useStore()
+const course = computed(() => {
+  return props.id ? store.getters.getCourseById(props.id) : null
+})
 const title = computed(() => {
-  return props.id ? store.getters.getCourseById(props.id).title : null
+  return course.value ? course.value.title : null
 })
 
 const emit = defineEmits(['update:modelValue', 'confirm'])

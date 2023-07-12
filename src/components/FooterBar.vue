@@ -20,7 +20,7 @@ const isFooterBarVisible = computed(() => !store.state.isFullScreen)
       class="w-full"
     >
       <div class="text-sm text-gray-500">
-        <span>Beta v1.1&nbsp;</span>
+        <span>Beta v1.2&nbsp;</span>
         <span>| &copy; {{ year }} |
           <a
             href="https://coursekit.dev/"

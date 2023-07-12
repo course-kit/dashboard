@@ -383,8 +383,6 @@ export default createStore({
         const response = await studentAdd(state.schoolId, payload)
         if (response.status === 200) {
           await dispatch('getStudents')
-          const { id } = await response.json()
-          return id
         } else {
           const { error } = await response.json()
           alert(error)

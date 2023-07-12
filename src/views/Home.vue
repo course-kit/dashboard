@@ -2,6 +2,7 @@
 import FullScreenSection from '@/components/FullScreenSection.vue'
 import CardComponent from '@/components/CardComponent.vue'
 import JbButton from '@/components/JbButton.vue'
+import LoginForm from '@/components/LoginForm.vue'
 </script>
 
 <template>
@@ -19,21 +20,7 @@ import JbButton from '@/components/JbButton.vue'
           class="h-6 mb-6"
         >
         <div class="flex-col flex justify-center items-center">
-          <jb-button
-            class="w-60 mb-3"
-            type="submit"
-            color="info"
-            label="Login"
-            :href="$store.state.loginUrl"
-          />
-          <jb-button
-            class="w-60"
-            type="submit"
-            color="info"
-            label="Create account"
-            outline
-            :href="$store.state.regUrl"
-          />
+          <LoginForm />
         </div>
       </div>
     </card-component>

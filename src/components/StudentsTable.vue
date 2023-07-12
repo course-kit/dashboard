@@ -67,7 +67,6 @@ const del = (id) => {
         </th>
         <th>Email</th>
         <th>Course</th>
-        <th>Status</th>
         <th>Actions</th>
       </tr>
     </thead>
@@ -94,12 +93,6 @@ const del = (id) => {
           @click="router.push(`/courses/${student.course}`)"
         >
           {{ getCourse(student.course) }}
-        </td>
-        <td
-          data-label="Status"
-          class="cursor-pointer"
-        >
-          {{ student.isPending ? "PENDING" : "ACTIVE" }}
         </td>
         <td data-label="Actions">
           <jb-buttons>

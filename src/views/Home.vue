@@ -1,7 +1,6 @@
 <script setup>
 import FullScreenSection from '@/components/FullScreenSection.vue'
 import CardComponent from '@/components/CardComponent.vue'
-import JbButton from '@/components/JbButton.vue'
 import LoginForm from '@/components/LoginForm.vue'
 </script>
 

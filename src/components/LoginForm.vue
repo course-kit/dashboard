@@ -9,7 +9,7 @@ const confirmPassword = ref('')
 const isLogin = ref(true)
 const registrationCode = ref('')
 
-let baseURL;
+let baseURL
 if (process.env.NODE_ENV === 'production') {
   baseURL = process.env.VUE_APP_API_URL
 } else {

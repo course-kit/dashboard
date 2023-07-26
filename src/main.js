@@ -58,11 +58,11 @@ router.beforeEach(async (to) => {
   }
   if (store.state.userEmail === null) {
     store.commit('setDataLoaded', true)
-    if (to.name !== 'home') {
+    if (to.meta.auth) {
       return { name: 'home' }
     }
   } else {
-    if (to.name === 'home') {
+    if (!to.meta.auth) {
       return { name: 'start' }
     }
     if (!store.state.dataLoaded) {

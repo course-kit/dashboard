@@ -30,16 +30,21 @@ function toggleFormType () {
 }
 
 const err = ref('')
+const message = ref('')
 
 onMounted(() => {
   const searchParams = new URLSearchParams(window.location.search)
   const errVal = searchParams.get('err')
   const typeVal = searchParams.get('type')
+  const messageVal = searchParams.get('message')
   if (errVal) {
     err.value = errVal
   }
   if (typeVal) {
     isLogin.value = typeVal !== 'reg'
+  }
+  if (messageVal) {
+    message.value = messageVal
   }
   window.history.replaceState(null, '', window.location.pathname)
 })
@@ -56,6 +61,12 @@ onMounted(() => {
         class="bg-red-200 text-red-800 p-2 text-center rounded mb-4"
       >
         {{ err }}
+      </div>
+      <div
+        v-if="message"
+        class="bg-green-200 text-green-800 p-2 text-center rounded mb-4"
+      >
+        {{ message }}
       </div>
       <Field>
         <input
@@ -88,12 +99,20 @@ onMounted(() => {
         label="Login"
       />
     </form>
-    <button
-      class="text-gray-500 text-sm"
-      @click="toggleFormType"
-    >
-      Don't have an account? <span class="underline">Create one here.</span>
-    </button>
+    <div class="flex flex-col items-center gap-2">
+      <button
+        class="text-gray-500 text-sm"
+        @click="toggleFormType"
+      >
+        Don't have an account? <span class="underline">Create one here.</span>
+      </button>
+      <router-link
+        class="text-gray-500 text-sm"
+        :to="{ name: 'passwordRequest' }"
+      >
+        Forgot your password? <span class="underline">Reset it here.</span>
+      </router-link>
+    </div>
   </div>
   <div v-else>
     <form

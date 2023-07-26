@@ -1,10 +1,12 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
+  // Non-auth
   {
     meta: {
       title: 'Home',
-      fullScreen: true
+      fullScreen: true,
+      auth: false
     },
     path: '/',
     name: 'home',
@@ -12,7 +14,28 @@ const routes = [
   },
   {
     meta: {
-      title: 'Get started'
+      title: 'PasswordReset',
+      fullScreen: true,
+      auth: false
+    },
+    path: '/password-reset',
+    name: 'passwordReset',
+    component: () => import(/* webpackChunkName: "passwordReset" */ '@/views/PasswordReset.vue')
+  },
+  {
+    meta: {
+      title: 'PasswordRequest',
+      fullScreen: true,
+      auth: false
+    },
+    path: '/password-request',
+    name: 'passwordRequest',
+    component: () => import(/* webpackChunkName: "passwordRequest" */ '@/views/PasswordRequest.vue')
+  },
+  {
+    meta: {
+      title: 'Get started',
+      auth: true
     },
     path: '/start',
     name: 'start',
@@ -20,7 +43,8 @@ const routes = [
   },
   {
     meta: {
-      title: 'Courses'
+      title: 'Courses',
+      auth: true
     },
     path: '/courses',
     name: 'courses',
@@ -29,7 +53,8 @@ const routes = [
   },
   {
     meta: {
-      title: 'Billing'
+      title: 'Billing',
+      auth: true
     },
     path: '/billing',
     name: 'billing',
@@ -46,7 +71,8 @@ const routes = [
   // },
   {
     meta: {
-      title: 'Course'
+      title: 'Course',
+      auth: true
     },
     path: '/courses/:courseId',
     name: 'course',
@@ -55,7 +81,8 @@ const routes = [
   },
   {
     meta: {
-      title: 'Lesson'
+      title: 'Lesson',
+      auth: true
     },
     path: '/courses/:courseId/lessons/:lessonId',
     name: 'lesson',
@@ -64,7 +91,8 @@ const routes = [
   },
   {
     meta: {
-      title: 'Students'
+      title: 'Students',
+      auth: true
     },
     path: '/students',
     name: 'students',
@@ -73,7 +101,8 @@ const routes = [
   },
   {
     meta: {
-      title: 'School'
+      title: 'School',
+      auth: true
     },
     path: '/school',
     name: 'school',
@@ -82,7 +111,8 @@ const routes = [
   },
   {
     meta: {
-      title: 'Analytics'
+      title: 'Analytics',
+      auth: true
     },
     path: '/analytics',
     name: 'analytics',
@@ -91,7 +121,8 @@ const routes = [
   },
   {
     meta: {
-      title: 'Billing'
+      title: 'Billing',
+      auth: true
     },
     path: '/billing',
     name: 'billing',
@@ -100,16 +131,8 @@ const routes = [
   },
   {
     meta: {
-      title: 'Billing'
-    },
-    path: '/billing',
-    name: 'billing',
-    component: () =>
-      import(/* webpackChunkName: "billing" */ '@/views/Billing.vue')
-  },
-  {
-    meta: {
-      title: 'Integrations'
+      title: 'Integrations',
+      auth: true
     },
     path: '/integrations',
     name: 'integrations',
@@ -118,7 +141,8 @@ const routes = [
   },
   {
     meta: {
-      title: 'Profile'
+      title: 'Profile',
+      auth: true
     },
     path: '/profile',
     name: 'profile',
@@ -128,7 +152,8 @@ const routes = [
   {
     meta: {
       title: 'Error',
-      fullScreen: true
+      fullScreen: true,
+      auth: false
     },
     path: '/error',
     name: 'error',
@@ -138,7 +163,8 @@ const routes = [
   {
     meta: {
       title: '404',
-      fullScreen: true
+      fullScreen: true,
+      auth: false
     },
     path: '/:pathMatch(.*)*',
     name: '404',

@@ -23,14 +23,14 @@ onMounted(() => {
   }
 })
 
-async function submit() {
+async function submit () {
   const res = await fetch(`${baseURL}/password-request`, {
     method: 'post',
     body: JSON.stringify({
       email: email.value
     }),
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/json'
     }
   })
   if (res.status === 500) {
@@ -42,11 +42,11 @@ async function submit() {
 </script>
 
 <template>
-  <div v-if="message">{{ message }}</div>
+  <div v-if="message">
+    {{ message }}
+  </div>
   <div v-else>
-    <form
-      @submit.prevent="submit"
-    >
+    <form @submit.prevent="submit">
       <div
         v-if="err"
         class="bg-red-200 text-red-800 p-2 text-center rounded mb-4"

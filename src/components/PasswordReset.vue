@@ -71,19 +71,19 @@ onMounted(() => {
         v-model="time"
         name="time"
         type="hidden"
-      />
+      >
       <input
         id="hash"
         v-model="hash"
         name="hash"
         type="hidden"
-      />
+      >
       <input
         id="userId"
         v-model="userId"
         name="userId"
         type="hidden"
-      />
+      >
       <jb-button
         class="w-full mb-3"
         type="submit"

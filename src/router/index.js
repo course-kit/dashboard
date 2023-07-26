@@ -20,7 +20,10 @@ const routes = [
     },
     path: '/password-reset',
     name: 'passwordReset',
-    component: () => import(/* webpackChunkName: "passwordReset" */ '@/views/PasswordReset.vue')
+    component: () =>
+      import(
+        /* webpackChunkName: "passwordReset" */ '@/views/PasswordReset.vue'
+      )
   },
   {
     meta: {
@@ -30,7 +33,10 @@ const routes = [
     },
     path: '/password-request',
     name: 'passwordRequest',
-    component: () => import(/* webpackChunkName: "passwordRequest" */ '@/views/PasswordRequest.vue')
+    component: () =>
+      import(
+        /* webpackChunkName: "passwordRequest" */ '@/views/PasswordRequest.vue'
+      )
   },
   {
     meta: {

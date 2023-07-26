@@ -1,7 +1,7 @@
 <script setup>
 import FullScreenSection from '@/components/FullScreenSection.vue'
 import CardComponent from '@/components/CardComponent.vue'
-import PasswordRequestForm from "@/components/PasswordRequest.vue";
+import PasswordRequestForm from '@/components/PasswordRequest.vue'
 </script>
 
 <template>
